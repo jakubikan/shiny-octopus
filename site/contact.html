@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+
+<html lang="de">
+		<!-- Meta Informations -->
+		<meta charset="utf-8">
+		<meta http-equiv='content-type' content='text/html; charset=utf-8'/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name='keywords' content='sailing, app, navigation, sea map, boat, skipper'/>
+		<meta name='description' content='SeaPal is a mobile app for sailors to do navigation, tracking and more.'/>
+		<meta name="author" content="Prof. Dr. Marko Boger, Dominic Eschbach und Timo Partl">
+		<title>Seapal</title>
+        <link type="text/css" href="photoprowess/styles/layout.css" rel="stylesheet"/>
+        <link type="text/css" href="../lib/bootstrap/css/bootstrap.css" rel="stylesheet"/>
+        
+        <!-- Custom Modules CSS-->
+        <link type="text/css" href="Footer/css/footer.css"></link>
+        <link type="text/css" href="Header/css/header.css"></link>
+        
+		<script type="text/javascript" src="../lib/js/jquery-1.4.1.min.js"></script>
+        <script type="text/javascript" src="../lib/js/jquery.defaultvalue.js"></script>
+        <script type="text/javascript" src="../lib/js/jquery-ui-1.8.13.custom.min.js"></script>
+        <script type="text/javascript" src="../lib/js/jquery.scrollTo-min.js"></script>
+        <script type="text/javascript" src="../lib/js/terrific-2.0.1.js"></script>
+        <script type="text/javascript" src="../lib/bootstrap/bootstrap.js"></script>
+        <script type="text/javascript" src="../lib/bootstrap/bootstrap.js"></script>
+        
+        <!-- Custom Modules Javascript -->
+        <script type="text/javascript" src="Footer/js/Tc.Module.Footer.js"></script>
+        <script type="text/javascript" src="Header/js/Tc.Module.Header.js"></script>
+        
+        <script type="text/javascript">
+		$(document).ready(function () {
+			$("#fullname, #validemail, #message").defaultvalue("Full Name", "Email Address", "Message");
+			$('#shout a').click(function () {
+				var to = $(this).attr('href');
+				$.scrollTo(to, 1200);
+				return false;
+			});
+			$('a.topOfPage').click(function () {
+				$.scrollTo(0, 1200);
+				return false;
+			});
+			$("#tabcontainer").tabs({
+				event: "click"
+			});
+		});
+		</script>
+	  	
+  	</head>
+  	<body id="top">
+  		
+  		<div id="header"></div>
+    	<!-- Container -->
+    	<div class="wrapper col4"> 
+	    	<div id="container" class="clear">
+		    	<div class="fl_left"><!-- Sidebar -->
+			    	<ul id="side">
+				    	<li><a href="#">IBN</a></li>
+						<li><a href="#">HTWG Konstanz</a></li>
+			        </ul>
+				</div><!-- Sidebar -->
+
+				<!-- Content -->
+				<div class="fl_right">
+					<div id="ibn" class="fl_left">
+						<h2>IBN</h2>
+						<img src="../img/icons/ibn.jpg" alt="IBN Konstanz"/>
+						<p>
+							 IBN Redaktion <br>
+							 Hans-Dieter M&ouml;hlhenrich<br>
+							 Malvine-Schiesser-Weg 3<br>
+							 78315 Radolfzell<br>
+							 Germany<br>
+							 <br>
+							 <a href="http://www.ibn-online.de">www.ibn-online.de</a><br>
+							 ibn at ibn-online.de
+						</p>		 
+					</div>
+					<div id="htwg" class="fl_right">
+						<h2>HTWG Konstanz</h2>
+						<img src="../img/icons/htwg.png" alt="HTWG Konstanz"/>
+						<p>
+							 HTWG Konstanz<br>
+							 Informatik<br>
+							 Prof. Dr. Marko Boger<br>
+							 Brauneggerstr. 55<br>
+							 78462 Konstanz<br>
+							 Germany<br>
+							 <br>
+							 <a href="http://www.htwg-konstanz.de">www.htwg-konstanz.de</a><br>
+							 marko.boger at htwg-konstanz.de
+						</p>
+			      	</div>
+				</div><!-- Content -->
+			</div>		
+		</div><!-- Container -->
+
+		
+  		<div id="footer"></div>
+
+	
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$('#footer').load('Footer/footer.html');
+				$('#header').load('Header/header.html');
+			});
+		</script>
+	
+		<script type="text/javascript">
+		(function($) {
+		    $(document).ready(function() {
+		        var $page = $('body'),
+		            application = new Tc.Application($page);
+		
+		        application.registerModules();
+		        application.start();
+		    });
+		})(Tc.$);
+		</script>
+  </body>
+</html>

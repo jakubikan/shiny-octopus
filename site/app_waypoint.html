@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+
+<html lang="de">
+<!-- Meta Informations -->
+<meta charset="utf-8">
+<meta http-equiv='content-type' content='text/html; charset=utf-8' />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name='keywords' content='sailing, app, navigation, sea map, boat, skipper' />
+<meta name='description' content='SeaPal is a mobile app for sailors to do navigation, tracking and more.' />
+<meta name="author" content="Prof. Dr. Marko Boger, Dominic Eschbach und Timo Partl"> <title>Seapal</title>
+<link type="text/css" href="photoprowess/styles/layout.css" rel="stylesheet" />
+<link type="text/css" href="../lib/bootstrap/css/bootstrap.css" rel="stylesheet"/>
+
+<!-- Custom Modules CSS-->
+<link type="text/css" href="Footer/css/footer.css"></link>
+<link type="text/css" href="Header/css/header.css"></link>
+
+<script type="text/javascript" src="../lib/js/jquery-1.4.1.min.js"></script>
+<script type="text/javascript" src="../lib/js/jquery.defaultvalue.js"></script>
+<script type="text/javascript"
+	src="../lib/js/jquery-ui-1.8.13.custom.min.js"></script>
+<script type="text/javascript" src="../lib/js/jquery.scrollTo-min.js"></script>
+<script type="text/javascript" src="../lib/js/terrific-2.0.1.js"></script>
+<script type="text/javascript" src="../lib/bootstrap/bootstrap.js"></script>
+<script type="text/javascript" src="../lib/bootstrap/bootstrap.js"></script>
+
+<!-- Custom Modules Javascript -->
+<script type="text/javascript" src="Footer/js/Tc.Module.Footer.js"></script>
+<script type="text/javascript" src="Header/js/Tc.Module.Header.js"></script>
+
+<script type="text/javascript">
+	$(document).ready(
+			function() {
+				$("#fullname, #validemail, #message").defaultvalue("Full Name",
+						"Email Address", "Message");
+				$('#shout a').click(function() {
+					var to = $(this).attr('href');
+					$.scrollTo(to, 1200);
+					return false;
+				});
+				$('a.topOfPage').click(function() {
+					$.scrollTo(0, 1200);
+					return false;
+				});
+				$("#tabcontainer").tabs({
+					event : "click"
+				});
+			});
+</script>
+
+</head>
+<body>
+
+	<div id="header"></div>
+
+	<!-- Container -->
+	<div>
+		<!-- Content -->
+		<div>
+			<br />
+			<h2>Wegpunkt</h2>
+			<br />
+			<form method="POST">
+				<div>
+					<div>
+						<label>Name</label> <input type="text" id="name" />
+					</div>
+					<div>
+						<label>Time</label> <input type="date" id="wdate" />
+					</div>
+					<div>
+						<label>Date</label> <input type="date" id="wtime" />
+					</div>
+				</div>
+				<div>
+					<div>
+						<label>Latitude</label> <input type="text" id="lat" />
+					</div>
+					<div>
+						<label>Longitude</label> <input type="text" id="lng" />
+					</div>
+					<div>
+						<label>Fahrt nach</label> <select name="fahrtziel" id="marker"></select>
+					</div>
+				</div>
+				<div>
+					<div>
+						<label>COG</label> <input type="text" id="cog" />
+					</div>
+					<div>
+						<label>SOG</label> <input type="text" id="sog" />
+					</div>
+	
+					<div>
+						<label>Manoever</label> <select name="manoever" id="manoever"></select>
+					</div>
+				</div>
+				<div>
+					<div>
+						<label>BTM</label> <input type="text" id="btm" />
+					</div>
+					<div>
+						<label>DTM</label> <input type="text" id="dtm" />
+					</div>
+					<div>
+						<label>Vorsegel</label> <select name="vorsegel" id="vorsegel"></select>
+					</div>
+				</div>
+				<table>
+					<tr>
+						<td><p>Wind Strength:</p></td>
+						<td><input type="text" placeholder="wind strength"></td>
+						<td><p>Wind Direction:</p></td>
+						<td><input type="text" placeholder="wind direction"></td>
+						<td><p>Air pressure:</p></td>
+						<td><input type="text" placeholder="air pressure"></td>
+					</tr>
+					<tr>
+						<td><p>Temperature:</p></td>
+						<td><input type="text" placeholder="temperature"></td>
+						<td><p>Clouds:</p></td>
+						<td><input type="text" placeholder="clouds"></td>
+						<td><p>Rain:</p></td>
+						<td><input type="text" placeholder="rain"></td>
+					</tr>
+					<tr>
+						<td><p>Wave height:</p></td>
+						<td><input type="text" placeholder="wave height"></td>
+						<td><p>Wave direction:</p></td>
+						<td><input type="text" placeholder="wave direction"></td>
+						<td><p>Date and time of Capture:</p></td>
+						<td><input type="text"
+							placeholder="date and time of capture"></td>
+					</tr>
+				</table>
+				<div id="appNotes">
+					<h4>Notes</h4>
+					<textarea></textarea>
+				</div>
+				<div id="markerMap">
+					<h4>Map</h4>
+					<img src="../img/icons/marker_map.png" id="appInfoPhoto" />
+				</div>
+				<div id="appPhotos">
+					<h4>Photos</h4>
+					<img src="../img/icons/no_image.jpg" id="appInfoPhoto" />
+				</div>
+			</form>
+		</div><!-- Content -->
+	</div><!-- Container -->
+
+	<div id="footer"></div>
+
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('#footer').load('Footer/footer.html');
+			$('#header').load('Header/header.html');
+		});
+	</script>
+
+	<script type="text/javascript">
+		(function($) {
+			$(document).ready(function() {
+				var $page = $('body'), application = new Tc.Application($page);
+
+				application.registerModules();
+				application.start();
+			});
+		})(Tc.$);
+	</script>
+
+</body>
+</html>

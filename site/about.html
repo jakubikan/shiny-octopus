@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+
+<html lang="de">
+		<!-- Meta Informations -->
+		<meta charset="utf-8">
+		<meta http-equiv='content-type' content='text/html; charset=utf-8'/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name='keywords' content='sailing, app, navigation, sea map, boat, skipper'/>
+		<meta name='description' content='SeaPal is a mobile app for sailors to do navigation, tracking and more.'/>
+		<meta name="author" content="Prof. Dr. Marko Boger, Dominic Eschbach und Timo Partl">
+		<title>Seapal</title>
+        <link type="text/css" href="photoprowess/styles/layout.css" rel="stylesheet"/>
+        <link type="text/css" href="../lib/bootrap/css/bootstrap.css" rel="stylesheet"/>
+        
+        <!-- Custom Modules CSS-->
+        <link type="text/css" href="Footer/css/footer.css"></link>
+        <link type="text/css" href="Header/css/header.css"></link>
+        
+		<script type="text/javascript" src="../lib/js/jquery-1.4.1.min.js"></script>
+        <script type="text/javascript" src="../lib/js/jquery.defaultvalue.js"></script>
+        <script type="text/javascript" src="../lib/js/jquery-ui-1.8.13.custom.min.js"></script>
+        <script type="text/javascript" src="../lib/js/jquery.scrollTo-min.js"></script>
+        <script type="text/javascript" src="../lib/js/terrific-2.0.1.js"></script>
+        <script type="text/javascript" src="../lib/bootstrap/bootstrap.js"></script>
+        <script type="text/javascript" src="../lib/bootstrap/bootstrap.js"></script>
+        
+        <!-- Custom Modules Javascript -->
+        <script type="text/javascript" src="Footer/js/Tc.Module.Footer.js"></script>
+        <script type="text/javascript" src="Header/js/Tc.Module.Header.js"></script>
+        
+        <script type="text/javascript">
+		$(document).ready(function () {
+			$("#fullname, #validemail, #message").defaultvalue("Full Name", "Email Address", "Message");
+			$('#shout a').click(function () {
+				var to = $(this).attr('href');
+				$.scrollTo(to, 1200);
+				return false;
+			});
+			$('a.topOfPage').click(function () {
+				$.scrollTo(0, 1200);
+				return false;
+			});
+			$("#tabcontainer").tabs({
+				event: "click"
+			});
+		});
+		</script>
+	  	
+  	</head>
+  	<body>
+  		
+		<div id="header"></div>
+
+    	<!-- Container -->
+    	<div class="container">
+	    	<div><!-- Sidebar -->
+		    	<ul id="sidebar">
+			    	<li><a href="userguide.html">User Guide</a></li>
+					<li><a href="contact.html">Contact us</a></li>
+		        </ul>
+			</div><!-- Sidebar -->
+
+			<!-- Content -->
+			<div class="container">
+				<h2>About SeaPal</h2>
+				<div>
+					<p>
+						 The <b>SeaPal</b> application was developed in a cooperation between the IBN publishing house and the HTWG Constance University. 								</p>
+					<p>IBN is a publishing house specialized in sailing and boating in the southern part of Germany. IBN has a long tradition of providing high quality maps, harbor guides and news for sailors for the lake Constance and the south of Germany. IBN initiated this project to bring their content to new mobile platforms like the iPad and the iPhone. 
+						
+					</p>	
+					<p>The University HTWG Constance is a University of Applied Sciences located in Constance right on the shores of the lake. Prof. Dr. Marko Boger leads the project and did the original concept. He works in the computer science department as professor for Software Architecture and Software Engineering. Software development for mobile platforms as well as for the web are included in this research and teaching. He is also an active sailor with more than 5,000 nm of experience in all waters of Europe.  
+					</p>
+					<p>These two partners initiated this project as an open cooperation to provide a modern, simple, yet powerful application for mobile devices. It is our goal to provide a base version of SeaPal free of charge with free online maps to sailors around the world. We also provide extensions to finance this project. Please view purchases as sponsoring to help advance our ambitious project. It will be used to further advance and develop this app.  
+					</p> 
+					<p>The development is partly done by a team of experienced software developers and partly in research and study groups at the University.
+					</p>
+					<p>Our cooperation is also open for other partners. If you are interested to join our partnership, to provide further content or develop extension, please contact us. You can also sponsor the development of specific functionalities or extensions. 
+					</p>
+					<br>
+					<br>
+					<img src="../img/icons/ibn.jpg" alt="SeaPal-InitialPosition"/>
+					<figcaption>IBN Publishing House</figcaption>
+					<br>
+					<img src="../img/icons/htwg.png" alt="SeaPal-InitialPosition"/>
+					<figcaption>HTWG Constance University</figcaption>
+					<br>
+					<br>
+				</div>
+	      	</div><!-- Content -->
+		</div><!-- Container -->
+
+		<div id="footer"></div>
+		
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$('#footer').load('Footer/footer.html');
+				$('#header').load('Header/header.html');
+			});
+		</script>
+	
+		<script type="text/javascript">
+		(function($) {
+		    $(document).ready(function() {
+		        var $page = $('body'),
+		            application = new Tc.Application($page);
+		
+		        application.registerModules();
+		        application.start();
+		    });
+		})(Tc.$);
+		</script>
+
+  </body>
+</html>
