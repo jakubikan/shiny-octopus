@@ -15,43 +15,39 @@
 		<!-- Favicon -->
 		<link rel='icon' type='image/png' href='../img/icons/seapal_normal.png'/>
 		
-		<!-- Font -->
-		<link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'/>  
-		
 		<!-- Styles -->
-		<link href="../css/bootstrap/bootstrap.css" rel="stylesheet">
-		<link href="../css/bootstrap/layout.css" rel="stylesheet">
-		<link href="../css/bootstrap/bootstrap-responsive.css" rel="stylesheet">
+		<link href="../lib/bootstrap/css/bootstrap.css" rel="stylesheet">
+		<link href="../lib/bootstrap/css/layout.css" rel="stylesheet">
+		<link href="../lib/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+		
+		<!-- Custom CSS -->
+		<link href="css/style.css" rel="stylesheet">
+		
+		<!-- Custom Module CSS -->
+		<link href="js/terrific/Footer/css/footer.css" rel="stylesheet">
+		<link href="js/terrific/Header/css/header.css" rel="stylesheet">
+		
+		
+		
+		<script type="text/javascript" src="../lib/js/jquery.js"></script>
+        <script type="text/javascript" src="../lib/js/jquery-ui.js"></script>
+        <script type="text/javascript" src="../lib/js/terrific-2.0.1.js"></script>
+        <script type="text/javascript" src="../lib/bootstrap/bootstrap.js"></script>
+		
+		<script type="text/javascript">
+			$("body").ready(function(){
+				$('#footer').load('js/terrific/Footer/footer.html');
+				$('#header').load('js/terrific/Header/header.html');
+			});
+		</script>
+		
+		<script type="text/javascript" src="js/static/main.js"></script>
 		
 	</head>
 	<body>
 		
 		<!-- Navigation -->
-		<div class="navbar navbar-inverse navbar-fixed-top" id="navigation">
-			<div class="navbar-inner" id="navigation">
-				<div class="container">
-					<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse" style="margin-top:25px; margin-right:20px;">
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</a>
-					<a class="brand" href="index.html">
-						<img src='../img/icons/seapal_normal.png' alt='Icon-Small-50' width='50' height='50' style="float: left; padding-top: 5px; padding-left: 20px"/>
-						<h2 style="float: left; padding-left:10px; margin-right:100px; font-weight: normal;">Seapal</h2>
-					</a>
-					<div class="nav-collapse collapse">
-						<ul class="nav nav-pills" style="padding-left:0px; padding-top: 24px; font-size: 18px;">
-							<li class="active"><a href='index.html'>Home</a></li>
-							<li><a href='app_waypoint.html'>App</a></li>
-							<li><a href='userguide.html'>User Guide</a></li>
-							<li><a href='screenshots.html'>Screenshots</a></li>
-							<li><a href='about.html'>About</a></li>
-							<li><a href='contact.html'>Contact</a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
+		<div id="header"></div>
 
 		
 		<!-- Container -->
@@ -146,6 +142,8 @@
 			</div><!-- Content -->
 			
 		</div><!-- Container -->
+		
+		<div id="footer"></div>
 		
 	</body>
 </html>
