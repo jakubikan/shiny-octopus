@@ -1,174 +1,151 @@
 <!DOCTYPE html>
 
 <html lang="de">
-<!-- Meta Informations -->
-<meta charset="utf-8">
-<meta http-equiv='content-type' content='text/html; charset=utf-8' />
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name='keywords' content='sailing, app, navigation, sea map, boat, skipper' />
-<meta name='description' content='SeaPal is a mobile app for sailors to do navigation, tracking and more.' />
-<meta name="author" content="Prof. Dr. Marko Boger, Dominic Eschbach und Timo Partl"> <title>Seapal</title>
-<link type="text/css" href="photoprowess/styles/layout.css" rel="stylesheet" />
-<link type="text/css" href="../lib/bootstrap/css/bootstrap.css" rel="stylesheet"/>
-
-<!-- Custom Modules CSS-->
-<link type="text/css" href="Footer/css/footer.css"></link>
-<link type="text/css" href="Header/css/header.css"></link>
-
-<script type="text/javascript" src="../lib/js/jquery-1.4.1.min.js"></script>
-<script type="text/javascript" src="../lib/js/jquery.defaultvalue.js"></script>
-<script type="text/javascript"
-	src="../lib/js/jquery-ui-1.8.13.custom.min.js"></script>
-<script type="text/javascript" src="../lib/js/jquery.scrollTo-min.js"></script>
-<script type="text/javascript" src="../lib/js/terrific-2.0.1.js"></script>
-<script type="text/javascript" src="../lib/bootstrap/bootstrap.js"></script>
-<script type="text/javascript" src="../lib/bootstrap/bootstrap.js"></script>
-
-<!-- Custom Modules Javascript -->
-<script type="text/javascript" src="Footer/js/Tc.Module.Footer.js"></script>
-<script type="text/javascript" src="Header/js/Tc.Module.Header.js"></script>
-
-<script type="text/javascript">
-	$(document).ready(
-			function() {
-				$("#fullname, #validemail, #message").defaultvalue("Full Name",
-						"Email Address", "Message");
-				$('#shout a').click(function() {
-					var to = $(this).attr('href');
-					$.scrollTo(to, 1200);
-					return false;
-				});
-				$('a.topOfPage').click(function() {
-					$.scrollTo(0, 1200);
-					return false;
-				});
-				$("#tabcontainer").tabs({
-					event : "click"
-				});
-			});
-</script>
-
-</head>
-<body>
-
-	<div id="header"></div>
-
-	<!-- Container -->
-	<div>
-		<!-- Content -->
-		<div>
-			<br />
-			<h2>Wegpunkt</h2>
-			<br />
-			<form method="POST">
-				<div>
-					<div>
-						<label>Name</label> <input type="text" id="name" />
-					</div>
-					<div>
-						<label>Time</label> <input type="date" id="wdate" />
-					</div>
-					<div>
-						<label>Date</label> <input type="date" id="wtime" />
+	<head>
+		
+		<!-- Meta Informations -->
+		<meta charset="utf-8">
+		<meta http-equiv='content-type' content='text/html; charset=utf-8'/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name='keywords' content='sailing, app, navigation, sea map, boat, skipper'/>
+		<meta name='description' content='SeaPal is a mobile app for sailors to do navigation, tracking and more.'/>
+		<meta name="author" content="Prof. Dr. Marko Boger, Dominic Eschbach und Timo Partl">
+		<title>Seapal</title>
+		
+		<!-- Favicon -->
+		<link rel='icon' type='image/png' href='../img/icons/seapal_normal.png'/>
+		
+		<!-- Font -->
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'/>  
+		
+		<!-- Styles -->
+		<link href="../css/bootstrap/bootstrap.css" rel="stylesheet">
+		<link href="../css/bootstrap/layout.css" rel="stylesheet">
+		<link href="../css/bootstrap/bootstrap-responsive.css" rel="stylesheet">
+		
+	</head>
+	<body>
+		
+		<!-- Navigation -->
+		<div class="navbar navbar-inverse navbar-fixed-top" id="navigation">
+			<div class="navbar-inner" id="navigation">
+				<div class="container">
+					<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse" style="margin-top:25px; margin-right:20px;">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</a>
+					<a class="brand" href="index.html">
+						<img src='../img/icons/seapal_normal.png' alt='Icon-Small-50' width='50' height='50' style="float: left; padding-top: 5px; padding-left: 20px"/>
+						<h2 style="float: left; padding-left:10px; margin-right:100px; font-weight: normal;">Seapal</h2>
+					</a>
+					<div class="nav-collapse collapse">
+						<ul class="nav nav-pills" style="padding-left:0px; padding-top: 24px; font-size: 18px;">
+							<li class="active"><a href='index.html'>Home</a></li>
+							<li><a href='app_waypoint.html'>App</a></li>
+							<li><a href='userguide.html'>User Guide</a></li>
+							<li><a href='screenshots.html'>Screenshots</a></li>
+							<li><a href='about.html'>About</a></li>
+							<li><a href='contact.html'>Contact</a></li>
+						</ul>
 					</div>
 				</div>
-				<div>
-					<div>
-						<label>Latitude</label> <input type="text" id="lat" />
-					</div>
-					<div>
-						<label>Longitude</label> <input type="text" id="lng" />
-					</div>
-					<div>
-						<label>Fahrt nach</label> <select name="fahrtziel" id="marker"></select>
-					</div>
-				</div>
-				<div>
-					<div>
-						<label>COG</label> <input type="text" id="cog" />
-					</div>
-					<div>
-						<label>SOG</label> <input type="text" id="sog" />
-					</div>
-	
-					<div>
-						<label>Manoever</label> <select name="manoever" id="manoever"></select>
-					</div>
-				</div>
-				<div>
-					<div>
-						<label>BTM</label> <input type="text" id="btm" />
-					</div>
-					<div>
-						<label>DTM</label> <input type="text" id="dtm" />
-					</div>
-					<div>
-						<label>Vorsegel</label> <select name="vorsegel" id="vorsegel"></select>
-					</div>
-				</div>
-				<table>
-					<tr>
-						<td><p>Wind Strength:</p></td>
-						<td><input type="text" placeholder="wind strength"></td>
-						<td><p>Wind Direction:</p></td>
-						<td><input type="text" placeholder="wind direction"></td>
-						<td><p>Air pressure:</p></td>
-						<td><input type="text" placeholder="air pressure"></td>
-					</tr>
-					<tr>
-						<td><p>Temperature:</p></td>
-						<td><input type="text" placeholder="temperature"></td>
-						<td><p>Clouds:</p></td>
-						<td><input type="text" placeholder="clouds"></td>
-						<td><p>Rain:</p></td>
-						<td><input type="text" placeholder="rain"></td>
-					</tr>
-					<tr>
-						<td><p>Wave height:</p></td>
-						<td><input type="text" placeholder="wave height"></td>
-						<td><p>Wave direction:</p></td>
-						<td><input type="text" placeholder="wave direction"></td>
-						<td><p>Date and time of Capture:</p></td>
-						<td><input type="text"
-							placeholder="date and time of capture"></td>
-					</tr>
-				</table>
-				<div id="appNotes">
-					<h4>Notes</h4>
-					<textarea></textarea>
-				</div>
-				<div id="markerMap">
-					<h4>Map</h4>
-					<img src="../img/icons/marker_map.png" id="appInfoPhoto" />
-				</div>
-				<div id="appPhotos">
-					<h4>Photos</h4>
-					<img src="../img/icons/no_image.jpg" id="appInfoPhoto" />
-				</div>
-			</form>
-		</div><!-- Content -->
-	</div><!-- Container -->
+			</div>
+		</div>
 
-	<div id="footer"></div>
-
-
-	<script type="text/javascript">
-		$(document).ready(function() {
-			$('#footer').load('Footer/footer.html');
-			$('#header').load('Header/header.html');
-		});
-	</script>
-
-	<script type="text/javascript">
-		(function($) {
-			$(document).ready(function() {
-				var $page = $('body'), application = new Tc.Application($page);
-
-				application.registerModules();
-				application.start();
-			});
-		})(Tc.$);
-	</script>
-
-</body>
+		
+		<!-- Container -->
+		<div class="container-fluid">
+						
+			<!-- Content -->		
+			<div id="appWrapper" align="center">
+			    <br />
+			    <h2>Wegpunkt</h2>
+			    <br />
+			    <div class="container-fluid" align="center">
+	            	<form class="form-horizontal"> 
+		            	<div class="row well" style="margin-left: 15%;" align="center">
+		            		<div class="span4" align="center">	            		
+			            		<div class="control-group">
+			            			<label class="control-label">Name</label>
+			            			<input class="input-medium" type="text" id="name"/>
+			            		</div>
+			            		<div class="control-group">
+			            			<label class="control-label">Time</label>
+			            			<input class="input-medium" type="date" id="wdate"/>
+			                    </div>
+			                    <div class="control-group">
+			            			<label class="control-label">Date</label>
+			            			<input class="input-medium" type="date" id="wtime"/>
+			                    </div>
+		            		</div>
+		            		<div class="span4">
+		            			<div class="control-group">
+			            			<label class="control-label">Latitude</label>
+			            			<input class="input-medium" type="text" id="lat"/>
+			            		</div>
+			            		<div class="control-group">
+			            			<label class="control-label">Longitude</label>
+			            			<input class="input-medium" type="text" id="lng"/>
+			                    </div>
+			                    <div class="control-group">
+			            			<label class="control-label">Fahrt nach</label>
+			            			<select name="fahrtziel" id="marker" style="width: 165px;"></select>
+			                    </div>
+		            		</div>
+		            		<div class="span4">
+		            			<div class="control-group">
+			            			<label class="control-label">COG</label>
+			            			<input class="input-medium" type="text" id="cog"/>
+			                    </div>
+			                    <div class="control-group">
+			            			<label class="control-label">SOG</label>
+			            			<input class="input-medium" type="text" id="sog"/>
+			                    </div>
+			                    
+			                    <div class="control-group">
+			                    	<label class="control-label">Manoever</label>
+			            			<select name="manoever" id="manoever" style="width: 165px;"></select>
+			                    </div>                   
+		            		</div>
+		            		<div class="span4">
+		            			<div class="control-group">
+			            			<label class="control-label">BTM</label>
+			            			<input class="input-medium" type="text" id="btm"/>
+			                    </div>
+			                    <div class="control-group">
+			            			<label class="control-label">DTM</label>
+			            			<input class="input-medium" type="text" id="dtm"/>
+			                    </div>
+			                    <div class="control-group">
+			            			<label class="control-label">Vorsegel</label>
+			            			<select name="vorsegel" id="vorsegel" style="width: 165px;"></select>
+			            		</div>
+		            		</div>
+		            	</div>      	 
+	            	</div>
+	            </div>
+			    <br />
+			    <br />
+			    <div class="container" align="center">
+			    <div class="row" style="margin-left:5%;">
+			        <div class="span4" id="appNotes">
+			        	<h4>Notes</h4>
+			            <textarea style="width:96%; height:360px;"></textarea>
+			        </div>
+			        <div class="span4" id="markerMap">
+			        	<h4>Map</h4>
+			            <img src="../img/icons/marker_map.png" id="appInfoPhoto" style="width:100%; heigt: 100%;"/>
+			        </div>
+			        <div class="span4" id="appPhotos">
+			        	<h4>Photos</h4>
+				        <img src="../img/icons/no_image.jpg" id="appInfoPhoto" style="width:100%; heigt: 100%;"/>
+				    </div>
+				</div>
+			    </div>
+			</div><!-- Content -->
+			
+		</div><!-- Container -->
+		
+	</body>
 </html>

@@ -2,8 +2,7 @@
 
 <html lang="de">
   	<head>
-  		
-		<!-- Meta Informations -->
+ 		<!-- Meta Informations -->
 		<meta charset="utf-8">
 		<meta http-equiv='content-type' content='text/html; charset=utf-8'/>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,68 +11,61 @@
 		<meta name="author" content="Prof. Dr. Marko Boger, Dominic Eschbach und Timo Partl">
 		<title>Seapal</title>
 		
-        <link type="text/css" href="../lib/bootstrap/css/bootstrap.css" rel="stylesheet"/>
-        
-        
-        <!-- Custom CSS -->
-        <link type="text/css" href="style.css" rel="stylesheet"/>
-        
-        <!-- Custom Modules CSS-->
-        <link type="text/css" href="Footer/css/footer.css" rel="stylesheet"></link>
-        <link type="text/css" href="Header/css/header.css" rel="stylesheet"></link>
-        
-        <!-- Javascript Libraries -->
+		<!-- Favicon -->
+		<link rel='icon' type='image/png' href='../img/icons/seapal_normal.png'/>
+		
+		<!-- Font -->
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'/>  
+		
+		<!-- Styles -->
+		<link href="../lib/bootstrap/css/bootstrap.css" rel="stylesheet">
+		<link href="../lib/bootstrap/css/layout.css" rel="stylesheet">
+		<link href="../lib/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+		
+		
 		<script type="text/javascript" src="../lib/js/jquery.js"></script>
+        <script type="text/javascript" src="../lib/js/jquery-ui.js"></script>
         <script type="text/javascript" src="../lib/js/terrific-2.0.1.js"></script>
         <script type="text/javascript" src="../lib/bootstrap/bootstrap.js"></script>
-        
-        <!-- Custom Modules Javascript -->
-        <script type="text/javascript" src="Footer/js/Tc.Module.Footer.js"></script>
-        <script type="text/javascript" src="Header/js/Tc.Module.Header.js"></script>
-        
-        <script type="text/javascript">
-		$(document).ready(function () {
-			$("#fullname, #validemail, #message").defaultvalue("Full Name", "Email Address", "Message");
-			$('#shout a').click(function () {
-				var to = $(this).attr('href');
-				$.scrollTo(to, 1200);
-				return false;
+        <script type="text/javascript" src="../lib/bootstrap/bootstrap.js"></script>
+		
+		
+		<script type="text/javascript">
+			$("body").ready(function(){
+				$('#footer').load('js/terrific/Footer/footer.html');
+				$('#header').load('js/terrific/Header/header.html');
 			});
-			$('a.topOfPage').click(function () {
-				$.scrollTo(0, 1200);
-				return false;
-			});
-			$("#tabcontainer").tabs({
-				event: "click"
-			});
-		});
 		</script>
+		
+		<script type="text/javascript" src="js/static/main.js"></script>
 	  	
   	</head>
-  	<body id="top">
-  	
+  	<body>
   	
   		<div id="header"></div>
-  	
-  	
-
-
-
+  		
     	<!-- Container -->
     	<div class="container">
-	    	<div >
-		    	<div id="shout" class="clear">
-		    		<!-- Content -->
-					<div class="fl_left">  
-						<div id="welcome">
+	    	<div class="container-fluid">
+		    	<div class="row-fluid">
+		    		<!-- Sidebar -->
+			    	<div class="span3 ">
+				    	<div class="sidebar-nav">
+					    	<ul class="nav nav-list bs-docs-sidenav affix" id="sidebar">
+		                        <li class="sidebar"><a href="#" class="welcome">Welcome</a></li>
+		                        <li class="sidebar"><a href="#" class="overview">Overview</a></li>
+		                        <li class="sidebar"><a href="#" class="extension">Extension</a></li>
+		                        <li class="sidebar"><a href="#" class="warning">Warning</a></li>
+					        </ul>
+					    </div>
+					</div><!-- Sidebar -->
+
+					<!-- Content -->
+					<div class="span9">  
+						<div class="post" id="welcome">
 							<h2>Welcome to SeaPal</h2>
-                        </div>
-					</div>
-                </div>
-				<div id="homepage" class="clear">
-                    <div>
-                    	<div>
-	                    	<div>
+	                    	<div class="entry">
+	                        	<p><img src="../img/screenshots/SeaPal-Horiz2.jpg" alt="" class="img-rounded" height="200" width="620"></p>
 	                        	<p>
 		                            <b>SeaPal</b> is an App for sailors and other water sport fanatics that support the skipper in his tasks for navigation, route planing and logbook keeping. The central view shows a map with the current position and forward line. Waypoint and routes can easily be created, distances and courses can quickly be determined and documented in the logbook. The touch interface allows for fast and intuitive interaction.
 		                        </p>
@@ -95,10 +87,10 @@
 		                   </div>
 						</div>
 						<br><br>
-						<div id="overview">
-	                    	<h2>Function Overview</h2>
-	                    	<div>
-		                        <p><img src="../img/screenshots/SeaPal-Horiz3.jpg" alt="" height="200" width="620"></p>
+						<div class="post" id="overview">
+	                    	<h2 class="title">Function Overview</h2>
+	                    	<div class="entry">
+		                        <p><img src="../img/screenshots/SeaPal-Horiz3.jpg" class="img-rounded" alt="" height="200" width="620"></p>
 		                        <p>
 		                            <b>SeaPal</b> offers the following functionality
 		                        </p>
@@ -124,7 +116,7 @@
 		                        <br><br>
 	                    	</div>
 						</div>
-                        <div id="extension">
+                        <div class="post" id="extension">
 	                        <h1>Extensions</h1>
 	                        <p>
 	                            With extensions <b>SeaPal</b> offers the following functionality:
@@ -138,7 +130,7 @@
 	                        </ul>
                         </div>
                         <br><br>
-                        <div id="warning">
+                        <div class="post" id="warning">
                         	<h1>Warning</h1>
                         	<p>
                             	<b>SeaPal</b> is a valuable addition to your navigational equipment, but no replacement. Always use official sea maps in conjunction. All positions are provided so that a transition to paper sea maps is simple. The responsibility for the proper use lies with the skipper. The manufacturer of <b>SeaPal</b> assume no liability.
@@ -149,38 +141,7 @@
 				</div>
 			</div>	
 		</div><!-- Container -->
-
-
-
-
-	<!-- Footer -->
-	<div id="footer">
-	</div>
-	
-	
-	<script type="text/javascript">
-		$(document).ready(function(){
-			$('#footer').load('Footer/footer.html');
-			$('#header').load('Header/header.html');
-		});
-	</script>
-
-	<script type="text/javascript">
-	(function($) {
-	    $(document).ready(function() {
-	        var $page = $('body'),
-	            application = new Tc.Application($page);
-	
-	        application.registerModules();
-	        application.start();
-	    });
-	})(Tc.$);
-	</script>
-
-	
-
-
-
-    
+		
+  		<div id="footer"></div>
   </body>
 </html>
