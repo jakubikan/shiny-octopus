@@ -1,6 +1,12 @@
 /* based on https://kuler.adobe.com/#themeID/2298596 */
+/* Color 1: #00182E */
+/* Color 2: #0C6BA1 */
+/* Color 3: #D4D6D4 */
+/* Color 4: #FFFDEB */
+/* Color 5: #FF7500 */
 body {
-	background-color: #D3D6D3;
+	background-color: #D4D6D4;
+	color: #0C6BA1;
 	
 }
 a:hover {
