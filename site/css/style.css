@@ -9,6 +9,13 @@ body {
 	color: #0C6BA1;
 	
 }
-a:hover {
+a:hover,
+a:focus {
+	background-color: #FFFDEB;
+	color: #FF7500;
+	
+}
+a {
+	color: #0C6BA1;
 	
 }

@@ -4,9 +4,15 @@
 	color: #D4D6D4;
 }
 
-.mod-header a {
-	color: #D4D6D4;
+.nav-pills > .active > a,
+.nav-pills > .active > a:hover,
+.nav-pills > .active > a:focus {
+	background-color: #FFFDEB;
+	color: #FF7500;
 }
+
+
+
 .mod-header .brand {
 	padding-top: 25px;
 	
