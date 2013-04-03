@@ -4,6 +4,8 @@
         callback();
     },
     after: function() { 
+		$(".headerfix").css("padding-top",$(".mod-header").height() + "px");
+
     	
     }
   });
