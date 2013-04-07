@@ -1,8 +1,8 @@
-.mod-header {
+	.mod-header {
 	width: 100%;
 	background-color: #00182E;
 	color: #D4D6D4;
-	position: fixed;
+	/*position: fixed;*/
 }
 
 .nav-pills > .active > a,

@@ -1293,6 +1293,41 @@ textarea::-webkit-input-placeholder {
   width: 150px;
 }
 
+.input-medium-short {
+	width: 135px;	
+}
+
+.input-medium-shorter {
+	width: 120px;	
+}
+
+.high-select option{
+	height: 33px;
+	padding-left: 38px;
+	padding-top: 12px;
+	background-repeat: no-repeat;
+	vertical-align: middle;
+}
+
+#select-sunny {
+	background-image:url(../../../img/icons/weather/sun.png);	
+}
+#select-partlycloudy {
+	background-image:url(../../../img/icons/weather/sunclouds.png);	
+}
+#select-cloudy {
+	background-image:url(../../../img/icons/weather/clouds.png);	
+}
+#select-rain {
+	background-image:url(../../../img/icons/weather/rain.png);	
+}
+#select-snow {
+	background-image:url(../../../img/icons/weather/snow.png);	
+}
+#select-thunder {
+	background-image:url(../../../img/icons/weather/thunder.png);	
+}
+
 .input-large {
   width: 210px;
 }
@@ -1964,6 +1999,7 @@ legend + .control-group {
   width: 160px;
   padding-top: 5px;
   text-align: right;
+  padding-right: 15px;
 }
 
 .form-horizontal .controls {
