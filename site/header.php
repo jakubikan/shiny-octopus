@@ -31,13 +31,6 @@
         <script type="text/javascript" src="../lib/js/terrific-2.0.1.js"></script>
         <script type="text/javascript" src="../lib/bootstrap/js/bootstrap.js"></script>
 		
-		<script type="text/javascript">
-			$("body").ready(function(){
-				$('#footer').load('js/terrific/Footer/footer.html');
-				$('#header').load('js/terrific/Header/header.html');
-			});
-		</script>
-		
 		<script type="text/javascript" src="js/static/main.js"></script>
 		
 	</head>
