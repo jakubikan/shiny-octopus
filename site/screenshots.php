@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 <html lang="de">
-  	<?php include("header.php")
+  	<?php include("js/terrific/Header/header.php")?>
   	<body>
 
 		<!-- Navigation -->
@@ -184,7 +184,9 @@
 			</div>	
 		</div><!-- Container -->
 
-		<div id="footer"></div>
+		<div id="footer">
+			<?php include ("js/terrific/Footer/footer.php")?>
+		</div>
 
   </body>
 </html>
