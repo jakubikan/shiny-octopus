@@ -28,6 +28,7 @@
 			            		<div class="control-group">
 			            			<label class="control-label">Wind Direction</label>
 			            			<select class="input-medium" id="windDirection" >
+                                    	<option disabled selected>-Please select-</option>
                                     	<option>North</option>
                                         <option>North-East</option>
                                         <option>East</option>
@@ -51,17 +52,19 @@
 			            		<div class="control-group">
 		            			  <label class="control-label">Clouds</label>
 			            			<select name="clouds" class="input-medium high-select" id="clouds" >
-			            			  <option selected id="select-sunny">Sunny</option>
-			            			  <option id="select-partlycloudy">Partly cloudy</option>
-			            			  <option id="select-cloudy">Cloudy</option>
-                                      <option id="select-rain">Rain</option>
-                                      <option id="select-snow">Snow</option>
-                                      <option id="select-thunder">Thunder / Storm</option>
+                                    	<option disabled selected>-Please select-</option>
+			            			  	<option id="select-sunny">Sunny</option>
+			            			  	<option id="select-partlycloudy">Partly cloudy</option>
+			            			  	<option id="select-cloudy">Cloudy</option>
+                                      	<option id="select-rain">Rain</option>
+                                      	<option id="select-snow">Snow</option>
+                                      	<option id="select-thunder">Thunder / Storm</option>
 		            			  </select>
 			            		</div>
 			                    <div class="control-group">
 			            			<label class="control-label">Rain</label>
 			            			<select class="input-medium" name="fahrtziel" id="rain" >
+                                    	<option disabled selected>-Please select-</option>
                                         <option>0 - 2 mm/sqm</option>
                                         <option>2 - 4 mm/sqm</option>
                                         <option>4 - 8 mm/sqm</option>
@@ -79,6 +82,7 @@
 			                    <div class="control-group">
 			            			<label class="control-label">Wave Direction</label>
 			            			<select class="input-medium" type="text" id="lng">
+                                    	<option disabled selected>-Please select-</option>
                                     	<option>North</option>
                                         <option>North-East</option>
                                         <option>East</option>
