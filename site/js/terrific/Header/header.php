@@ -1,4 +1,4 @@
-<head>
+<div>
 		
 		<!-- Meta Informations -->
 		<meta charset="utf-8">
@@ -10,24 +10,25 @@
 		<title>Seapal</title>
 		
 		<!-- Favicon -->
-		<link rel='icon' type='image/png' href='../../../../img/icons/seapal_normal.png'/>
+		<link rel='icon' type='image/png' href='../img/icons/seapal_normal.png'/>
 		
 		<!-- Styles -->
-		<link href="../../../../lib/bootstrap/css/bootstrap.css" rel="stylesheet">
-		<link href="../../../../lib/bootstrap/css/layout.css" rel="stylesheet">
-		<link href="../../../../lib/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
-		
+		<link href="../lib/bootstrap/css/bootstrap.css" rel="stylesheet">
+		<link href="../lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+		<link href="../lib/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+		<link href="../lib/bootstrap/css/bootstrap-responsive.min..css" rel="stylesheet">
+        
 		<!-- Custom CSS -->
-		<link href="../../../css/style.css" rel="stylesheet">
+		<link href="css/style.css" rel="stylesheet">
 		
 		<!-- Custom Module CSS -->
-		<link href="css/header.css" rel="stylesheet">
-		<link href="../Footer/css/footer.css" rel="stylesheet">
+		<link href="js/terrific/Header/css/header.css" rel="stylesheet">
+		<link href="js/terrific/Footer/css/footer.css" rel="stylesheet">
 		
-		<script type="text/javascript" src="../../../../lib/js/jquery.js"></script>
-        <script type="text/javascript" src="../../../../lib/js/jquery-ui.js"></script>
-        <script type="text/javascript" src="../../../../lib/js/terrific-2.0.1.js"></script>
-        <script type="text/javascript" src="../../../../lib/bootstrap/js/bootstrap.js"></script>
+		<script type="text/javascript" src="../lib/js/jquery.js"></script>
+        <script type="text/javascript" src="../lib/js/jquery-ui.js"></script>
+        <script type="text/javascript" src="../lib/js/terrific-2.0.1.js"></script>
+        <script type="text/javascript" src="../lib/bootstrap/js/bootstrap.js"></script>
 		
 		<script type="text/javascript">
 			$("body").ready(function(){
@@ -36,6 +37,29 @@
 			});
 		</script>
 		
-		<script type="text/javascript" src="../../static/main.js"></script>
-		
-	</head>
+		<script type="text/javascript" src="js/static/main.js"></script>
+	
+    <div class="mod mod-header">
+        <!-- Navigation -->
+        <div class="container">
+                <a class="brand span1" href="index.html">
+                    <img src='../img/icons/seapal_normal.png' alt='Icon-Small-50' width='50' height='50' />
+                </a>
+                <div class="span10">
+                    <h1 >Seapal</h1>
+                    <ul class="nav nav-pills">
+                        <li class="active"><a href='index.html'>Home</a></li>
+                        <li><a href='app_waypoint.html'>App</a></li>
+                        <li><a href='userguide.html'>User Guide</a></li>
+                        <li><a href='screenshots.html'>Screenshots</a></li>
+                        <li><a href='about.html'>About</a></li>
+                        <li><a href='contact.html'>Contact</a></li>
+                    </ul>
+                
+                </div>
+            
+            
+        </div>
+	</div>
+    
+	</div>

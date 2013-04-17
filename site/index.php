@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 
 <html lang="de">
-  	<?php include("js/terrific/Header/header.php")?>
-  	<body>
-  	
-  		<div id="header"></div>
+  	<head> 
+	    <div id="header">
+			<?php include("js/terrific/Header/header.php")?>
+        </div>
+	</head>
+	<body>
   		
     	<!-- Container -->
     	<div class="container headerfix">
