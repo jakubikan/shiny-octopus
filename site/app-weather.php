@@ -17,17 +17,16 @@
 			    <h2 align="center">Weather information</h2>
 			    <br />
 			    <div class="container-fluid">
-	            	<form class="form-horizontal"> 
+	            	<form action="insert.php" method="post" class="form-horizontal"> 
 		            	<div class="row well" style="margin-left: 15%;" >
 		            		<div class="span4">	            		
 			            		<div class="control-group">
 			            			<label class="control-label">Wind Strength</label>					
-			            				<input id="windStrength" class="input-medium-short" type="number" autofocus/> knots
-                                                                          
+			            				<input id="windStrength" class="input-medium-short" type="number" name="windStrength" autofocus/> knots
 			            		</div>
 			            		<div class="control-group">
 			            			<label class="control-label">Wind Direction</label>
-			            			<select class="input-medium" id="windDirection" >
+			            			<select class="input-medium" id="windDirection" name="windDirection">
                                     	<option disabled selected>-Please select-</option>
                                     	<option>North</option>
                                         <option>North-East</option>
@@ -41,17 +40,17 @@
 			                    </div>
 			                    <div class="control-group">
 			            			<label class="control-label">Air Pressure</label>
-			            			<input class="input-medium" type="number" id="airPressure"/> hPa
+			            			<input class="input-medium" type="number" id="airPressure" name="airPressure"/> hPa
 			                    </div>
 		            		</div>
 		            		<div class="span4">
 		            			<div class="control-group">
 			            			<label class="control-label">Temperature</label>
-		            			  <input class="input-medium" id="temp"type="text" /> °C
+		            			  <input class="input-medium" id="temp"type="text" name="temp" /> °C
 		            		  </div>
 			            		<div class="control-group">
 		            			  <label class="control-label">Clouds</label>
-			            			<select name="clouds" class="input-medium high-select" id="clouds" >
+			            			<select name="clouds" class="input-medium high-select" id="clouds" name="clouds">
                                     	<option disabled selected>-Please select-</option>
 			            			  	<option id="select-sunny">Sunny</option>
 			            			  	<option id="select-partlycloudy">Partly cloudy</option>
@@ -63,7 +62,7 @@
 			            		</div>
 			                    <div class="control-group">
 			            			<label class="control-label">Rain</label>
-			            			<select class="input-medium" name="fahrtziel" id="rain" >
+			            			<select class="input-medium" name="rain" id="rain" >
                                     	<option disabled selected>-Please select-</option>
                                         <option>0 - 2 mm/sqm</option>
                                         <option>2 - 4 mm/sqm</option>
@@ -77,11 +76,11 @@
 		            		<div class="span4">
 		            			<div class="control-group">
 			            			<label class="control-label">Wave Height</label>
-			            			<input class="input-medium" type="text" id="cog"/> m
+			            			<input class="input-medium" type="text" id="waveheight" name="waveheight"/> m
 			                    </div>
 			                    <div class="control-group">
 			            			<label class="control-label">Wave Direction</label>
-			            			<select class="input-medium" type="text" id="lng">
+			            			<select class="input-medium" type="text" id="wavedirection" name="wavedirection">
                                     	<option disabled selected>-Please select-</option>
                                     	<option>North</option>
                                         <option>North-East</option>
@@ -95,7 +94,7 @@
 			                    
 			                    <div class="control-group">
 			                    	<label class="control-label">Date and time of tracking</label>
-			            			<input type="datetime-local" class="input-medium" name="manoever" id="manoever"></select>
+			            			<input type="datetime-local" class="input-medium" name="trackdatetime" id="trackdatetime"></select>
 			                    </div>
                                                    
 		            		</div>
