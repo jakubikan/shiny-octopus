@@ -1,5 +1,3 @@
-<script type="text/javascript" src="js/terrific/Weather/js/Tc.Module.Weather.js">
-</script>
 
 <div id="mod mod-weather">
 	<br />

@@ -2,6 +2,8 @@
 
 <html lang="de">
 	<?php include("js/terrific/Header/header.php")?>
+	<script type="text/javascript" src="js/terrific/Weather/js/Tc.Module.Weather.js">
+	</script>
 	<body>
 		
 		<!-- Navigation -->

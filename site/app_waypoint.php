@@ -2,6 +2,8 @@
 
 <html lang="de">
 	<?php include("js/terrific/Header/header.php")?>
+	<script type="text/javascript" src="js/terrific/Waypoint/js/Tc.Module.Waypoint.js">
+	</script>
 	<body>
 		
 		<!-- Navigation -->
@@ -10,8 +12,7 @@
 		
 		<!-- Container -->
 		<div class="container">
-						
-			
+			<?php include ("js/terrific/Waypoint/waypoint.php")?>
 		</div><!-- Container -->
 		
 		<div id="footer">
