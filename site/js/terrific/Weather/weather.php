@@ -1,3 +1,6 @@
+<script type="text/javascript" src="js/terrific/Weather/js/Tc.Module.Weather.js">
+</script>
+
 <div id="mod mod-weather">
 	<br />
 	<h2 align="center">Weather information</h2>
@@ -34,7 +37,7 @@
 				<div class="span4">
 					<div class="control-group">
 						<label class="control-label">Temperature</label> <input
-							class="input-medium" id="temp" type="text" name="temp" /> ��C
+							class="input-medium" id="temp" type="text" name="temp" />
 					</div>
 					<div class="control-group">
 						<label class="control-label">Clouds</label> <select name="clouds"

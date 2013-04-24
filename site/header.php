@@ -23,7 +23,8 @@
 		<!-- Custom Module CSS -->
 		<link href="js/terrific/Footer/css/footer.css" rel="stylesheet">
 		<link href="js/terrific/Header/css/header.css" rel="stylesheet">
-		
+		<link href="js/terrific/Weather/css/weather.css" rel="stylesheet">
+		<link href="js/terrific/Waypoint/css/waypoint.css" rel="stylesheet">
 		
 		
 		<script type="text/javascript" src="../lib/js/jquery.js"></script>

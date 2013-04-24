@@ -10,7 +10,7 @@
 		
 		<!-- Container -->
 		<div class="container">
-			<?php include ("js/terrific/Weahter/weather.php")?>
+			<?php include ("js/terrific/Weather/weather.php")?>
 		</div><!-- Container -->
 		
 		<div id="footer">
