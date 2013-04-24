@@ -96,7 +96,6 @@
 				        <img src="../img/icons/no_image.jpg" id="appInfoPhoto" style="width:100%; heigt: 100%;"/>
 				    </div>
 				</div>
-			    </div>
 			</div><!-- Content -->
 			
 		</div><!-- Container -->
