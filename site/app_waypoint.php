@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 
 <html lang="de">
-	<?php include("js/terrific/Header/header.php")?>
+	<?php include("header.php")?>
 	<script type="text/javascript" src="js/terrific/Waypoint/js/Tc.Module.Waypoint.js">
 	</script>
 	<body>
 		
 		<!-- Navigation -->
-		<div id="header"></div>
+		<div id="header">
+			<?php include("js/terrific/Header/header.php")?>
+		</div>
 
 		
 		<!-- Container -->

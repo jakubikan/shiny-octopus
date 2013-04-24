@@ -1,4 +1,5 @@
 
+<!-- Content -->
 <div id="mod mod-weather">
 	<br />
 	<h2 align="center">Weather information</h2>
@@ -38,7 +39,7 @@
 							class="input-medium" id="temp" type="text" name="temp" />
 					</div>
 					<div class="control-group">
-						<label class="control-label">Clouds</label> <select name="clouds"
+						<label class="control-label">Clouds</label> <select
 							class="input-medium high-select" id="clouds" name="clouds">
 							<option disabled selected>-Please select-</option>
 							<option id="select-sunny">Sunny</option>
@@ -65,13 +66,13 @@
 				<div class="span4">
 					<div class="control-group">
 						<label class="control-label">Wave Height</label> <input
-							class="input-medium" type="text" id="waveheight"
-							name="waveheight" /> m
+							class="input-medium" type="text" id="waveHeight"
+							name="waveHeight" /> m
 					</div>
 					<div class="control-group">
 						<label class="control-label">Wave Direction</label> <select
-							class="input-medium" type="text" id="wavedirection"
-							name="wavedirection">
+							class="input-medium" type="text" id="waveDirection"
+							name="waveDirection">
 							<option disabled selected>-Please select-</option>
 							<option>North</option>
 							<option>North-East</option>
@@ -86,8 +87,8 @@
 
 					<div class="control-group">
 						<label class="control-label">Date and time of tracking</label> <input
-							type="datetime-local" class="input-medium" name="trackdatetime"
-							id="trackdatetime"></select>
+							type="datetime-local" class="input-medium" name="trackDateTime"
+							id="trackDateTime">
 					</div>
 
 				</div>
@@ -105,7 +106,27 @@
 			</div>
 		</form>
 	</div>
-	<br /> <br />
+	<br />
+	<div id="dbTable">
+		<table>
+			<?php
+			$result = mysql_query("Select * FROM weather");
+			while($row = mysql_fetch_array($result)){
+				    			echo "<tr>";
+				    			echo 	"<td>".$row['Windstrength']." Knots</td>
+				<td>".$row['Temperature']." </td>
+					<td>".$row['WindDirection']."</td>
+					<td>".$row['Clouds']."</td>
+					<td>".$row['AirPressure']." hPa</td>
+					<td>".$row['Rain']."</td>
+					<td>".$row['WaveHeight']." m</td>
+					<td>".$row['WaveDirection']."</td>
+					<td>".$row['DateTime']."</td>";
+    			echo "</tr>";
+    		} ?>
+		</table>
+	</div>
+	<br />
 
 </div>
 <!-- Content -->
