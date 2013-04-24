@@ -1,16 +1,14 @@
 <?php		
 	//Datenbank Konstanten
+	include("php/dbconnect.php");
 	$DBNAME = "seapal";
 	$WEATHERTABLENAME = "Weather";
-	$connection = mysql_connect("localhost","root","");
-	if (!$connection) {
-		die('Could not connenct: '. mysql_error());
-	}
+	$connection = ConnectDatabase();
 	if (!mysql_query("CREATE DATABASE IF NOT EXISTS ".$DBNAME,$connection)) {
 		die("Error creating Database: ".mysql_error());
 	}
 	//Create table
-	mysql_select_db("seapal",$connection);
+	SelectDB($connection);
 	
 	$sql = "CREATE TABLE IF NOT EXISTS ".$WEATHERTABLENAME."(	ID INT NOT NULL AUTO_INCREMENT, 
 																PRIMARY KEY(ID),

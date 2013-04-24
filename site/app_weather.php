@@ -1,7 +1,10 @@
 <!DOCTYPE html>
-
+<?php
+	include("php/dbconnect.php");
+	$con = ConnectAndSelectDB();
+?>
 <html lang="de">
-	<?php include("js/terrific/Header/header.php")?>
+	<?php include("js/terrific/Header/header.php") ?>
 	<body>
 		
 		<!-- Navigation -->
@@ -113,6 +116,26 @@
 	            	</form>
 	            </div>
 			    <br />
+			    <div id="dbTable">
+			    	<table>
+				    	<?php
+				    		$result = mysql_query("Select * FROM weather");
+				    		while($row = mysql_fetch_array($result)){
+				    			echo "<tr>";
+				    			echo 	"<td>".$row['Windstrength']." Knots</td>
+				    					<td>".$row['Temperature']." °C</td>
+				    					<td>".$row['WindDirection']."</td>
+				    					<td>".$row['Clouds']."</td>
+				    					<td>".$row['AirPressure']." hPa</td>
+				    					<td>".$row['Rain']."</td>
+				    					<td>".$row['WaveHeight']." m</td>
+				    					<td>".$row['WaveDirection']."</td>
+				    					<td>".$row['DateTime']."</td>";
+				    			echo "</tr>";
+				    		}
+				    	?>
+			    	</table>
+			    </div>
 			    <br />
 			    
 			</div><!-- Content -->
@@ -120,7 +143,7 @@
 		</div><!-- Container -->
 		
 		<div id="footer">
-			<?php include ("js/terrific/Footer/footer.php")?>
+			<?php include ("js/terrific/Footer/footer.php") ?>
 		</div>
 		
 	</body>
