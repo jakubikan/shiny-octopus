@@ -50,7 +50,7 @@
 		            		  </div>
 			            		<div class="control-group">
 		            			  <label class="control-label">Clouds</label>
-			            			<select name="clouds" class="input-medium high-select" id="clouds" name="clouds">
+			            			<select class="input-medium high-select" id="clouds" name="clouds">
                                     	<option disabled selected>-Please select-</option>
 			            			  	<option id="select-sunny">Sunny</option>
 			            			  	<option id="select-partlycloudy">Partly cloudy</option>
@@ -76,11 +76,11 @@
 		            		<div class="span4">
 		            			<div class="control-group">
 			            			<label class="control-label">Wave Height</label>
-			            			<input class="input-medium" type="text" id="waveheight" name="waveheight"/> m
+			            			<input class="input-medium" type="text" id="waveHeight" name="waveHeight"/> m
 			                    </div>
 			                    <div class="control-group">
 			            			<label class="control-label">Wave Direction</label>
-			            			<select class="input-medium" type="text" id="wavedirection" name="wavedirection">
+			            			<select class="input-medium" type="text" id="waveDirection" name="waveDirection">
                                     	<option disabled selected>-Please select-</option>
                                     	<option>North</option>
                                         <option>North-East</option>
@@ -94,7 +94,7 @@
 			                    
 			                    <div class="control-group">
 			                    	<label class="control-label">Date and time of tracking</label>
-			            			<input type="datetime-local" class="input-medium" name="trackdatetime" id="trackdatetime"></select>
+			            			<input type="datetime-local" class="input-medium" name="trackDateTime" id="trackDateTime">
 			                    </div>
                                                    
 		            		</div>
