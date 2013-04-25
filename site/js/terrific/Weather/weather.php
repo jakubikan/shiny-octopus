@@ -1,21 +1,20 @@
-
 <!-- Content -->
 <div id="mod mod-weather">
-	<br />
 	<h2 align="center">Weather information</h2>
-	<br />
 	<div class="container-fluid">
 		<form action="insert.php" method="post" class="form-horizontal">
-			<div class="row well" style="margin-left: 15%;">
+			<div class="row well">
 				<div class="span4">
 					<div class="control-group">
-						<label class="control-label">Wind Strength</label> <input
-							id="windStrength" class="input-medium-short" type="number"
-							name="windStrength" autofocus /> knots
+						<label class="control-label">Wind Strength</label> 
+						<input id="windStrength" class="input-medium-short" type="number"
+							name="windStrength" autofocus tabindex="1"/>
+						<span>knots</span>
 					</div>
 					<div class="control-group">
-						<label class="control-label">Wind Direction</label> <select
-							class="input-medium" id="windDirection" name="windDirection">
+						<label class="control-label">Wind Direction</label> 
+						<select
+							class="input-medium" id="windDirection" name="windDirection" >
 							<option disabled selected>-Please select-</option>
 							<option>North</option>
 							<option>North-East</option>
@@ -28,15 +27,17 @@
 						</select>
 					</div>
 					<div class="control-group">
-						<label class="control-label">Air Pressure</label> <input
-							class="input-medium" type="number" id="airPressure"
-							name="airPressure" /> hPa
+						<label class="control-label">Air Pressure</label> 
+						<input class="input-medium" type="number" id="airPressure"
+							name="airPressure" />
+						<span>hPa</span>
 					</div>
 				</div>
 				<div class="span4">
 					<div class="control-group">
-						<label class="control-label">Temperature</label> <input
-							class="input-medium" id="temp" type="text" name="temp" />
+						<label class="control-label">Temperature</label> 
+						<input class="input-medium" id="temp" type="text" name="temp" tabindex="2"/>
+						<span>°C</span>
 					</div>
 					<div class="control-group">
 						<label class="control-label">Clouds</label> <select
@@ -59,7 +60,7 @@
 							<option>4 - 8 mm/sqm</option>
 							<option>8 - 15 mm/sqm</option>
 							<option>15 - 25 mm/sqm</option>
-							<option>>25 mm/sqm</option>
+							<option>25 mm/sqm</option>
 						</select>
 					</div>
 				</div>
@@ -67,7 +68,8 @@
 					<div class="control-group">
 						<label class="control-label">Wave Height</label> <input
 							class="input-medium" type="text" id="waveHeight"
-							name="waveHeight" /> m
+							name="waveHeight" /> 
+							<span>m</span>
 					</div>
 					<div class="control-group">
 						<label class="control-label">Wave Direction</label> <select
@@ -86,8 +88,8 @@
 					</div>
 
 					<div class="control-group">
-						<label class="control-label">Date and time of tracking</label> <input
-							type="datetime-local" class="input-medium" name="trackDateTime"
+						<label class="control-label">Date and time of tracking</label> 
+						<input type="datetime-local" class="input-medium" name="trackDateTime"
 							id="trackDateTime">
 					</div>
 
@@ -102,11 +104,9 @@
 						</div>
 					</div>
 				</div>
-
 			</div>
 		</form>
 	</div>
-	<br />
 	<div id="dbTable">
 		<table>
 			<?php
@@ -126,7 +126,5 @@
     		} ?>
 		</table>
 	</div>
-	<br />
-
 </div>
 <!-- Content -->
