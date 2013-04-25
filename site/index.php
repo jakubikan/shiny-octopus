@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 
 <html lang="de">
-  	<head> 
+	<?php include("header.php")?>
+	<body>
+  		
 	    <div id="header">
 			<?php include("js/terrific/Header/header.php")?>
         </div>
-	</head>
-	<body>
-  		
+        
     	<!-- Container -->
     	<div class="container headerfix">
 	    	<div class="row-fluid">

@@ -32,6 +32,12 @@
         <script type="text/javascript" src="../lib/js/terrific-2.0.1.js"></script>
         <script type="text/javascript" src="../lib/bootstrap/js/bootstrap.js"></script>
 		
+		<!-- Custom Modul Js -->
+		<script type="text/javascript" src="js/terrific/Header/js/Tc.Module.Header.js"></script>
+		<script type="text/javascript" src="js/terrific/Footer/js/Tc.Module.Footer.js"></script>
+		<script type="text/javascript" src="js/terrific/Weather/js/Tc.Module.Weather.js"></script>
+		<script type="text/javascript" src="js/terrific/Waypoint/js/Tc.Module.Waypoint.js"></script>
+		
 		<script type="text/javascript" src="js/static/main.js"></script>
 		
 	</head>
