@@ -19,8 +19,8 @@
 				    	<div class="sidebar-nav" id="sidebar">
 					    	<ul class="nav nav-list bs-docs-sidenav affix">
 						    	<li class="sidebar"><a href="#" class="installing">Installing SeaPal</a></li>
-								<li class="sidebar"><a href="#" class="starting">Starting SeaPal</a></li>
-								<li class="sidebar"><a href="#" class="map">Map Selection</a></li>
+								<li class="sidebar"><a href="#start" class="starting">Starting SeaPal</a></li>
+								<li class="sidebar"><a href="#map_select" class="map">Map Selection</a></li>
 								<li><a href="../img/screenshots/SeaPal-Legend-IBN-Map.pdf">Legend of IBN Maps</a></li>
 					        </ul>
 					    </div>
@@ -38,7 +38,7 @@
 						</div>
 						<div class="post" id="starting">
 							<br><br>
-							<h2>Starting SeaPal</h2>
+							<h2 id="start">Starting SeaPal</h2>
 							<div class="entry">
 								<p>
 									 Tap on the SeaPal application icon to start SeaPal. If you have GPS on your mobile device, the app will ask you if it is ok to access your current position. This of course makes a lot of sense in a navigational app, so please do approve that.
@@ -58,7 +58,7 @@
 						</div>
 						<div class="post" id="map">
 							<br><br>
-							<h2>Map Selection</h2>
+							<h2 id="map_select">Map Selection</h2>
 							<div class="entry">
 								<p>
 									The map view initially shows maps from Google Maps. This is convenient because it downloads fast and is familiar to most. It is excellent for overview and orientation, but it is not very good for navigational purposes. These maps were created primarily for navigation with cars and not with sailors in mind. The shore line and especially harbors can be very imprecise. So you should know how to switch to different map views. For this, tap on the menu button at the top left.
