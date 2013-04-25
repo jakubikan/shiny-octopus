@@ -9,7 +9,7 @@
         </div>
         
     	<!-- Container -->
-    	<div class="container headerfix">
+    	<div class="container">
 	    	<div class="row-fluid">
 	    		<!-- Sidebar -->
 		    	<div class="span2">

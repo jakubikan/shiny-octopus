@@ -4,7 +4,7 @@
         callback();
     },
     after: function() { 
-		$(".headerfix").css("padding-top",$(".mod-header").height() + "px");
+		$("#header +").css("padding-top",$(".mod-header").height() + "px");
 	
     }
   });
