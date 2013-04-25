@@ -17,9 +17,10 @@
 				    	<div class="sidebar-nav affix-top">
 					    	<ul class="nav nav-list bs-docs-sidenav affix" id="sidebar">
 						    	<li class="sidebar"><a href="#" class="ipad">iPad</a></li>
-						    	<li class="sidebar"><a href="#" class="tools">Tools</a></li>
-						    	<li class="sidebar"><a href="#" class="inplace">In-Place-Tools</a></li>
-						    	<li class="sidebar"><a href="#" class="iphone">iPhone</a></li>
+						    	<li class="sidebar"><a href="#tools" class="tools">Tools</a></li>
+						    	<li class="sidebar"><a href="#in_place_tools" class="inplace">In-Place-Tools</a></li>
+                                <li class="sidebar"><a href="#logbook" class="inplace">Seapal Logbook and Tracking</a></li>
+						    	<li class="sidebar"><a href="#iphone" class="iphone">iPhone</a></li>
 					        </ul>
 					    </div>
 					</div><!-- Sidebar -->
@@ -83,8 +84,7 @@
 				      		</div>
 						</div>
 						<div id="tools">
-							<br><br>
-							<h2 >SeaPal Tools</h2>
+							<h2 id="tools">SeaPal Tools</h2>
 							<div class="entry">
 								<figure>
 									<img src="../img/screenshots//SeaPal-RouteTool.jpg" class="img-rounded" alt="SeaPal-RouteTool" width="580" height="435">
@@ -103,8 +103,7 @@
 							</div>
 						</div>
 						<div class="post" id="inplace">
-							<br><br>
-							<h2>SeaPal In-Place-Tools</h2>
+							<h2 id='in_place_tools'>SeaPal In-Place-Tools</h2>
 							<div class="entry">
 								<figure>
 									<img src="../img/screenshots//SeaPal-Longtouch.jpg" class="img-rounded" alt="SeaPal-Longtouch" width="580" height="435">
@@ -133,8 +132,7 @@
 							</div>
 						</div>
 						<div class="post" id="logbook">
-							<br><br>
-							<h2>SeaPal Logbook and Tracking</h2>
+							<h2 id='logbook'>SeaPal Logbook and Tracking</h2>
 							<div class="entry">
 								<figure>
 									<img src="../img/screenshots//SeaPal-Tracking.jpg" class="img-rounded" alt="SeaPal-Tracking" width="580" height="435">
@@ -153,8 +151,7 @@
 							</div>
 						</div>
 						<div class="post" id="iphone">
-							<br><br>
-							<h2>SeaPal on the iPhone</h2>
+							<h2 id='iphone'>SeaPal on the iPhone</h2>
 							<div class="entry">
 								<figure>
 									<img src="../img/screenshots//SeaPal-iPhone-LaCoruna.jpg" class="img-rounded" alt="SeaPal-iPhone-LaCoruna" width="218" height="292">
