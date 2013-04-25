@@ -2,8 +2,6 @@
 
 <html lang="de">
 	<?php include("head_tag.php")?>
-	<script type="text/javascript" src="js/terrific/Waypoint/js/Tc.Module.Waypoint.js">
-	</script>
 	<body>
 		
 		<!-- Navigation -->
