@@ -4,7 +4,7 @@
 	$con = ConnectAndSelectDB();
 ?>
 <html lang="de">
-	<?php include("header.php")?>
+	<?php include("head_tag.php")?>
 	<script type="text/javascript" src="js/terrific/Weather/js/Tc.Module.Weather.js">
 	</script>
 	<body>

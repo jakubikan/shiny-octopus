@@ -1,6 +1,6 @@
 <?php 
 	function ConnectDatabase(){
-		$con = mysql_connect("localhost","root","");
+		$con = mysql_connect("localhost","root","muhkuh123");
 		if(!$con){
 			die("Could not connect to DB: ".mysql_error());
 		}

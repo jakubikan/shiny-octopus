@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 <html lang="de">
-	<?php include("header.php")?>
+	<?php include("head_tag.php")?>
 	<body>
   		
 	    <div id="header">

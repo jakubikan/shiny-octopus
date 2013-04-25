@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 <html lang="de">
-	<?php include("header.php")?>
+	<?php include("head_tag.php")?>
 	<script type="text/javascript" src="js/terrific/Waypoint/js/Tc.Module.Waypoint.js">
 	</script>
 	<body>
