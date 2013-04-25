@@ -14,7 +14,7 @@
 					<div class="control-group">
 						<label class="control-label">Wind Direction</label> 
 						<select
-							class="input-medium" id="windDirection" name="windDirection" >
+							class="input-medium" id="windDirection" name="windDirection" tabindex='4'>
 							<option disabled selected>-Please select-</option>
 							<option>North</option>
 							<option>North-East</option>
@@ -28,20 +28,20 @@
 					</div>
 					<div class="control-group">
 						<label class="control-label">Air Pressure</label> 
-						<input class="input-medium" type="number" id="airPressure"
-							name="airPressure" />
+						<input class="input-medium-short" type="number" id="airPressure"
+							name="airPressure" tabindex='7'/>
 						<span>hPa</span>
 					</div>
 				</div>
 				<div class="span4">
 					<div class="control-group">
 						<label class="control-label">Temperature</label> 
-						<input class="input-medium" id="temp" type="text" name="temp" tabindex="2"/>
+						<input class="input-medium-short" id="temp" type="text" name="temp" tabindex="2"/>
 						<span>°C</span>
 					</div>
 					<div class="control-group">
 						<label class="control-label">Clouds</label> <select
-							class="input-medium high-select" id="clouds" name="clouds">
+							class="input-medium high-select" id="clouds" name="clouds" tabindex='5'>
 							<option disabled selected>-Please select-</option>
 							<option id="select-sunny">Sunny</option>
 							<option id="select-partlycloudy">Partly cloudy</option>
@@ -53,7 +53,7 @@
 					</div>
 					<div class="control-group">
 						<label class="control-label">Rain</label> <select
-							class="input-medium" name="rain" id="rain">
+							class="input-medium" name="rain" id="rain" tabindex='8'>
 							<option disabled selected>-Please select-</option>
 							<option>0 - 2 mm/sqm</option>
 							<option>2 - 4 mm/sqm</option>
@@ -67,13 +67,13 @@
 				<div class="span4">
 					<div class="control-group">
 						<label class="control-label">Wave Height</label> <input
-							class="input-medium" type="text" id="waveHeight"
-							name="waveHeight" /> 
+							class="input-medium-short" type="text" id="waveHeight"
+							name="waveHeight"  tabindex='3'/> 
 							<span>m</span>
 					</div>
 					<div class="control-group">
 						<label class="control-label">Wave Direction</label> <select
-							class="input-medium" type="text" id="waveDirection"
+							class="input-medium" type="text" id="waveDirection" tabindex='6'
 							name="waveDirection">
 							<option disabled selected>-Please select-</option>
 							<option>North</option>
@@ -90,7 +90,7 @@
 					<div class="control-group">
 						<label class="control-label">Date and time of tracking</label> 
 						<input type="datetime-local" class="input-medium" name="trackDateTime"
-							id="trackDateTime">
+							id="trackDateTime" tabindex='9'>
 					</div>
 
 				</div>
@@ -99,7 +99,7 @@
 						<div class="span2"></div>
 						<div class="span1">
 							<div class="btn-group">
-								<button type="submit" id="submitBtn" class="btn btn-primary">Submit</button>
+								<button type="submit" id="submitBtn" class="btn btn-primary" tabindex='10'>Submit</button>
 							</div>
 						</div>
 					</div>
