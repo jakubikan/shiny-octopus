@@ -1,5 +1,5 @@
 <!-- Content -->
-<div id="mod mod-weather">
+<div class="mod mod-weather">
 	<h2 align="center">Weather information</h2>
 	<div class="container-fluid">
 		<form action="insert.php" method="post" class="form-horizontal">
@@ -7,9 +7,10 @@
 				<div class="span4">
 					<div class="control-group">
 						<label class="control-label">Wind Strength</label> 
-						<input id="windStrength" class="input-medium-short" type="number"
-							name="windStrength" autofocus tabindex="1"/>
+						<input id="windStrength" class="input-medium-short"  type="number"
+							name="windStrength" autofocus tabindex="1" data-validation="windstrength" />
 						<span>knots</span>
+						<span class="help-block hide">Please insert a number</span>
 					</div>
 					<div class="control-group">
 						<label class="control-label">Wind Direction</label> 
@@ -29,15 +30,17 @@
 					<div class="control-group">
 						<label class="control-label">Air Pressure</label> 
 						<input class="input-medium-short" type="number" id="airPressure"
-							name="airPressure" tabindex='7'/>
+							name="airPressure" tabindex='7' data-validation="airpreasure" />
 						<span>hPa</span>
+						<span class="help-block hide">Please insert a number</span>
 					</div>
 				</div>
 				<div class="span4">
 					<div class="control-group">
 						<label class="control-label">Temperature</label> 
-						<input class="input-medium-short" id="temp" type="text" name="temp" tabindex="2"/>
+						<input class="input-medium-short" id="temp" type="text" name="temp" tabindex="2" data-validation="temperature"/>
 						<span>°C</span>
+						<span class="help-block hide">Please insert a number between -273.15 and 273.15</span>
 					</div>
 					<div class="control-group">
 						<label class="control-label">Clouds</label> <select
@@ -68,8 +71,9 @@
 					<div class="control-group">
 						<label class="control-label">Wave Height</label> <input
 							class="input-medium-short" type="text" id="waveHeight"
-							name="waveHeight"  tabindex='3'/> 
+							name="waveHeight"  tabindex='3' data-validation="meters"/> 
 							<span>m</span>
+							<span class="help-block hide">Please insert a number</span>
 					</div>
 					<div class="control-group">
 						<label class="control-label">Wave Direction</label> <select
@@ -91,6 +95,7 @@
 						<label class="control-label">Date and time of tracking</label> 
 						<input type="datetime-local" class="input-medium" name="trackDateTime"
 							id="trackDateTime" tabindex='9'>
+						<span class="help-block hide">Please select a datetime using datepicker</span>
 					</div>
 
 				</div>
