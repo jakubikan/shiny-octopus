@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html>
+
+<html lang="de">
 	<head>
     <title>SeaMap</title>
         <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
@@ -14,13 +15,21 @@
         </script>
         <script type="text/javascript">
 			function initialize() {
-				var previousLatLng;
+				var latLngs = [];
+				var markers = [];
+				var routes = [];
 				var latDMS;
 				var lngDMS;
+				var crosshair;
 				var mapOptions = {
+					disableDoubleClickZoom: true,
 					center: new google.maps.LatLng(47.667272, 9.171036),
 					zoom: 18,
-					mapTypeId: "OSM"
+					mapTypeId: "OSM",
+					mapTypeControl: false,
+					zoomControlOptions: {
+					  style: google.maps.ZoomControlStyle.SMALL
+					},					
 				};
 				var map = new google.maps.Map(document.getElementById("map_canvas"),
 				mapOptions);
@@ -50,23 +59,98 @@
 					maxZoom: 18
 				}));
 				
-				google.maps.event.addListener(map, 'click', function(event) {
+				google.maps.event.addListener(map, 'rightclick', function(event) {
+					latLngs.push(event.latLng);
 					var marker = new google.maps.Marker({
 						position: event.latLng,	
-						map: map
+						map: map,
+						title: "Route marker #"+markers.length,
+						draggable: true
+					});				
+					markers.push(marker);
+					if (markers.length > 1) {
+						var points = [
+							new google.maps.LatLng(event.latLng.lat(), event.latLng.lng()),
+							latLngs[latLngs.length - 2],
+						];					
+						var route = new google.maps.Polyline({
+							path: points,
+							strokeColor: "#FF0000",
+							strokeOpacity: 1.0,
+							strokeWeight: 2
+						});					
+						route.setMap(map);
+						routes.push(route);					
+						
+						console.log("Anzahl Marker: "+markers.length);
+						console.log("Anzahl LatLngs: "+latLngs.length);
+						console.log("Anzahl Routes: "+routes.length);
+					}
+									
+					google.maps.event.addListener(marker, 'dragend', function(event) {
+						var index = parseInt(this.getTitle().split("#")[1]);
+						var mapRef = this.getMap();
+						
+						latLngs[index] = new google.maps.LatLng(event.latLng.lat(), event.latLng.lng());
+						markers[index].setPosition(latLngs[index]);
+						
+						console.log("Anzahl Marker: "+markers.length);
+						
+						if (routes[index-1] != null) {
+							routes[index-1].setMap(null);
+						}
+						if (routes[index] != null) {							
+							routes[index].setMap(null);
+						}
+						
+						if (latLngs[index-1] != null) {
+						
+							console.log("Anzahl Routen: "+routes.length);
+							
+							var points = [
+								latLngs[index-1],
+								latLngs[index]
+							];
+							var route = new google.maps.Polyline({
+								path: points,
+								strokeColor: "#FF0000",
+								strokeOpacity: 1.0,
+								strokeWeight: 2
+							});
+							routes[index-1] = route;					
+							route.setMap(mapRef);
+						}
+						if (latLngs[index+1] != null) {
+							var points = [
+								latLngs[index],
+								latLngs[index+1]
+							];
+							var route = new google.maps.Polyline({
+								path: points,
+								strokeColor: "#FF0000",
+								strokeOpacity: 1.0,
+								strokeWeight: 2
+							});	
+							routes[index] = route;
+							route.setMap(mapRef);
+						}
+					})
+				})
+				
+				google.maps.event.addListener(map, 'click', function(event) {
+					if (crosshair != null) {
+						crosshair.setMap(null);	
+					}
+					crosshair = new google.maps.Marker({
+						position: event.latLng,	
+						map: map,
+						draggable: true,
+						icon: {
+							anchor: new google.maps.Point(20, 20),
+							url: "../img/icons/crosshair_red.png"
+						},
+						raiseOnDrag: true
 					});
-					var routePoints = [
-						new google.maps.LatLng(event.latLng.lat(), event.latLng.lng()),
-						previousLatLng,
-					];
-					var route = new google.maps.Polyline({
-						path: routePoints,
-						strokeColor: "#FF0000",
-						strokeOpacity: 1.0,
-						strokeWeight: 2
-					});					
-					route.setMap(map);					
-					previousLatLng = event.latLng;
 				})
 				
 				function convertDMS(lat, lng) {
@@ -95,14 +179,14 @@
 					lngDMS =  lngDeg+"\xB0 "+lngMin+"."+lngSec+"' "+lngDir;
 					return;
 				}
-			}			
+			}
         </script>
     </head>
     <body onload="initialize()">
         <div id="map_canvas" ></div>
-       		<span>Center Latitude and Longitude:</span>
-        	<input id="lat" placeholder="latitude" readonly/>
-        	<span>, </span>
-        	<input id="long" placeholder="longitude" readonly/>
+        <span>Center Position:</span>
+        <input id="lat" placeholder="latitude" readonly/>
+        <span>, </span>
+        <input id="long" placeholder="longitude" readonly/>
     </body>
 </html>
