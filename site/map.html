@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
+    <title>SeaMap</title>
         <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
         <style type="text/css">
 			html { height: 100% }
@@ -25,8 +26,8 @@
 				mapOptions);
 				google.maps.event.addListener(map, 'center_changed', function() {
 					convertDMS(map.getCenter().lat(), map.getCenter().lng());
-					document.getElementById("lat").value = map.getCenter().lat();
-					document.getElementById("long").value = map.getCenter().lng();
+					document.getElementById("lat").value = latDMS;
+					document.getElementById("long").value = lngDMS;
 				})
 				
 				map.mapTypes.set("OSM", new google.maps.ImageMapType({
@@ -80,9 +81,9 @@
 					  	latDir ="N";
 					}
 					lng = Math.abs(lng);
-					var lonDeg = Math.floor(lng);
-			      	var lonMin = Math.floor((lng-lonDeg)*60);
-      				var lonSec = (Math.round((((lng - lonDeg) - (lonMin / 60 )) * 60 * 60) * 100 ) / 100);
+					var lngDeg = Math.floor(lng);
+			      	var lngMin = Math.floor((lng-lngDeg)*60);
+      				var lngSec = (Math.round((((lng - lngDeg) - (lngMin / 60 )) * 60 * 60) * 100 ) / 100);
 					if (lng<0) {
 					  	lngDir = "W";
 					}
@@ -90,19 +91,18 @@
 					  	lngDir ="E";
 					}					
 					
-					latDMS = latDeg+"° "+latMin+"."+latSec+"' "+latDir;
-					lngDMS =  lngDeg+"° "+lngMin+"."+lngSec+"' "+lngDir;
+					latDMS = latDeg+"\xB0 "+latMin+"."+latSec+"' "+latDir;
+					lngDMS =  lngDeg+"\xB0 "+lngMin+"."+lngSec+"' "+lngDir;
 					return;
 				}
-			}
-			
+			}			
         </script>
     </head>
     <body onload="initialize()">
         <div id="map_canvas" ></div>
-       <span>Center Latitude and Longitude:</span>
-        <input id="lat" placeholder="latitude" readonly/>
-        <span>, </span>
-        <input id="long" placeholder="longitude" readonly/>
+       		<span>Center Latitude and Longitude:</span>
+        	<input id="lat" placeholder="latitude" readonly/>
+        	<span>, </span>
+        	<input id="long" placeholder="longitude" readonly/>
     </body>
 </html>
