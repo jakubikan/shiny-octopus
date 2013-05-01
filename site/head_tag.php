@@ -25,6 +25,7 @@
 		<link href="js/terrific/Header/css/header.css" rel="stylesheet">
 		<link href="js/terrific/Weather/css/weather.css" rel="stylesheet">
 		<link href="js/terrific/Waypoint/css/waypoint.css" rel="stylesheet">
+		<link href="js/terrific/Map/css/map.css" rel="stylesheet">
 		
 		
 		<script type="text/javascript" src="../lib/js/jquery.js"></script>
@@ -37,6 +38,7 @@
 		<script type="text/javascript" src="js/terrific/Footer/js/Tc.Module.Footer.js"></script>
 		<script type="text/javascript" src="js/terrific/Weather/js/Tc.Module.Weather.js"></script>
 		<script type="text/javascript" src="js/terrific/Waypoint/js/Tc.Module.Waypoint.js"></script>
+		<script type="text/javascript" src="js/terrific/Map/js/Tc.Module.Map.js"></script>
 		
 		<script type="text/javascript" src="js/static/main.js"></script>
 		
