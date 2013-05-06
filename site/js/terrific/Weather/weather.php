@@ -105,6 +105,7 @@
 						<div class="span1">
 							<div class="btn-group">
 								<button type="submit" id="submitBtn" class="btn btn-primary" tabindex='10'>Submit</button>
+								<span class="help-block hide">Please check your form</span>
 							</div>
 						</div>
 					</div>
@@ -117,9 +118,10 @@
 			<?php
 			$result = mysql_query("Select * FROM weather");
 			while($row = mysql_fetch_array($result)){
-				    			echo "<tr>";
-				    			echo 	"<td>".$row['Windstrength']." Knots</td>
-				<td>".$row['Temperature']." </td>
+    			echo "<tr>";
+    			echo 
+    				"<td>".$row['Windstrength']." Knots</td>
+					<td>".$row['Temperature']." </td>
 					<td>".$row['WindDirection']."</td>
 					<td>".$row['Clouds']."</td>
 					<td>".$row['AirPressure']." hPa</td>

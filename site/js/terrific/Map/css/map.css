@@ -1,3 +1,5 @@
 .mod .mod-map {
-/* insert map css here*/
+}
+#map-canvas { 
+	height: 800px;
 }

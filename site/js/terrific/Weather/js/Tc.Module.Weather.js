@@ -3,6 +3,9 @@
     on: function(callback) {
     	var self  = this;
     	
+    	
+		$("form",self.$ctx).data("errors", true);
+		
     	$("input", self.$ctx).blur(function() {
     		type = $(this).data("validation");
     		result = self.validateField($(this), type, self);
@@ -19,6 +22,8 @@
     			.removeClass("text-error")
     			.addClass("text-success");
     			
+    			$(this).parents("form").data("errors", false);
+    			
     			
     			$(this).siblings(".help-block").fadeOut("slow");
     			
@@ -34,10 +39,12 @@
     			.removeClass("text-success")
     			.addClass("text-error");
     			
+    			
+    			$(this).parents("form").data("errors", true);
+    			
     			$(this).siblings(".help-block").fadeIn("slow");
     		}
     	});
-    	
     	
         callback();
     },
