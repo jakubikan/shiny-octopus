@@ -79,6 +79,7 @@
 			title: "Route marker #"+self.markers.length,
 			draggable: true
 		});				
+		
 		self.markers.push(marker);
 		
 		// Marker Draged listener

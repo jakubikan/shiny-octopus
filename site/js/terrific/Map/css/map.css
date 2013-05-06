@@ -1,5 +1,10 @@
 .mod .mod-map {
 }
 #map-canvas { 
-	height: 800px;
+	height: 1000px;
+	width: 1000px;
+	
+}
+ #map-canvas img {
+  max-width: none;
 }
