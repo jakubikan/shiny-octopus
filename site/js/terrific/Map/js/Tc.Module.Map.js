@@ -99,20 +99,6 @@
     
     
     drawRoute : function (self, points) {
-		defaultPoints = [
-		];					
-		
-    	if (points.lat() && points.lng()) {
-    		defaultPoints = [
-				new google.maps.LatLng(points.lat(), points.lng()),
-				self.latLngs[self.latLngs.length - 2],
-            ];
-    	} else {
-    		
-    	}
-		
-		points = $.merge([],defaultPoints, points);
-		
 		if (!points[0]) {
 			throw "Irgendwass war da falsch";
 			
@@ -124,6 +110,7 @@
 			strokeOpacity: 1.0,
 			strokeWeight: 2
 		});					
+		
 		return route
     },
     
@@ -132,8 +119,14 @@
 		self.drawNewMarkerAt(event.latLng);
 		self.latLngs.push(event.latLng);
 		if (self.markers.length > 1) {
-			route = self.drawRoute(self, event.latLng);
+			points = [
+				event.latLng,
+				self.latLngs[self.latLngs.length - 2],
+            ];
+			console.log(points);
+			route = self.drawRoute(self, points);
 			self.routes.push(route);					
+			route.setMap(self.map);
 		}
 	},
 	
@@ -158,7 +151,9 @@
 				self.latLngs[index-1],
 				self.latLngs[index]
 			];
-			route = self.drawRoute(self, null, points);
+			
+			console.log(points);
+			route = self.drawRoute(self, points);
 			
 			self.routes[index-1] = route;					
 			route.setMap(mapRef);
@@ -169,7 +164,7 @@
 				self.latLngs[index],
 				self.latLngs[index+1]
 			];
-			route = self.drawRoute(self, null, points);
+			route = self.drawRoute(self, points);
 			
 			self.routes[index] = route;
 			route.setMap(mapRef);
