@@ -93,9 +93,8 @@
 
 					<div class="control-group">
 						<label class="control-label">Date and time of tracking</label> 
-						<input type="datetime-local" class="input-medium" name="trackDateTime"
-							id="trackDateTime" tabindex='9'>
-						<span class="help-block hide">Please select a datetime using datepicker</span>
+						<input type="datetime-local" class="input-medium-large" name="trackDateTime"
+							id="trackDateTime" tabindex='9'>						
 					</div>
 
 				</div>
@@ -118,9 +117,14 @@
 			<?php
 			$result = mysql_query("Select * FROM weather");
 			while($row = mysql_fetch_array($result)){
+<<<<<<< HEAD
     			echo "<tr>";
     			echo 
     				"<td>".$row['Windstrength']." Knots</td>
+=======
+				    			echo "<tr>";
+				    			echo "<td>".$row['Windstrength']." Knots</td>
+>>>>>>> Added: autofill date field with current date and time
 					<td>".$row['Temperature']." </td>
 					<td>".$row['WindDirection']."</td>
 					<td>".$row['Clouds']."</td>
