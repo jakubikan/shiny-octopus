@@ -26,6 +26,7 @@
 		<link href="js/terrific/Weather/css/weather.css" rel="stylesheet">
 		<link href="js/terrific/Waypoint/css/waypoint.css" rel="stylesheet">
 		<link href="js/terrific/Map/css/map.css" rel="stylesheet">
+		<link href="js/terrific/ContextMenu/css/contextmenu.css" rel="stylesheet">
 		
 		
 		<script type="text/javascript" src="../lib/js/jquery.js"></script>
@@ -36,12 +37,16 @@
 			key=AIzaSyBAgciq8z1_C5aadB3D08yzrc-1YlTOEQ0&sensor=false">
         </script>
 		
+		
+		<!--  Helper -->
+		<script type="text/javascript" src="js/static/helper.js"></script>
 		<!-- Custom Modul Js -->
 		<script type="text/javascript" src="js/terrific/Header/js/Tc.Module.Header.js"></script>
 		<script type="text/javascript" src="js/terrific/Footer/js/Tc.Module.Footer.js"></script>
 		<script type="text/javascript" src="js/terrific/Weather/js/Tc.Module.Weather.js"></script>
 		<script type="text/javascript" src="js/terrific/Waypoint/js/Tc.Module.Waypoint.js"></script>
 		<script type="text/javascript" src="js/terrific/Map/js/Tc.Module.Map.js"></script>
+		<script type="text/javascript" src="js/terrific/ContextMenu/js/Tc.Module.ContextMenu.js"></script>
 		
 		<script type="text/javascript" src="js/static/main.js"></script>
 		

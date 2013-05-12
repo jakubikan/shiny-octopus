@@ -8,6 +8,7 @@
 	lngDMS: null,
 	crosshair: null,
 	map : null,
+	longClickStoped: false,
 	mapOptions : {
 		disableDoubleClickZoom: true,
 		center: new google.maps.LatLng(47.667272, 9.171036),
@@ -50,6 +51,8 @@
 			maxZoom: 18
 		}));
 		
+		new LongClick(self.map, 300);
+		
     	    	
         callback();
     },
@@ -64,7 +67,7 @@
 		
 		// Right Click Event Listener
 		google.maps.event.addListener(self.map, 'rightclick', function(event) {
-			self.onRightClick.call(this, self, event);
+				self.setMarkerDrawRoute.call(this, self, event);
 		});
 		
 		// Map Click Listener
@@ -76,7 +79,17 @@
 		google.maps.event.addListener(self.map, 'mousedown', function(event){
 			self.onMapClick.call(this, self, event);
 		});
+		
+		
+		google.maps.event.addListener(self.map, 'longpress', function(event){
+			self.loadContextMenu.call(this,self,event);
+		});
 	
+    },
+    
+    loadContextMenu : function(self, event) {
+    	self.fire('contextRequest', {event: event}, function() { console.log('yeah... really'); });
+    	
     },
     
     drawNewMarkerAt : function (latLng) {
@@ -223,6 +236,7 @@
 			latDMS : latDeg+"\xB0 "+latMin+"."+latSec+"' "+latDir,
 			lngDMS :  lngDeg+"\xB0 "+lngMin+"."+lngSec+"' "+lngDir
 		};
-	}
+	},
+	
   });
 })(Tc.$);
