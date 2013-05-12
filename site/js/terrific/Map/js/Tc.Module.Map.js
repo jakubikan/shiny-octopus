@@ -26,6 +26,12 @@
     	$canvas = $("#map-canvas", self.$ctx);
 		self.map = new google.maps.Map($canvas[0], self.mapOptions);
 		
+		self.overlay = new google.maps.OverlayView();
+		self.overlay.draw = function() {};
+		self.overlay.setMap(self.map);
+		
+		
+		
 		$canvas.height($canvas.width()/2);
 		self.$ctx.height($canvas.width()/2);
 		
@@ -52,8 +58,21 @@
 			maxZoom: 18
 		}));
 		
+		
+		self.crosshair = new google.maps.Marker({
+			position: self.map.getCenter(),	
+			map: self.map,
+			icon: {
+				anchor: new google.maps.Point(20, 20),
+				url: "../img/icons/crosshair_red.png"
+			},
+			raiseOnDrag: true
+		});
+		
 		// Registering LongClick Handler, see /site/js/static/helper.js
 		new LongClick(self.map, 1000);
+		
+		new LongClick(self.crosshair, 1000);
 		
     	    	
         callback();
@@ -75,17 +94,22 @@
 		// Map Click Listener
 		google.maps.event.addListener(self.map, 'click', function(event){
 			self.onMapClick.call(this, self, event);
-		});
-		
-		
-		google.maps.event.addListener(self.map, 'mousedown', function(event){
-			self.onMapClick.call(this, self, event);
-	    	self.fire('hideContext',  event, function() { });
 	    	self.fire('lngLatChanged',  event, function() { });
 		});
 		
 		
+		google.maps.event.addListener(self.map, 'mousedown', function(event){
+		});
+		
+		
 		google.maps.event.addListener(self.map, 'longpress', function(event){
+			self.loadContextMenu.call(this,self,event);
+		});
+		
+		
+		google.maps.event.addListener(self.crosshair, 'longpress', function(event){
+			projection = self.overlay.getProjection();
+			event.pixel = projection.fromLatLngToContainerPixel(event.latLng);
 			self.loadContextMenu.call(this,self,event);
 		});
 	
@@ -198,19 +222,9 @@
 	},
 	
 	onMapClick : function (self, event) {
-		if (self.crosshair != null) {
-			self.crosshair.setMap(null);	
-		}
-		self.crosshair = new google.maps.Marker({
-			position: event.latLng,	
-			map: self.map,
-			draggable: true,
-			icon: {
-				anchor: new google.maps.Point(20, 20),
-				url: "../img/icons/crosshair_red.png"
-			},
-			raiseOnDrag: true
-		});
+		console.log(self.crosshair);
+		self.crosshair.position = event.latLng;
+		self.crosshair.setMap(self.map);
 	},
     
 	convertDMS :function(lat, lng) {

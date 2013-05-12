@@ -21,6 +21,7 @@
 			$("[data-id='position']", self.$ctx).html(
 					"Lat: " + self.$ctx.data("lat") + " Lng: "
 							+ self.$ctx.data("lng"));
+			console.log(event);
 
 		},
 
