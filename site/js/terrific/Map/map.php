@@ -1,7 +1,8 @@
 <div class="mod mod-map">
-	<div id="map-canvas" class="span12 pull-right"></div>
-    <span>Center Position:</span>
-    <input id="lat" placeholder="latitude" readonly/>
-    <span>, </span>
-    <input id="long" placeholder="longitude" readonly/>
+	<div class="row-fluid">
+		<div class="span2"></div>
+		<div id="map-canvas" class="span9"></div>
+		<div class="span1"></div>
+		
+	</div>
 </div>

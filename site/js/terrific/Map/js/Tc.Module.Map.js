@@ -24,6 +24,9 @@
     	$canvas = $("#map-canvas", self.$ctx);
 		self.map = new google.maps.Map($canvas[0], self.mapOptions);
 		
+		$canvas.height($canvas.width()/2);
+		self.$ctx.height($canvas.width()/2);
+		
 		
 		// Open Street Map
 		self.map.mapTypes.set("OSM", new google.maps.ImageMapType({
@@ -66,6 +69,11 @@
 		
 		// Map Click Listener
 		google.maps.event.addListener(self.map, 'click', function(event){
+			self.onMapClick.call(this, self, event);
+		});
+		
+		
+		google.maps.event.addListener(self.map, 'mousedown', function(event){
 			self.onMapClick.call(this, self, event);
 		});
 	
@@ -116,7 +124,7 @@
     },
     
     
-	onRightClick : function(self, event) {
+	setMarkerDrawRoute : function(self, event) {
 		self.drawNewMarkerAt(event.latLng);
 		self.latLngs.push(event.latLng);
 		if (self.markers.length > 1) {
