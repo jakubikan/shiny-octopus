@@ -8,6 +8,7 @@
 	lngDMS: null,
 	crosshair: null,
 	map : null,
+	overlay: null,
 	longClickStoped: false,
 	mapOptions : {
 		disableDoubleClickZoom: true,
@@ -52,7 +53,7 @@
 		}));
 		
 		// Registering LongClick Handler, see /site/js/static/helper.js
-		new LongClick(self.map, 300);
+		new LongClick(self.map, 1000);
 		
     	    	
         callback();
@@ -61,7 +62,7 @@
     	var self = this;
     	
 		// Center Changed
-		google.maps.event.addListener(self.map, 'center_changed', function() {
+		google.maps.event.addListener(self.map, 'center_changed', function(event) {
 			self.centerChanged.call(this, self);
 		});
 		
@@ -79,6 +80,8 @@
 		
 		google.maps.event.addListener(self.map, 'mousedown', function(event){
 			self.onMapClick.call(this, self, event);
+	    	self.fire('hideContext',  event, function() { });
+	    	self.fire('lngLatChanged',  event, function() { });
 		});
 		
 		
@@ -89,7 +92,7 @@
     },
     
     loadContextMenu : function(self, event) {
-    	self.fire('contextRequest', {event: event}, function() { console.log('yeah... really'); });
+    	self.fire('contextRequest',  event, function() { });
     	
     },
     

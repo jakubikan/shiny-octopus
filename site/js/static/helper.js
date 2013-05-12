@@ -5,6 +5,8 @@ LongClick = Class.extend({
 	    me.map_ = map;
 	    google.maps.event.addListener(map, 'mousedown', function(e) { me.onMouseDown_(e) });
 	    google.maps.event.addListener(map, 'mouseup', function(e) { me.onMouseUp_(e) });   
+	    google.maps.event.addDomListener(window, 'touchstart', function(e) { me.onMouseDown_(e) });   
+	    google.maps.event.addDomListener(window, 'touchend', function(e) { me.onMouseUp_(e) });   
 	},
 	onMouseUp_ : function(e) {
 	    var now = +new Date;

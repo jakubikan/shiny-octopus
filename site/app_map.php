@@ -12,7 +12,6 @@
 		<!-- Container -->
 		<div class="container-fluid">
 			<?php include("js/terrific/Map/map.php")?>
-			<?php include("js/terrific/ContextMenu/contextmenu.php")?>
 		</div><!-- Container -->
 		
 		<div id="footer">
