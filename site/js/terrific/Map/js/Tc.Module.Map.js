@@ -51,6 +51,7 @@
 			maxZoom: 18
 		}));
 		
+		// Registering LongClick Handler, see /site/js/static/helper.js
 		new LongClick(self.map, 300);
 		
     	    	
