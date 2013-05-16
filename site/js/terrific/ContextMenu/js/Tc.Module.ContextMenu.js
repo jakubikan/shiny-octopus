@@ -7,26 +7,68 @@
 			callback();
 		},
 		after : function() {
+			var self = this;
+			
+			$("[data-id='add-marker']",self.$ctx).bind("click",function(e) {
+				lat = self.$ctx.data("lat");
+				lng = self.$ctx.data("lng");
+				
+				$.extend(e, {latLng: new google.maps.LatLng(lat, lng) })
+				self.addMarker.call(this, self, e);
+				
+				$('.dropdown-menu', self.$ctx).addClass("fade");
+				
+				
+				
+			});
+			
+			$("[data-id='calculate-distance']",self.$ctx).bind("click",function(e) {
+				lat = self.$ctx.data("lat");
+				lng = self.$ctx.data("lng");
+				
+				$.extend(e, {latLng: new google.maps.LatLng(lat, lng) })
+				
+				
+				$('.dropdown-menu', self.$ctx).addClass("fade");
+				
+				
+				
+			});
+			
+			$("[data-id='make-goal']",self.$ctx).bind("click",function(e) {
+				lat = self.$ctx.data("lat");
+				lng = self.$ctx.data("lng");
+				
+				$.extend(e, {latLng: new google.maps.LatLng(lat, lng) })
+				
+			$('.dropdown-menu', self.$ctx).addClass("fade");
+				
+				
+			});
+			
+			
 
 		},
 
 		onContextRequest : function(event) {
 			var self = this;
-			$('.dropdown-menu', self.$ctx).removeClass("fade");
-			$('.dropdown-menu', self.$ctx).dropdown("toggle");
+			console.log("Context requested");
+			
+			
+			$(".dropdown-menu", self.$ctx).removeClass("fade");
+			$(".dropdown-menu", self.$ctx).dropdown("toggle");
 			$(".dropdown-menu", self.$ctx).css({
+				display : "visible",
 				"left" : event.pixel.x,
 				"top" : event.pixel.y,
 			});
-			$("[data-id='position']", self.$ctx).html(
-					"Lat: " + self.$ctx.data("lat") + " Lng: "
-							+ self.$ctx.data("lng"));
-			console.log(event);
+			$("[data-id='position']", self.$ctx)
+				.html( 	"Lat: " + self.$ctx.data("lat") + 
+						" Lng: " + self.$ctx.data("lng"));
 
 		},
 
 		onHideContext : function(event) {
-			console.log("hiding");
 			$('.dropdown-menu', self.$ctx).addClass("fade");
 		},
 
@@ -41,11 +83,11 @@
 			
 		},
 		
-		makeGoal : function() {
+		makeGoal : function(event) {
 			
 		},
 		
-		calculateDistance : function() {
+		calculateDistance : function(event) {
 			
 		}
 	});

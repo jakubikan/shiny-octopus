@@ -26,6 +26,8 @@
     	$canvas = $("#map-canvas", self.$ctx);
 		self.map = new google.maps.Map($canvas[0], self.mapOptions);
 		
+		self.sandbox.subscribe(1, self);
+		
 		self.overlay = new google.maps.OverlayView();
 		self.overlay.draw = function() {};
 		self.overlay.setMap(self.map);
