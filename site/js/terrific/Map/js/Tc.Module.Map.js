@@ -8,6 +8,8 @@
 	lngDMS: null,
 	crosshair: null,
 	map : null,
+	overlay: null,
+	longClickStoped: false,
 	mapOptions : {
 		disableDoubleClickZoom: true,
 		center: new google.maps.LatLng(47.667272, 9.171036),
@@ -23,6 +25,15 @@
     	var self = this;
     	$canvas = $("#map-canvas", self.$ctx);
 		self.map = new google.maps.Map($canvas[0], self.mapOptions);
+		
+		self.overlay = new google.maps.OverlayView();
+		self.overlay.draw = function() {};
+		self.overlay.setMap(self.map);
+		
+		
+		
+		$canvas.height($canvas.width()/2);
+		self.$ctx.height($canvas.width()/2);
 		
 		
 		// Open Street Map
@@ -47,6 +58,22 @@
 			maxZoom: 18
 		}));
 		
+		
+		self.crosshair = new google.maps.Marker({
+			position: self.map.getCenter(),	
+			map: self.map,
+			icon: {
+				anchor: new google.maps.Point(20, 20),
+				url: "../img/icons/crosshair_red.png"
+			},
+			raiseOnDrag: true
+		});
+		
+		// Registering LongClick Handler, see /site/js/static/helper.js
+		new LongClick(self.map, 1000);
+		
+		new LongClick(self.crosshair, 1000);
+		
     	    	
         callback();
     },
@@ -54,21 +81,43 @@
     	var self = this;
     	
 		// Center Changed
-		google.maps.event.addListener(self.map, 'center_changed', function() {
+		google.maps.event.addListener(self.map, 'center_changed', function(event) {
 			self.centerChanged.call(this, self);
 		});
 		
 		
 		// Right Click Event Listener
 		google.maps.event.addListener(self.map, 'rightclick', function(event) {
-			self.onRightClick.call(this, self, event);
+				self.setMarkerDrawRoute.call(this, self, event);
 		});
 		
 		// Map Click Listener
 		google.maps.event.addListener(self.map, 'click', function(event){
 			self.onMapClick.call(this, self, event);
+	    	self.fire('lngLatChanged',  event, function() { });
+		});
+		
+		
+		google.maps.event.addListener(self.map, 'mousedown', function(event){
+		});
+		
+		
+		google.maps.event.addListener(self.map, 'longpress', function(event){
+			self.loadContextMenu.call(this,self,event);
+		});
+		
+		
+		google.maps.event.addListener(self.crosshair, 'longpress', function(event){
+			projection = self.overlay.getProjection();
+			event.pixel = projection.fromLatLngToContainerPixel(event.latLng);
+			self.loadContextMenu.call(this,self,event);
 		});
 	
+    },
+    
+    loadContextMenu : function(self, event) {
+    	self.fire('contextRequest',  event, function() { });
+    	
     },
     
     drawNewMarkerAt : function (latLng) {
@@ -90,6 +139,12 @@
 		return marker;
     },
     
+    onMarkerAdd : function(event) {
+    	var self = this;
+    	console.log("on-marker-add");
+		self.setMarkerDrawRoute.call(this, self, event);
+    	
+    },
     
     centerChanged : function(self) {
 		center = this.center;
@@ -116,7 +171,7 @@
     },
     
     
-	onRightClick : function(self, event) {
+	setMarkerDrawRoute : function(self, event) {
 		self.drawNewMarkerAt(event.latLng);
 		self.latLngs.push(event.latLng);
 		if (self.markers.length > 1) {
@@ -173,19 +228,9 @@
 	},
 	
 	onMapClick : function (self, event) {
-		if (self.crosshair != null) {
-			self.crosshair.setMap(null);	
-		}
-		self.crosshair = new google.maps.Marker({
-			position: event.latLng,	
-			map: self.map,
-			draggable: true,
-			icon: {
-				anchor: new google.maps.Point(20, 20),
-				url: "../img/icons/crosshair_red.png"
-			},
-			raiseOnDrag: true
-		});
+		console.log(self.crosshair);
+		self.crosshair.position = event.latLng;
+		self.crosshair.setMap(self.map);
 	},
     
 	convertDMS :function(lat, lng) {
@@ -215,6 +260,7 @@
 			latDMS : latDeg+"\xB0 "+latMin+"."+latSec+"' "+latDir,
 			lngDMS :  lngDeg+"\xB0 "+lngMin+"."+lngSec+"' "+lngDir
 		};
-	}
+	},
+	
   });
 })(Tc.$);

@@ -3,6 +3,7 @@
 	background-color: #00182E;
 	color: #D4D6D4;
 	position: fixed;
+	z-index: 100;
 }
 
 .mod-header .nav-pills > .active > a,
