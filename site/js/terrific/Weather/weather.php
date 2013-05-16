@@ -117,14 +117,9 @@
 			<?php
 			$result = mysql_query("Select * FROM weather");
 			while($row = mysql_fetch_array($result)){
-<<<<<<< HEAD
     			echo "<tr>";
     			echo 
     				"<td>".$row['Windstrength']." Knots</td>
-=======
-				    			echo "<tr>";
-				    			echo "<td>".$row['Windstrength']." Knots</td>
->>>>>>> Added: autofill date field with current date and time
 					<td>".$row['Temperature']." </td>
 					<td>".$row['WindDirection']."</td>
 					<td>".$row['Clouds']."</td>
