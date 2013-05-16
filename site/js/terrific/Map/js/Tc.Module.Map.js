@@ -139,6 +139,12 @@
 		return marker;
     },
     
+    onMarkerAdd : function(event) {
+    	var self = this;
+    	console.log("on-marker-add");
+		self.setMarkerDrawRoute.call(this, self, event);
+    	
+    },
     
     centerChanged : function(self) {
 		center = this.center;

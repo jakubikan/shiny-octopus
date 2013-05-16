@@ -36,7 +36,8 @@
 			self.$ctx.data("lng", event.latLng.lng());
 		},
 		
-		addMarker : function() {
+		addMarker : function(self, event) {
+			self.fire("markerAdd", event, function() {} );
 			
 		},
 		
