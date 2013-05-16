@@ -1,65 +1,65 @@
 <div class="mod mod-waypoint">
 	<h2>Wegpunkt</h2>
-	<form class="form-horizontal row well">
+	<form class="form-horizontal row well" id="waypt-form">
 
 		<div class="span5">
 			<div class="control-group">
 				<label class="control-label">Name</label> <input
-					class="input-medium" type="text" id="name" />
+					class="input-medium waypt-formelement" type="text" id="name" />
 			</div>
 			<div class="control-group">
 				<label class="control-label">Time</label> <input
-					class="input-medium" type="date" id="wdate" />
+					class="input-medium waypt-formelement" type="date" id="wdate" />
 			</div>
 			<div class="control-group">
 				<label class="control-label">Date</label> <input
-					class="input-medium" type="date" id="wtime" />
+					class="input-medium waypt-formelement" type="date" id="wtime" />
 			</div>
 		</div>
 
 		<div class="span5">
 			<div class="control-group">
 				<label class="control-label">Latitude</label> <input
-					class="input-medium" type="text" id="lat" />
+					class="input-medium waypt-formelement" type="text" id="lat" />
 			</div>
 			<div class="control-group">
 				<label class="control-label">Longitude</label> <input
-					class="input-medium" type="text" id="lng" />
+					class="input-medium waypt-formelement" type="text" id="lng" />
 			</div>
 			<div class="control-group">
 				<label class="control-label">Fahrt nach</label> <select
-					name="fahrtziel" id="marker"></select>
+					name="fahrtziel" id="marker" class="waypt-formelement"></select>
 			</div>
 		</div>
 
 		<div class="span5">
 			<div class="control-group">
-				<label class="control-label">COG</label> <input class="input-medium"
+				<label class="control-label">COG</label> <input class="input-medium waypt-formelement"
 					type="text" id="cog" />
 			</div>
 			<div class="control-group">
-				<label class="control-label">SOG</label> <input class="input-medium"
+				<label class="control-label">SOG</label> <input class="input-medium waypt-formelement"
 					type="text" id="sog" />
 			</div>
 
 			<div class="control-group">
 				<label class="control-label">Manoever</label> <select
-					name="manoever" id="manoever"></select>
+					name="manoever" id="manoever" class="waypt-formelement"></select>
 			</div>
 		</div>
 
 		<div class="span5">
 			<div class="control-group">
-				<label class="control-label">BTM</label> <input class="input-medium"
+				<label class="control-label">BTM</label> <input class="input-medium waypt-formelement"
 					type="text" id="btm" />
 			</div>
 			<div class="control-group">
-				<label class="control-label">DTM</label> <input class="input-medium"
+				<label class="control-label">DTM</label> <input class="input-medium waypt-formelement"
 					type="text" id="dtm" />
 			</div>
 			<div class="control-group">
 				<label class="control-label">Vorsegel</label> <select
-					name="vorsegel" id="vorsegel"></select>
+					name="vorsegel" id="vorsegel" class="waypt-formelement"></select>
 			</div>
 		</div>
 	</form>
@@ -67,7 +67,7 @@
 		<div class="row">
 			<div class="span4" id="appNotes">
 				<h4>Notes</h4>
-				<textarea></textarea>
+				<textarea class="waypt-formelement"></textarea>
 			</div>
 			<div class="span4" id="markerMap">
 				<h4>Map</h4>
