@@ -1,0 +1,7 @@
+.mod-appmenu {
+	width: 100%;
+	background-color: #00182E;
+	color: #D4D6D4;
+	position: fixed;
+	z-index: 100;
+}

@@ -20,24 +20,9 @@ if (!$site) {
 
 	<!-- Container -->
 	<div class="container-fluid">
-		<div class="app-menu navbar">
-			<div class="navbar-inner">
-				<ul class="nav">
-					<li class="<?php echo strcmp($site, "weather") == 0 ? 'active': 'weather'?>">
-						<a href="?site=weather">Wetter</a>
-					</li>
-					<li class="<?php echo strcmp($site, "waypoint") == 0 ? 'active': 'waypoint'?>">
-						<a href="?site=waypoint">Wegpunkt</a>
-					</li>
-					<li class="<?php echo strcmp($site, "map") == 0 ? 'active': 'map'?>">
-						<a href="?site=map">Map</a>
-					</li>
-				</ul>
-			</div>
-			
-		</div>
-		
+		<?php include ("js/terrific/Appmenu/appmenu.php"); ?>
 		<?php 
+		$site = $_GET["site"] || "weather";
 		switch ($site) {
 			case "weather":
 				include ("js/terrific/Weather/weather.php");

@@ -27,6 +27,7 @@
 		<link href="js/terrific/Waypoint/css/waypoint.css" rel="stylesheet">
 		<link href="js/terrific/Map/css/map.css" rel="stylesheet">
 		<link href="js/terrific/ContextMenu/css/contextmenu.css" rel="stylesheet">
+		<link href="js/terrific/Appmenu/css/appmenu.css" rel="stylesheet">
 		
 		
 		<script type="text/javascript" src="../lib/js/jquery.js"></script>
@@ -47,6 +48,7 @@
 		<script type="text/javascript" src="js/terrific/Waypoint/js/Tc.Module.Waypoint.js"></script>
 		<script type="text/javascript" src="js/terrific/Map/js/Tc.Module.Map.js"></script>
 		<script type="text/javascript" src="js/terrific/ContextMenu/js/Tc.Module.ContextMenu.js"></script>
+		<script type="text/javascript" src="js/terrific/Appmenu/js/Tc.Module.Appmenu.js"></script>
 		
 		<script type="text/javascript" src="js/static/main.js"></script>
 		
