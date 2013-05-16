@@ -8,8 +8,7 @@
                     <h1 >Seapal</h1>
                     <ul class="nav nav-pills">
                         <li><a href='index.php'>Home</a></li>
-                        <li><a href='app_waypoint.php'>App</a></li>
-                        <li><a href='app_weather.php'>App Weather</a></li>
+                        <li><a href='app.php'>App</a></li>
                         <li><a href='userguide.php'>User Guide</a></li>
                         <li><a href='screenshots.php'>Screenshots</a></li>
                         <li><a href='about.php'>About</a></li>
