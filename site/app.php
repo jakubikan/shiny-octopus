@@ -3,10 +3,7 @@
 include("php/dbconnect.php");
 $con = ConnectAndSelectDB();
 global $site;
-$site = $_GET["site"];
-if (!$site) {
-	$site = "weather";
-}
+$site = $_GET["site"] || "weather"
 ?>
 <html lang="de">
 <?php include("head_tag.php")?>
@@ -22,7 +19,6 @@ if (!$site) {
 	<div class="container-fluid">
 		<?php include ("js/terrific/Appmenu/appmenu.php"); ?>
 		<?php 
-		$site = $_GET["site"] || "weather";
 		switch ($site) {
 			case "weather":
 				include ("js/terrific/Weather/weather.php");

@@ -1,5 +1,3 @@
-.mod .mod-map {
-}
- #map-canvas img {
+.mod-map #map-canvas img {
   max-width: none;
 }
