@@ -36,35 +36,39 @@
 			
 			// Control-group
 			$(this).parent()
-			.removeClass("error")
-			.addClass("success");
+				.removeClass("error")
+				.addClass("success");
 			
 			// elements e.g span
 			$(this).parent().children()
-			.removeClass("text-error")
-			.addClass("text-success");
+				.removeClass("text-error")
+				.addClass("text-success");
 			
 			$(this).parents("form").data("errors", false);
 			
 			
-			$(this).siblings(".help-block").fadeOut("slow");
+			$(this).parent(".row-fluid").siblings(".help-block")
+				.addClass("fade")
+				.fadeOut("slow");
 			
 		} else {
 			
 			// Control-group
-			$(this).parent()
-			.removeClass("success")
-			.addClass("error");
+			$(this).parents(".control-group")
+				.removeClass("success")
+				.addClass("error");
 			
 			// elements e.g span
 			$(this).parent().children()
-			.removeClass("text-success")
-			.addClass("text-error");
+				.removeClass("text-success")
+				.addClass("text-error");
 			
 			
 			$(this).parents("form").data("errors", true);
 			
-			$(this).siblings(".help-block").fadeIn("slow");
+			$(this).parent(".row-fluid").siblings(".help-block")
+				.removeClass("fade")
+				.fadeIn("slow");
 		}
 	},
 	
