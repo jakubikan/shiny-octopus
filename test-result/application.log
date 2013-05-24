@@ -1,0 +1,4 @@
+23 May 2013 17:55:08,268 INFO  ~ Starting /home/jakub/git/shiny-octopus/.
+23 May 2013 17:55:08,756 WARN  ~ You're running Play! in DEV mode
+23 May 2013 17:55:10,961 INFO  ~ Connected to jdbc:h2:mem:play;MODE=MYSQL;LOCK_MODE=0
+23 May 2013 17:55:10,971 INFO  ~ Application 'shiny-octopus2' is now started !
