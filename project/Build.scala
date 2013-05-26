@@ -15,8 +15,7 @@ object ApplicationBuild extends Build {
   )
 
   val main = play.Project(appName, appVersion, appDependencies).settings(
-  	    	requireJs += "main.js"
-       lessEntryPoints <<= baseDirectory(_ / "app" / "assets" / "stylesheets" ** "main.less")	
+  	   requireJs += "main.js"
   )
 
 }
