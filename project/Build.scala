@@ -13,6 +13,7 @@ object ApplicationBuild extends Build {
     javaJdbc,
     javaEbean,
   	"commons-io" % "commons-io" % "2.3"
+  	"mysql" % "mysql-connector-java" % "5.1.18"
     
     
   )
