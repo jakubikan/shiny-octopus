@@ -1,15 +1,5 @@
-<!DOCTYPE html>
+@main("Seapal - Shiny-Octopus - Userguide"){
 
-<html lang="de">
-  	<?php include("head_tag.php")?>
-  	<body>
-  	
-		<!-- Navigation -->
-		<div id="header">
-		  	<?php include("js/terrific/Header/header.php")?>
-		</div>
-    	
-    	<!-- Container -->
     	<div class="container">
 	    	<div class="container-fluid">
 		    	<div class="row-fluid">
@@ -21,7 +11,7 @@
 						    	<li class="sidebar"><a href="#" class="installing">Installing SeaPal</a></li>
 								<li class="sidebar"><a href="#start" class="starting">Starting SeaPal</a></li>
 								<li class="sidebar"><a href="#map_select" class="map">Map Selection</a></li>
-								<li><a href="../img/screenshots/SeaPal-Legend-IBN-Map.pdf">Legend of IBN Maps</a></li>
+								<li><a href="@routes.Assets.at("images/screenshots/SeaPal-Legend-IBN-Map.pdf")">Legend of IBN Maps</a></li>
 					        </ul>
 					    </div>
 					</div><!-- Sidebar -->
@@ -108,9 +98,4 @@
 	    	</div>	
 		</div><!-- Container -->
 		
-		<div id="footer">
-			<?php include ("js/terrific/Footer/footer.php")?>
-		</div>
-	    
-  </body>
-</html>
+}
