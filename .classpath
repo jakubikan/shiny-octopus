@@ -36,6 +36,8 @@
   <classpathentry path="/opt/play-framework/repository/local/net.sf.ehcache/ehcache-core/2.6.0/jars/ehcache-core.jar" kind="lib"></classpathentry>
   <classpathentry path="/opt/play-framework/repository/local/javax.transaction/jta/1.1/jars/jta.jar" kind="lib"></classpathentry>
   <classpathentry path="/opt/play-framework/repository/local/org.scala-lang/scala-reflect/2.10.0/jars/scala-reflect.jar" kind="lib"></classpathentry>
+  <classpathentry path="/opt/play-framework/repository/local/play/play-java-jdbc_2.10/2.1.0/jars/play-java-jdbc_2.10.jar" kind="lib"></classpathentry>
+  <classpathentry path="/opt/play-framework/repository/local/play/play-jdbc_2.10/2.1.0/jars/play-jdbc_2.10.jar" kind="lib"></classpathentry>
   <classpathentry path="/opt/play-framework/repository/local/play/play-java_2.10/2.1.0/jars/play-java_2.10.jar" kind="lib"></classpathentry>
   <classpathentry path="/opt/play-framework/repository/local/org.yaml/snakeyaml/1.10/bundles/snakeyaml.jar" kind="lib"></classpathentry>
   <classpathentry path="/opt/play-framework/repository/local/org.hibernate/hibernate-validator/4.3.0.Final/jars/hibernate-validator.jar" kind="lib"></classpathentry>
@@ -48,17 +50,17 @@
   <classpathentry path="/opt/play-framework/repository/local/com.google.guava/guava/13.0.1/jars/guava.jar" kind="lib"></classpathentry>
   <classpathentry path="/opt/play-framework/repository/local/com.google.code.findbugs/jsr305/2.0.1/jars/jsr305.jar" kind="lib"></classpathentry>
   <classpathentry path="/opt/play-framework/repository/local/javax.servlet/javax.servlet-api/3.0.1/jars/javax.servlet-api.jar" kind="lib"></classpathentry>
-  <classpathentry path="/opt/play-framework/repository/local/play/play-java-jdbc_2.10/2.1.0/jars/play-java-jdbc_2.10.jar" kind="lib"></classpathentry>
-  <classpathentry path="/opt/play-framework/repository/local/play/play-jdbc_2.10/2.1.0/jars/play-jdbc_2.10.jar" kind="lib"></classpathentry>
   <classpathentry path="/opt/play-framework/repository/local/com.jolbox/bonecp/0.7.1.RELEASE/bundles/bonecp.jar" kind="lib"></classpathentry>
   <classpathentry path="/opt/play-framework/repository/local/com.h2database/h2/1.3.168/jars/h2.jar" kind="lib"></classpathentry>
   <classpathentry path="/opt/play-framework/repository/local/tyrex/tyrex/1.0.1/jars/tyrex.jar" kind="lib"></classpathentry>
+  <classpathentry path="/opt/play-framework/repository/local/play/anorm_2.10/2.1.0/jars/anorm_2.10.jar" kind="lib"></classpathentry>
   <classpathentry path="/opt/play-framework/repository/local/play/play-java-ebean_2.10/2.1.0/jars/play-java-ebean_2.10.jar" kind="lib"></classpathentry>
   <classpathentry path="/opt/play-framework/repository/local/org.avaje.ebeanorm/avaje-ebeanorm/3.1.2/jars/avaje-ebeanorm.jar" kind="lib"></classpathentry>
   <classpathentry path="/opt/play-framework/repository/local/org.avaje.ebeanorm/avaje-ebeanorm-api/3.1.1/jars/avaje-ebeanorm-api.jar" kind="lib"></classpathentry>
   <classpathentry path="/opt/play-framework/repository/local/org.avaje.ebeanorm/avaje-ebeanorm-agent/3.1.1/jars/avaje-ebeanorm-agent.jar" kind="lib"></classpathentry>
   <classpathentry path="/opt/play-framework/repository/local/org.avaje.ebeanorm/avaje-ebeanorm-server/3.1.2/jars/avaje-ebeanorm-server.jar" kind="lib"></classpathentry>
   <classpathentry path="/opt/play-framework/repository/local/org.hibernate.javax.persistence/hibernate-jpa-2.0-api/1.0.1.Final/jars/hibernate-jpa-2.0-api.jar" kind="lib"></classpathentry>
+  <classpathentry path="/opt/play-framework/framework/../repository/cache/commons-io/commons-io/jars/commons-io-2.3.jar" kind="lib"></classpathentry>
   <classpathentry path="/opt/play-framework/repository/local/play/play-test_2.10/2.1.0/jars/play-test_2.10.jar" kind="lib"></classpathentry>
   <classpathentry path="/opt/play-framework/repository/local/junit/junit-dep/4.10/jars/junit-dep.jar" kind="lib"></classpathentry>
   <classpathentry path="/opt/play-framework/repository/local/org.hamcrest/hamcrest-core/1.1/jars/hamcrest-core.jar" kind="lib"></classpathentry>
@@ -96,7 +98,6 @@
   <classpathentry path="/opt/play-framework/repository/local/net.sourceforge.nekohtml/nekohtml/1.9.15/jars/nekohtml.jar" kind="lib"></classpathentry>
   <classpathentry path="/opt/play-framework/repository/local/net.sourceforge.cssparser/cssparser/0.9.5/jars/cssparser.jar" kind="lib"></classpathentry>
   <classpathentry path="/opt/play-framework/repository/local/org.w3c.css/sac/1.3/jars/sac.jar" kind="lib"></classpathentry>
-  <classpathentry path="/opt/play-framework/repository/local/commons-io/commons-io/2.0.1/jars/commons-io.jar" kind="lib"></classpathentry>
   <classpathentry path="/opt/play-framework/repository/local/org.seleniumhq.selenium/selenium-firefox-driver/2.25.0/jars/selenium-firefox-driver.jar" kind="lib"></classpathentry>
   <classpathentry path="/opt/play-framework/repository/local/org.seleniumhq.selenium/selenium-ie-driver/2.25.0/jars/selenium-ie-driver.jar" kind="lib"></classpathentry>
   <classpathentry path="/opt/play-framework/repository/local/org.seleniumhq.selenium/selenium-iphone-driver/2.25.0/jars/selenium-iphone-driver.jar" kind="lib"></classpathentry>

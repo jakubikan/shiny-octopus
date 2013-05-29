@@ -40,7 +40,10 @@ public class Application extends Controller {
 		}
     	
     	
-    	return ok( main.render(page, Html.apply(content)));
+    	return ok(main.render(page, Html.apply(content)));
+    }
+    public static Result app(String site) {
+    	return ok(views.html.app.render(site));
     }
   
 }
