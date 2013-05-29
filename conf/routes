@@ -9,3 +9,5 @@ GET     /                           controllers.Application.index()
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
 
 GET   	/:page                		controllers.Application.show(page)
+
+GET   	/app/:site                	controllers.Application.app(site)

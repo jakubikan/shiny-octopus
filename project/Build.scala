@@ -11,7 +11,10 @@ object ApplicationBuild extends Build {
     // Add your project dependencies here,
     javaCore,
     javaJdbc,
-    javaEbean
+    javaEbean,
+  	"mysql" % "mysql-connector-java" % "5.1.18",
+  	"commons-io" % "commons-io" % "2.3"
+    
   )
 
   val main = PlayProject(appName, appVersion, appDependencies, mainLang = JAVA).settings(
