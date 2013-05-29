@@ -1,6 +1,8 @@
 package controllers;
 
+
 import play.*;
+import play.api.mvc.Rendering;
 import play.mvc.*;
 
 import views.html.*;
@@ -11,7 +13,8 @@ public class Application extends Controller {
         return ok(index.render("Your new application is ready."));
     }
     public static Result show(String page) {
-    	return ok(page, "Your page hase been rendered");
+    	response().setContentType("text/html");
+    	return null;
     }
     
   
