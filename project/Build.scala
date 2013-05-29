@@ -14,9 +14,8 @@ object ApplicationBuild extends Build {
     javaEbean
   )
 
-  val main = play.Project(appName, appVersion, appDependencies).settings(
-  	    	requireJs += "main.js"
-       lessEntryPoints <<= baseDirectory(_ / "app" / "assets" / "stylesheets" ** "main.less")	
+  val main = PlayProject(appName, appVersion, appDependencies, mainLang = JAVA).settings(
+  	    	requireJs += "main.js"	
   )
 
 }
