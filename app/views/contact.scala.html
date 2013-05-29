@@ -1,15 +1,4 @@
-<!DOCTYPE html>
-
-<html lang="de">
-  	<?php include("head_tag.php")?>
-  	<body>
-  		
-		<!-- Navigation -->
-		<div id="header">
-		  	<?php include("js/terrific/Header/header.php")?>
-		</div>
-
-
+@main("Seapal - Shiny-Octopus - Contact"){
     	<!-- Container -->
     	<div class="container"> 
 	    	<div class="container-fluid">
@@ -30,7 +19,7 @@
 						<div class="post" id="ibn">
 							<h2>IBN</h2>
 							<div class="entry">	
-								<img src="../img/icons/ibn.jpg" class="img-rounded" alt="IBN Konstanz"/>
+								<img src="@routes.Assets.at("images/icons/ibn.jpg")" class="img-rounded" alt="IBN Konstanz"/>
 								<br><br>							
 								<p>
 									 IBN Redaktion <br>
@@ -48,7 +37,7 @@
 						<div class="post" id="htwg">
 							<h2>HTWG Konstanz</h2>
 							<div class="entry">
-								<img src="../img/icons/htwg.png" class="img-rounded" alt="HTWG Konstanz"/>
+								<img src="@routes.Assets.at("images/icons/htwg.png")" class="img-rounded" alt="HTWG Konstanz"/>
 								<br><br>
 								<p>
 									 HTWG Konstanz<br>
@@ -69,9 +58,4 @@
 				</div>
 			</div>		
 		</div><!-- Container -->
-
-		<div id="footer">
-			<?php include ("js/terrific/Footer/footer.php")?>
-		</div>
-  </body>
-</html>
+}

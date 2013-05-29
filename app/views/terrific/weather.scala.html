@@ -1,6 +1,7 @@
 <!-- Content -->
 <div class="mod mod-weather">
 	<h2 align="center">Weather information</h2>
+	<!--TODO: insert.php-->
 	<form action="insert.php" method="post" class="form-horizontal">
 		<div class="row-fluid well">
 			<div class="span4">
@@ -119,6 +120,7 @@
 	</form>
 	<div id="dbTable">
 		<table>
+			<!-- TODO:
 			<?php
 			$result = mysql_query("Select * FROM weather");
 			while($row = mysql_fetch_array($result)){
@@ -134,7 +136,7 @@
 					<td>".$row['WaveDirection']."</td>
 					<td>".$row['DateTime']."</td>";
     			echo "</tr>";
-    		} ?>
+    		} ?>-->
 		</table>
 	</div>
 </div>
