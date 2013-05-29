@@ -14,8 +14,8 @@ object ApplicationBuild extends Build {
     javaEbean
   )
 
-  val main = play.Project(appName, appVersion, appDependencies).settings(
-  	   requireJs += "main.js"
+  val main = PlayProject(appName, appVersion, appDependencies, mainLang = JAVA).settings(
+  	    	requireJs += "main.js"	
   )
 
 }
