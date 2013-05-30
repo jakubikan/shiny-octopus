@@ -1,0 +1,37 @@
+@(title: String)(content: Html)
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>@title</title>
+        <link rel="shortcut icon" type="image/png" href="/assets/images/icons/seapal_small.png">
+        <link rel="stylesheet" media="screen" href="/assets/lib/bootstrap/css/bootstrap.css">
+        <link rel="stylesheet" media="screen" href="/assets/lib/bootstrap/css/bootstrap-responsive.css">
+        
+        <link rel="stylesheet" media="screen" href="/assets/stylesheets/style.css">
+        <link rel="stylesheet" media="screen" href="/assets/stylesheets/main.css">
+        
+        <script src="/assets/javascripts/jquery-1.9.0.min.js" type="text/javascript"></script>
+        <script src="/assets/javascripts/jquery-ui.js" type="text/javascript"></script>
+        <script src="/assets/javascripts/terrific-2.0.1.js" type="text/javascript"></script>
+        <script src="/assets/lib/bootstrap/js/bootstrap.js" type="text/javascript"></script>
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?
+			key=AIzaSyBAgciq8z1_C5aadB3D08yzrc-1YlTOEQ0&sensor=false">
+        </script>
+        
+        @helper.requireJs(core = routes.Assets.at("javascripts/require.js").url, module = routes.Assets.at("javascripts/main").url)
+    </head>
+    <body>
+    	@import terrific._
+        <div id="header">
+	        @header()
+        </div>
+        
+        @content
+        
+        <div id="footer">
+	        @footer()
+        </div>
+    </body>
+</html>

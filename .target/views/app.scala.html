@@ -1,0 +1,31 @@
+@(site: String = "weather")
+
+@import terrific._
+
+
+@main("Seapal - Shiny-Octopus - App") {
+
+	<!-- Container -->
+	<div class="container-fluid">
+		@appmenu()
+	</div>
+	
+	<!-- Container -->
+	<div class="container-fluid">
+	
+		@site match {
+			case "map" => {
+				@map()
+			}
+			
+			case "waypoint" => {
+				@waypoint()
+			}
+			
+			case "weather" => {
+				@weather()
+			}
+		}
+	</div>
+	<!-- Container -->
+}
