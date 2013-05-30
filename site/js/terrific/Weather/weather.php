@@ -1,7 +1,7 @@
 <!-- Content -->
 <div class="mod mod-weather">
 	<h2 align="center">Weather information</h2>
-	<form action="insert.php" method="post" class="form-horizontal">
+	<form method="post" class="form-horizontal">
 		<div class="row-fluid well">
 			<div class="span4">
 				<div class="control-group">
@@ -106,14 +106,6 @@
 					</div>
 				</div>
 
-			</div>
-			<div class="row span4">
-				<div class="span1 offset2">
-					<div class="btn-group">
-						<button type="submit" id="submitBtn" class="btn btn-primary" tabindex='10'>Submit</button>
-						<span class="help-block hide">Please check your form</span>
-					</div>
-				</div>
 			</div>
 		</div>
 	</form>

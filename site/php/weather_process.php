@@ -1,5 +1,5 @@
 <?php 
-	include("php/dbconnect.php");
+	include("dbconnect.php");
 	$DBNAME = "seapal";
 	$WEATHERTABLENAME = "Weather";
 	$connection = ConnectDatabase();
@@ -29,27 +29,27 @@
 	$result = array();
 	switch($action) {		
 		case('send'):
-			$data = $_POST['formData'];
+			$data = $_POST['data'];
 			if(($data) != "\n"){
 				$sql = "INSERT INTO ".$WEATHERTABLENAME." VALUES(	0,
-																	$data.windstrength,
-																	$data.temperature,
-																	'$data.winddirection',
-																	'$data.clouds',
-																	$data.airpressure,
-																	'$data.rain',
-																	$data.waveheight,
-																	'$data.wavedirection',
-																	'$data.dateandtime'
+																	".$data['windstrength'].",
+																	".$data['temperature'].",
+																	".$data['winddirection'].",
+																	".$data['clouds'].",
+																	".$data['airpressure'].",
+																	".$data['rain'].",
+																	".$data['waveheight'].",
+																	".$data['wavedirection'].",
+																	".$data['dateandtime']."
 																);";
-				mysql_query($sql);																						
+				$result = mysql_query($sql);																						
 /*				if(!mysql_query($sql)){
 					die("Error: ".mysql_error());
 				}else{
 					echo "Eintrag eingefuegt";
 				}*/
-				$sql2 = "SELECT";
-				$result = mysql_query($sql2);
+				$sql2 = "SELECT ID FROM ".$WEATHERTABLENAME." WHERE";
+				//$result = mysql_query($sql2);
 			}
 			break;
 		case('update'): 
