@@ -1,6 +1,6 @@
 <?php 
 	$action = $_POST['action'];
-	$result = array();
+	$result;
 	switch($action) {
 		case('update'): ;
 		
@@ -9,6 +9,7 @@
 		if(($message) != "\n"){
 			fwrite(fopen('chat.txt', 'a'), $message); 
 		}
+		
 		break;
 		
 	}
