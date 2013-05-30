@@ -151,8 +151,8 @@
     centerChanged : function(self) {
 		center = this.center;
 		dms = self.convertDMS(center.lat(), center.lng());
-		$("#lat",self.$ctx).val(dms.latDMS);
-		$("#long",self.$ctx).val(dms.lngDMS);
+		$("#lat",self.$ctx).html(dms.latDMS+" Lat");
+		$("#long",self.$ctx).html(dms.lngDMS+" Long");
     },
     
     
