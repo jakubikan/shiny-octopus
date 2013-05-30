@@ -12,4 +12,4 @@ GET   	/:page                		controllers.Application.show(page)
 
 GET   	/app/:site                	controllers.Application.app(site)
 
-GET   	/api/weather                	controllers.Api.weather()
+GET   	/api/weather               	controllers.Api.weather()
