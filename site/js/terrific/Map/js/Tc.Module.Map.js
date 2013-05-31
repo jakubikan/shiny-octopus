@@ -66,15 +66,16 @@
 			map: self.map,
 			icon: {
 				anchor: new google.maps.Point(20, 20),
-				url: "../img/icons/crosshair_red.png"
+				url: "../img/icons/crosshair_red.png"	//TODO: für Play: "/assets/images/icons/crosshair_red.png"
 			},
-			raiseOnDrag: true
+			raiseOnDrag: false,
+			draggable: true
 		});
 		
 		// Registering LongClick Handler, see /site/js/static/helper.js
 		new LongClick(self.map, 1000);
 		
-		new LongClick(self.crosshair, 1000);
+		//new LongClick(self.crosshair, 1000);
 		
     	    	
         callback();
@@ -89,27 +90,28 @@
 		
 		
 		// Right Click Event Listener
+		
 		google.maps.event.addListener(self.map, 'rightclick', function(event) {
 				self.setMarkerDrawRoute.call(this, self, event);
 		});
 		
 		// Map Click Listener
 		google.maps.event.addListener(self.map, 'click', function(event){
-			self.onMapClick.call(this, self, event);
-	    	self.fire('lngLatChanged',  event, function() { });
+			//self.onMapClick.call(this, self, event);
+	    	//self.fire('lngLatChanged',  event, function() { });
 		});
 		
 		
 		google.maps.event.addListener(self.map, 'mousedown', function(event){
 		});
 		
-		
+		/*
 		google.maps.event.addListener(self.map, 'longpress', function(event){
 			self.loadContextMenu.call(this,self,event);
 		});
+		*/
 		
-		
-		google.maps.event.addListener(self.crosshair, 'longpress', function(event){
+		google.maps.event.addListener(self.crosshair, 'rightclick', function(event){
 			projection = self.overlay.getProjection();
 			event.pixel = projection.fromLatLngToContainerPixel(event.latLng);
 			self.loadContextMenu.call(this,self,event);
@@ -118,6 +120,7 @@
     },
     
     loadContextMenu : function(self, event) {
+    	self.fire('lngLatChanged',  event, function() { });
     	self.fire('contextRequest',  event, function() { });
     	
     },
@@ -130,7 +133,10 @@
 			title: "Route marker #"+self.markers.length,
 			draggable: true
 		});				
-		
+
+		google.maps.event.addListener(marker, 'rightclick', function(event){
+			self.loadContextMenu.call(this,self,event);
+		});
 		self.markers.push(marker);
 		
 		// Marker Draged listener
@@ -230,9 +236,9 @@
 	},
 	
 	onMapClick : function (self, event) {
-		console.log(self.crosshair);
-		self.crosshair.position = event.latLng;
-		self.crosshair.setMap(self.map);
+		//console.log(self.crosshair);
+		//self.crosshair.position = event.latLng;
+		//self.crosshair.setMap(self.map);
 	},
     
 	convertDMS :function(lat, lng) {
