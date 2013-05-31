@@ -135,6 +135,8 @@
 		});				
 
 		google.maps.event.addListener(marker, 'rightclick', function(event){
+			projection = self.overlay.getProjection();
+			event.pixel = projection.fromLatLngToContainerPixel(event.latLng);
 			self.loadContextMenu.call(this,self,event);
 		});
 		self.markers.push(marker);
