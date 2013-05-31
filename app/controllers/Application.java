@@ -8,8 +8,13 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.Arrays;
+import java.util.Set;
 
 import org.apache.commons.io.IOUtils;
+import org.reflections.Reflections;
 
 import play.*;
 import play.api.mvc.Rendering;
@@ -26,19 +31,62 @@ public class Application extends Controller {
         return ok(index.render("Your new application is ready."));
     }
     public static Result show(String page) {
-    	FileInputStream pagefile;
-    	String content = null;
+		Class c = null;
 		try {
-			pagefile = new FileInputStream("app/views/" + page + ".scala.html");
-			content = IOUtils.toString(pagefile);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
+			c = Class.forName("views.html." + page);
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}	
+		
+		Method m = null;
+		Html content = null;
+		
+		if (c != null) {
+		
+			try {
+				m = c.getDeclaredMethod("render", String.class);
+				content = (Html) m.invoke(null, page);
+			} catch (NoSuchMethodException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IllegalArgumentException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (InvocationTargetException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			try {
+				m = c.getDeclaredMethod("render");
+				content = (Html) m.invoke(null, null);
+			} catch (NoSuchMethodException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IllegalArgumentException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (InvocationTargetException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
-    	
-    	
-    	return ok(main.render(page, Html.apply(content)));
+			
+		if (content == null) {
+			return redirect("/");
+			
+		}
+		return ok(content);
+		
+		
+		
     }
     public static Result app(String site) {
     	return ok(views.html.app.render(site));

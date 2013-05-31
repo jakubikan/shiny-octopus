@@ -1,6 +1,6 @@
 (function($) {
   Tc.Module.Appmenu = Tc.Module.extend({
-	offset: 10,
+	offset: 30,
     on: function(callback) {
     	var self = this;
     	
@@ -11,7 +11,7 @@
     },
     after: function() { 
     	var self = this;
-		$("+", self.$ctx).css("padding-top",self.$ctx.height() + self.offset + "px");
+		self.$ctx.parent().css("padding-bottom", self.$ctx.height()+  "px");
 	
     }
   });
