@@ -60,20 +60,11 @@
 			maxZoom: 18
 		}));
 		
-		
-		self.crosshair = new google.maps.Marker({
-			position: self.map.getCenter(),	
-			map: self.map,
-			icon: {
-				anchor: new google.maps.Point(20, 20),
-				url: "../img/icons/crosshair_red.png"	//TODO: für Play: "/assets/images/icons/crosshair_red.png"
-			},
-			raiseOnDrag: false,
-			draggable: true
-		});
-		
+		/*
+
+		*/
 		// Registering LongClick Handler, see /site/js/static/helper.js
-		new LongClick(self.map, 1000);
+		//new LongClick(self.map, 1000);
 		
 		//new LongClick(self.crosshair, 1000);
 		
@@ -92,7 +83,7 @@
 		// Right Click Event Listener
 		
 		google.maps.event.addListener(self.map, 'rightclick', function(event) {
-				self.setMarkerDrawRoute.call(this, self, event);
+				self.drawCrosshairOrMarker.call(this, self, event);
 		});
 		
 		// Map Click Listener
@@ -103,7 +94,9 @@
 		
 		
 		google.maps.event.addListener(self.map, 'mousedown', function(event){
+		
 		});
+
 		
 		/*
 		google.maps.event.addListener(self.map, 'longpress', function(event){
@@ -111,12 +104,37 @@
 		});
 		*/
 		
-		google.maps.event.addListener(self.crosshair, 'rightclick', function(event){
-			projection = self.overlay.getProjection();
-			event.pixel = projection.fromLatLngToContainerPixel(event.latLng);
-			self.loadContextMenu.call(this,self,event);
-		});
+
 	
+    },
+
+    drawCrosshairOrMarker : function(self, event){
+    	if(self.crosshair==null){
+    		self.crosshair = new google.maps.Marker({
+				position: event.latLng,	
+				map: self.map,
+				icon: {
+						anchor: new google.maps.Point(20, 20),
+						url: "../img/icons/crosshair_red.png"	//TODO: für Play: "/assets/images/icons/crosshair_red.png"
+				},
+				raiseOnDrag: false,
+				draggable: true
+			});
+
+    		google.maps.event.addListener(self.crosshair, 'rightclick', function(event){
+    			self.setMarkerDrawRoute.call(this,self,event);
+    			self.crosshair.setMap(null);
+    			self.crosshair = null;
+			});
+			google.maps.event.addListener(self.crosshair, 'drag', function(event){
+				degLatLngs = self.crosshair.getPosition();
+				latLngs = self.convertDMS(degLatLngs.lat(), degLatLngs.lng());
+				$("#crossLat",self.$ctx).html(latLngs.latDMS+ " Lat");
+				$("#crossLong",self.$ctx).html(latLngs.lngDMS+ " Long");
+			});
+    	} else {
+    		self.setMarkerDrawRoute.call(this,self,event);
+    	}
     },
     
     loadContextMenu : function(self, event) {

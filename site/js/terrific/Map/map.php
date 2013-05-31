@@ -9,6 +9,11 @@
 			<div id="map-canvas">
 			</div>
 			<?php include("js/terrific/ContextMenu/contextmenu.php")?>
+			<div id="CrossHair">
+				FadenKreuz
+				<div id="crossLat">fga</div>
+				<div id="crossLong">adf</div>
+			</div>
 		</div>
 		<div class="span1"></div>
 	</div>
