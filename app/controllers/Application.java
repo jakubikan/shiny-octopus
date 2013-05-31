@@ -63,7 +63,7 @@ public class Application extends Controller {
 			
 			try {
 				m = c.getDeclaredMethod("render");
-				content = (Html) m.invoke(null, null);
+				content = (Html) m.invoke(null);
 			} catch (NoSuchMethodException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

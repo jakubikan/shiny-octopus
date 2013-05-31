@@ -1,13 +1,26 @@
+@(site: String = "weather")
 <div class="mod mod-appmenu navbar">
 	<div class="navbar-inner">
 		<ul class="nav">
-			<li class="">
+			@if(site == "weather")  {
+				<li class="active">
+			} else {
+				<li>
+			}
 				<a href="/app/weather">Wetter</a>
 			</li>
-			<li class="">
+			@if(site == "waypoint")  {
+				<li class="active">
+			} else {
+				<li>
+			}
 				<a href="/app/waypoint">Wegpunkt</a>
 			</li>
-			<li class="">
+			@if(site == "map")  {
+				<li class="active">
+			} else {
+				<li>
+			}
 				<a href="/app/map">Map</a>
 			</li>
 		</ul>
