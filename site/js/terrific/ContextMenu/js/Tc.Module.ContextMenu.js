@@ -9,7 +9,7 @@
 		after : function() {
 			var self = this;
 			
-			$("[data-id='add-marker']",self.$ctx).bind("click",function(e) {
+			$("[data-id='remove-marker']",self.$ctx).bind("click",function(e) {
 				lat = self.$ctx.data("lat");
 				lng = self.$ctx.data("lng");
 				

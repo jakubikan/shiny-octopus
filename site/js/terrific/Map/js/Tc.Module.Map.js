@@ -153,18 +153,62 @@
 		});				
 
 		google.maps.event.addListener(marker, 'rightclick', function(event){
+			/*
 			projection = self.overlay.getProjection();
 			event.pixel = projection.fromLatLngToContainerPixel(event.latLng);
-			self.loadContextMenu.call(this,self,event);
+			self.loadContextMenu.call(this,self,event);*/	
+			//self.removeMarker.call(this,self);
+			self.drawRoute.call(this,self);
 		});
 		self.markers.push(marker);
 		
 		// Marker Draged listener
-		google.maps.event.addListener(marker, 'dragend', function(event) {
+		/*google.maps.event.addListener(marker, 'dragend', function(event) {
 			self.onMarkerDragged.call(this, self, event);
-		});
+		});*/
 		
 		return marker;
+    },
+
+    drawRoute : function(self){
+    	if(self.markers.length > 1){
+    		points = [];
+    		for (var i = 0; i < self.markers.length; i++) {
+    			points.push(self.markers[i].getPosition());
+    			self.markers[i].setMap(null);
+    		};
+    		route = new google.maps.Polyline({
+				path: points,
+				strokeColor: "#FF0000",
+				strokeOpacity: 1.0,
+				strokeWeight: 2,
+				draggable: true,
+				editable: true
+			});	
+			google.maps.event.addListener(route, 'rightclick', function(event){
+				this.setMap(null);
+				idx = self.routes.indexOf(this);
+				self.routes.splice(idx,1);
+			});
+			google.maps.event.addListener(route, 'dblclick', function(event){
+				this.setMap(null);
+				this.getPath().forEach(function(item, index){
+					self.drawNewMarkerAt(item);
+				});
+
+			});
+			route.setMap(self.map);
+			self.routes.push(route);
+			self.markers=[];
+
+
+    	}
+    },
+
+    removeMarker : function(self){
+    		this.setMap(null);
+			index = self.markers.indexOf(this);
+			self.markers.splice(index,1);
     },
     
     onMarkerAdd : function(event) {
@@ -181,7 +225,7 @@
 		$("#long",self.$ctx).html(dms.lngDMS+" Long");
     },
     
-    
+    /*
     drawRoute : function (self, points) {
 		if (!points[0]) {
 			throw "Irgendwass war da falsch";
@@ -192,16 +236,18 @@
 			path: points,
 			strokeColor: "#FF0000",
 			strokeOpacity: 1.0,
-			strokeWeight: 2
+			strokeWeight: 2,
+			draggable: true,
+			editable: true
 		});					
 		
 		return route
     },
-    
+    */
     
 	setMarkerDrawRoute : function(self, event) {
 		self.drawNewMarkerAt(event.latLng);
-		self.latLngs.push(event.latLng);
+		/*self.latLngs.push(event.latLng);
 		if (self.markers.length > 1) {
 			points = [
 				event.latLng,
@@ -211,7 +257,7 @@
 			route = self.drawRoute(self, points);
 			self.routes.push(route);					
 			route.setMap(self.map);
-		}
+		}*/
 	},
 	
 	onMarkerDragged : function(self, event) {

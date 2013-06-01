@@ -6,9 +6,9 @@
 			</a>
 		</li>
 		<li >
-			<a tabindex="-1" href="#" data-id="add-marker">
+			<a tabindex="-1" href="#" data-id="remove-marker">
 				<i class="icon-flag"></i>
-				<span>Add Marker</span>
+				<span>Remove Marker</span>
 			</a>
 		</li>
 		<li>
