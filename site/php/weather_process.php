@@ -67,5 +67,6 @@
 		case('fetch'):
 			break;
 	}	
+	
 	echo json_encode($result);
 ?>

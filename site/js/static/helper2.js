@@ -18,6 +18,7 @@ $(document).ready(function() {
 	
 	function setId(data) {
 		formID = data;
+		console.log("helper2.js formId is: " + formID);
 	}
 		
 	function getDOMElement(array, id) {
@@ -52,7 +53,7 @@ $(document).ready(function() {
 			else updateSentData(formData);
 			if (e.keyCode == 13) { //Enter is pressed.
 				inputs.each(function(index, element) {
-                $(this).val("");
+                	$(this).val("");
 				});
 				selects.each(function(index, element) {
 					$(this).val("");
@@ -88,7 +89,7 @@ $(document).ready(function() {
 			else updateSentData(formData);
 			if (e.keyCode == 13) { //Enter is pressed.
 				inputs.each(function(index, element) {
-                $(this).val("");
+                	$(this).val("");
 				});
 				selects.each(function(index, element) {
 					$(this).val("");
@@ -107,11 +108,13 @@ $(document).ready(function() {
 				'data': data
 			},
 			dataType: "json",
-			success: setId
+			success: function(data) {
+				setId(data);
+			}
 		});
 	}
 	
-	sendWeatherForm(formData).done(setId);
+//	sendWeatherForm(formData).done(setId);
 	
 	function fetchWeatherData(index) {
 		$.ajax({
