@@ -34,30 +34,38 @@
 				$sql = "INSERT INTO ".$WEATHERTABLENAME." VALUES(	0,
 																	".$data['windstrength'].",
 																	".$data['temperature'].",
-																	".$data['winddirection'].",
-																	".$data['clouds'].",
+																	'".$data['winddirection']."',
+																	'".$data['clouds']."',
 																	".$data['airpressure'].",
-																	".$data['rain'].",
+																	'".$data['rain']."',
 																	".$data['waveheight'].",
-																	".$data['wavedirection'].",
-																	".$data['dateandtime']."
+																	'".$data['wavedirection']."',
+																	'".$data['dateandtime']."'
 																);";
-				$result = mysql_query($sql);																						
-/*				if(!mysql_query($sql)){
-					die("Error: ".mysql_error());
+																									
+				if(!mysql_query($sql)){
+					die("Error: ".mysql_error()."    ");
 				}else{
-					echo "Eintrag eingefuegt";
-				}*/
-				$sql2 = "SELECT ID FROM ".$WEATHERTABLENAME." WHERE";
-				//$result = mysql_query($sql2);
+					echo "Eintrag eingefuegt!    ";
+				}
+				$sql2 = "SELECT MAX(ID) FROM ".$WEATHERTABLENAME.";";
+				$resultArray = mysql_query($sql2);
+				$row = mysql_fetch_row($resultArray);
+				echo "row[0]: ".$row[0]."    ";
+				$result = $row[0];
+				if(!($result >= 0)) {
+					die("Error: ".mysql_error()."    ");
+				}else{
+					echo "ID zurückgegeben!    ";
+				}
+				mysql_free_result($resultArray);
 			}
 			break;
-		case('update'): 
+		case('update'):
+			echo "UPDATE!";
 			break;
-		case('fetch'):		
+		case('fetch'):
 			break;
-	}
-	
-	
+	}	
 	echo json_encode($result);
 ?>

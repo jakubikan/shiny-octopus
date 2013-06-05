@@ -1,5 +1,6 @@
 $(document).ready(function() {
    	var formID = null;
+	var formData;
    
     $('a[href^="#"]').bind('click.smoothscroll',function (e) {
         e.preventDefault();
@@ -15,7 +16,10 @@ $(document).ready(function() {
 		
     });
 	
-	
+	function setId(data) {
+		formID = data;
+	}
+		
 	function getDOMElement(array, id) {
 		for (var i = 0; i < array.length; i++) {
 			if (array[i].id.indexOf(id) != -1) return array[i];
@@ -28,20 +32,24 @@ $(document).ready(function() {
 		if (e.keyCode == 13 || e.keyCode == 9) { //Enter or TAB is pressed.
 			var inputs = $(this).closest('.well').find('input');
 			var selects = $(this).closest('.well').find('select');
-			var data={windstrength: getDOMElement(inputs, "windStrength").value || 0,
-					  winddirection: getDOMElement(selects, 'windDirection').value || "null",
+			formData={windstrength: getDOMElement(inputs, "windStrength").value || 0,
+					  winddirection: getDOMElement(selects, 'windDirection').value === '-Please select-' ? 
+					  							   "null" : getDOMElement(selects, 'windDirection').value,
 					  airpressure: getDOMElement(inputs, 'airPressure').value || 0,
 					  temperature: getDOMElement(inputs, 'temp').value || 0,
-					  clouds: getDOMElement(selects, 'clouds').value || "null",
-					  rain: getDOMElement(selects, 'rain').value || "null",
+					  clouds: getDOMElement(selects, 'clouds').value === '-Please select-' ? 
+			  							    "null" : getDOMElement(selects, 'clouds').value,
+					  rain: getDOMElement(selects, 'rain').value === '-Please select-' ? 
+			  							  "null" : getDOMElement(selects, 'rain').value,
 					  waveheight: getDOMElement(inputs, 'waveHeight').value || 0,
-					  wavedirection: getDOMElement(selects, 'waveDirection').value || "null",
+					  wavedirection: getDOMElement(selects, 'waveDirection').value === '-Please select-' ? 
+			  							    	   "null" : getDOMElement(selects, 'waveDirection').value,
 					  dateandtime: getDOMElement(inputs, 'trackDateTime').value || "null"
 					  };
-					
+					  
 			// send 
-			if (formID == null) sendWeatherForm(data);
-			else updateSentData(data);
+			if (formID == null) sendWeatherForm(formData);
+			else updateSentData(formData);
 			if (e.keyCode == 13) { //Enter is pressed.
 				inputs.each(function(index, element) {
                 $(this).val("");
@@ -60,20 +68,24 @@ $(document).ready(function() {
 		if (e.keyCode == 13 || e.keyCode == 9) { //Enter or TAB is pressed.
 			var inputs = $(this).closest('.well').find('input');
 			var selects = $(this).closest('.well').find('select');
-			var data={windstrength: getDOMElement(inputs, "windStrength").value || 0,
-					  winddirection: getDOMElement(selects, 'windDirection').value || "null",
+			formData={windstrength: getDOMElement(inputs, "windStrength").value || 0,
+					  winddirection: getDOMElement(selects, 'windDirection').value === '-Please select-' ? 
+					  							   "null" : getDOMElement(selects, 'windDirection').value,
 					  airpressure: getDOMElement(inputs, 'airPressure').value || 0,
 					  temperature: getDOMElement(inputs, 'temp').value || 0,
-					  clouds: getDOMElement(selects, 'clouds').value || "null",
-					  rain: getDOMElement(selects, 'rain').value || "null",
+					  clouds: getDOMElement(selects, 'clouds').value === '-Please select-' ? 
+			  							    "null" : getDOMElement(selects, 'clouds').value,
+					  rain: getDOMElement(selects, 'rain').value === '-Please select-' ? 
+			  							  "null" : getDOMElement(selects, 'rain').value,
 					  waveheight: getDOMElement(inputs, 'waveHeight').value || 0,
-					  wavedirection: getDOMElement(selects, 'waveDirection').value || "null",
+					  wavedirection: getDOMElement(selects, 'waveDirection').value === '-Please select-' ? 
+			  							    	   "null" : getDOMElement(selects, 'waveDirection').value,
 					  dateandtime: getDOMElement(inputs, 'trackDateTime').value || "null"
 					  };
-					
+					  					
 			// send 
-			if (formID == null) sendWeatherForm(data);
-			else updateSentData(data);
+			if (formID == null) sendWeatherForm(formData);
+			else updateSentData(formData);
 			if (e.keyCode == 13) { //Enter is pressed.
 				inputs.each(function(index, element) {
                 $(this).val("");
@@ -86,20 +98,20 @@ $(document).ready(function() {
 		}
 	});
 	
-	function sendWeatherForm(formData) {
+	function sendWeatherForm(data) {
 		$.ajax({
 			type: "POST",
 			url: "php/weather_process.php",
 			data: { 
 				'action': 'send',
-				'data': formData
+				'data': data
 			},
 			dataType: "json",
-			success: function(id){
-				formID = id;
-			}
+			success: setId
 		});
 	}
+	
+	sendWeatherForm(formData).done(setId);
 	
 	function fetchWeatherData(index) {
 		$.ajax({
@@ -107,7 +119,7 @@ $(document).ready(function() {
 			url: "php/weather_process.php",
 			data: { 
 				'action': 'fetch',
-				'data': formData
+				'data': index
 			},
 			dataType: "json",
 			success: function(data){
@@ -116,13 +128,13 @@ $(document).ready(function() {
 		});		
 	}
 	
-	function updateSentData(formData) {
+	function updateSentData(data) {
 		$.ajax({
 			type: "POST",
 			url: "php/weather_process.php",
 			data: { 
 				'action': 'update',
-				'data': formData
+				'data': data
 			},
 			dataType: "json",
 			success: function(data){
