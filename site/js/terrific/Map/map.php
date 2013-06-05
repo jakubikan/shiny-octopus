@@ -14,6 +14,10 @@
 				<div id="crossLat">fga</div>
 				<div id="crossLong">adf</div>
 			</div>
+			<div>
+				Entfernung:
+				<div id="distanceToCrosshair"></div>
+			</div>
 		</div>
 		<div class="span1"></div>
 	</div>

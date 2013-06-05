@@ -10,12 +10,16 @@
 	map : null,
 	overlay: null,
 	longClickStoped: false,
+	//var mapTypeIds = ["ROADMAP","SATELLITE","OSM"];
 	mapOptions : {
 		disableDoubleClickZoom: true,
 		center: new google.maps.LatLng(47.667272, 9.171036),
 		zoom: 18,
 		mapTypeId: "OSM",
 		mapTypeControl: false,
+		/*mapTypeControlOptions: {
+			mapTypeIds: mapTypeIds
+		},*/
 		zoomControlOptions: {
 		  style: google.maps.ZoomControlStyle.SMALL
 		},					
@@ -39,6 +43,7 @@
 		
 		
 		// Open Street Map
+		
 		self.map.mapTypes.set("OSM", new google.maps.ImageMapType({
 			getTileUrl: function(coord, zoom) {
 				return "http://tile.openstreetmap.org/" + zoom +
@@ -50,13 +55,42 @@
 		}));
 		
 		// Open Sea Map
+		/*
+		self.map.overlayMapTypes.push(new google.maps.ImageMapType({getTileUrl: function(coord, zoom) {
+                    return "http://tiles.openseamap.org/seamark/" + zoom + "/" + coord.x + "/" + coord.y + ".png";
+                },
+                tileSize: new google.maps.Size(256, 256),
+                name: "OpenSeaMap",
+                maxZoom: 18 }));
+*/
+		
 		self.map.overlayMapTypes.push(new google.maps.ImageMapType({
 			getTileUrl: function(coord, zoom) {
-			return "http://tile.openseamap.org/seamark/" + zoom +
+			return "http://tiles.openseamap.org/seamark/" + zoom +
 			"/" + coord.x + "/" + coord.y + ".png";
 			},
 			tileSize: new google.maps.Size(256, 256),
 			name: "OpenSeaMap",
+			maxZoom: 18
+		}));
+
+		self.map.overlayMapTypes.push(new google.maps.ImageMapType({
+			getTileUrl: function(coord, zoom) {
+			return "http://www.openportguide.org/tiles/actual/air_temperature/5/" + zoom +
+			"/" + coord.x + "/" + coord.y + ".png";
+			},
+			tileSize: new google.maps.Size(256, 256),
+			name: "Temp",
+			maxZoom: 18
+		}));
+
+		self.map.overlayMapTypes.push(new google.maps.ImageMapType({
+			getTileUrl: function(coord, zoom) {
+			return "http://www.openportguide.org/tiles/actual/wind_vector/7/" + zoom +
+			"/" + coord.x + "/" + coord.y + ".png";
+			},
+			tileSize: new google.maps.Size(256, 256),
+			name: "Wind",
 			maxZoom: 18
 		}));
 		
@@ -158,8 +192,10 @@
 			event.pixel = projection.fromLatLngToContainerPixel(event.latLng);
 			self.loadContextMenu.call(this,self,event);*/	
 			//self.removeMarker.call(this,self);
-			self.drawRoute.call(this,self);
+			//self.drawRoute.call(this,self);
+			self.distanceToCrosshair.call(this,self);
 		});
+
 		self.markers.push(marker);
 		
 		// Marker Draged listener
@@ -169,7 +205,12 @@
 		
 		return marker;
     },
-
+    distanceToCrosshair : function(self){
+    	if(self.crosshair ==null)
+    		return;
+    	var distance = google.maps.geometry.spherical.computeDistanceBetween (self.crosshair.getPosition(), this.getPosition());
+    	$("#distanceToCrosshair",self.$ctx).html(distance.toFixed(2)+ " Meter");
+    },
     drawRoute : function(self){
     	if(self.markers.length > 1){
     		points = [];
