@@ -45,28 +45,72 @@
 																									
 				if(!mysql_query($sql)){
 					die("Error: ".mysql_error()."    ");
-				}else{
-					echo "Eintrag eingefuegt!    ";
 				}
 				$sql2 = "SELECT MAX(ID) FROM ".$WEATHERTABLENAME.";";
 				$resultArray = mysql_query($sql2);
 				$row = mysql_fetch_row($resultArray);
-				echo "row[0]: ".$row[0]."    ";
 				$result = $row[0];
 				if(!($result >= 0)) {
 					die("Error: ".mysql_error()."    ");
-				}else{
-					echo "ID zurückgegeben!    ";
 				}
 				mysql_free_result($resultArray);
 			}
 			break;
 		case('update'):
-			echo "UPDATE!";
+			$data = $_POST['data'];
+			if(($data) != "\n"){
+				$sql = "UPDATE ".$WEATHERTABLENAME." SET WindStrength=".$data['windstrength'].",
+														 Temperature=".$data['temperature'].",
+														 WindDirection='".$data['winddirection']."',
+														 Clouds='".$data['clouds']."',
+														 AirPressure=".$data['airpressure'].",
+														 Rain='".$data['rain']."',
+														 WaveHeight=".$data['waveheight'].",
+														 WaveDirection='".$data['wavedirection']."',
+														 DateTime='".$data['dateandtime']."'
+														 WHERE ID = ".$data['ID'].";";
+																									
+				$result = mysql_query($sql);																		
+				if(!$result){
+					die("Error: ".mysql_error()."    ");
+				}
+			}
 			break;
 		case('fetch'):
+			$data = $_POST['data'];
+			if(($data) != "\n"){
+				$sql = "SELECT * FROM ".$WEATHERTABLENAME." WHERE
+															ID = ".$data['id'].";";
+																									
+				$resultArray = mysql_query($sql);
+				$row = mysql_fetch_row($resultArray);
+				$result = $row;																		
+				if(!$result){
+					die("Error: ".mysql_error()."    ");
+				}				
+				mysql_free_result($resultArray);
+			}
+			
+			break;
+		case('select'):
+			$data = $_POST['data'];
+			if(($data) != "\n"){
+				
+				
+				$iter = 0;
+				$sql = "SELECT ID, DateTime FROM ".$WEATHERTABLENAME." ";
+				$resultArray = mysql_query($sql);
+				while ($row = mysql_fetch_array($resultArray)) {
+					$result[$iter] = $row;
+					$iter++;
+				}
+				if(!$result){
+					die("Error: ".mysql_error()."    ");
+				}
+				mysql_free_result($resultArray);
+			}
+			
 			break;
 	}	
-	
 	echo json_encode($result);
 ?>
