@@ -32,13 +32,13 @@ $(document).ready(function() {
 		var selects = $(document).find('select');
 		formID = formData[0];
 		getDOMElement(inputs, "windStrength").value = formData[1] != 0 ? formData[1] : "";
-		getDOMElement(selects, "windDirection").value = formData[3] != null ? formData[3] : "-Please select-";
+		getDOMElement(selects, "windDirection").value = formData[3] != 'null' ? formData[3] : "-Please select-";
 		getDOMElement(inputs, "airPressure").value = formData[5] != 0 ? formData[5] : "";
 		getDOMElement(inputs, "temp").value = formData[2] != 0 ? formData[2] : "";
-		getDOMElement(selects, "clouds").value = formData[4] != null ? formData[4] : "-Please select-";
-		getDOMElement(selects, "rain").value = formData[6] != null ? formData[6] : "-Please select-";
+		getDOMElement(selects, "clouds").value = formData[4] != 'null' ? formData[4] : "-Please select-";
+		getDOMElement(selects, "rain").value = formData[6] != 'null' ? formData[6] : "-Please select-";
 		getDOMElement(inputs, "waveHeight").value = formData[7] != 0 ? formData[7] : "";
-		getDOMElement(selects, "waveDirection").value = formData[8] != null ? formData[8] : "-Please select-";
+		getDOMElement(selects, "waveDirection").value = formData[8] != 'null' ? formData[8] : "-Please select-";
 		getDOMElement(inputs, "trackDateTime").value = formData[9] != 0 ? formData[9] : "";
 	}
 	

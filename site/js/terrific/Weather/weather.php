@@ -8,7 +8,7 @@
                 	<div class="row-fluid"> 
 						<label class="control-label">Choose existing entry: </label> 
 						<select
-						class="input-medium-large" id="entry" name="entry" tabindex='1'>                            
+						class="input-medium-xlarge" id="entry" name="entry" tabindex='1'>                            
 						</select>
 					</div>
                 </div>
