@@ -3,13 +3,14 @@
 	<h2 align="center">Weather information</h2>
 	<form method="post" class="form-horizontal">
 		<div class="row-fluid well">
-        	<div class="span4">
+        	<div class="span6">
            	 	<div class="control-group">
                 	<div class="row-fluid"> 
 						<label class="control-label">Choose existing entry: </label> 
 						<select
 						class="input-medium-xlarge" id="entry" name="entry" tabindex='1'>                            
 						</select>
+                        <img id="loadgif" src="../../../../img/animation/ajax-loader.gif"/>
 					</div>
                 </div>
             </div>

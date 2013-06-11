@@ -1,11 +1,13 @@
 $(document).ready(function() {
+	var gifVisible = "visible";
 	var formID = null;
 	var formData;
 	var selectSelector = {selector : '#entry'};
 	var map = {};
 
+	$('#loadgif').height($('#entry').height());
 	fillSelect();
-   
+
     $('a[href^="#"]').bind('click.smoothscroll',function (e) {
         e.preventDefault();
       
@@ -19,6 +21,16 @@ $(document).ready(function() {
 		
     });	
 		
+	function showGif() {
+//		if (gifVisible == "visible") gifVisible = "hidden"
+//		else gifVisible = "visible";
+		$('#loadgif').show();	
+	}
+	
+	function hideGif() {
+		$('#loadgif').hide();
+	}
+
 	function getDOMElement(array, id) {
 		for (var i = 0; i < array.length; i++) {
 			if (array[i].id.indexOf(id) != -1) return array[i];
@@ -150,6 +162,7 @@ $(document).ready(function() {
 	});	
 	
 	function sendWeatherForm(data) {
+		showGif();
 		$.ajax({
 			type: "POST",
 			url: "php/weather_process.php",
@@ -160,11 +173,13 @@ $(document).ready(function() {
 			dataType: "json", 
 			success: function(data) {
 				formID = data;
+				hideGif();
 			}
 		});
 	}
 	
 	function fetchWeatherData(index) {
+		showGif();
 		$.ajax({
 			type: "POST",
 			url: "php/weather_process.php",
@@ -176,11 +191,13 @@ $(document).ready(function() {
 			success: function(data){
 				formData = data;
 				setFieldData(data);
+				hideGif();
 			}
 		});		
 	}
 	
 	function updateSentData(data) {
+		showGif();
 		$.ajax({
 			type: "POST",
 			url: "php/weather_process.php",
@@ -189,10 +206,14 @@ $(document).ready(function() {
 				'data': data
 			},
 			dataType: "json",
+			success: function(data) {
+				hideGif();	
+			}
 		});	
 	}
 	
 	function fillSelect() {
+		showGif();
 		$.ajax({
 			type: "POST",
 			url: "php/weather_process.php",
@@ -213,6 +234,7 @@ $(document).ready(function() {
 						map[data[o]['DateTime']] = data[o]['ID'] + " #";
 					}
 					$(document).find('#entry').append("<option>"+data[o]['DateTime']+"</option>");
+					hideGif();
 				}
 				updateCurrSelected();
 			}
