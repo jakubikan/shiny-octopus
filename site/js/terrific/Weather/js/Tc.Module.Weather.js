@@ -13,12 +13,13 @@
 		
 		var date = new Date();
 		var dateHours = self.leftPad(date.getHours(), 2);		
-		var dateMinutes = self.leftPad(date.getMinutes(), 2);
+		var dateMinutes = self.leftPad(date.getMinutes(), 2);		
+		var dateSeconds = self.leftPad(date.getSeconds(), 2);
 		
 		// Fri, May 16 2013, 11:01
 		dateText = $.datepicker.formatDate("D, M d yy", date);
 		
-		$(document).find("#trackDateTime").val(dateText  +", "+dateHours+":"+dateMinutes);
+		$(document).find("#trackDateTime").val(dateText  +", "+dateHours+":"+dateMinutes+":"+dateSeconds);
     	
 		
         callback();

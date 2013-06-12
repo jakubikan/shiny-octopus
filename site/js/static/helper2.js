@@ -21,15 +21,9 @@ $(document).ready(function() {
 		
     });	
 		
-	function showGif() {
-//		if (gifVisible == "visible") gifVisible = "hidden"
-//		else gifVisible = "visible";
-		$('#loadgif').show();	
-	}
+	function showGif() { $('#loadgif').show(); }
 	
-	function hideGif() {
-		$('#loadgif').hide();
-	}
+	function hideGif() { $('#loadgif').hide(); }
 
 	function getDOMElement(array, id) {
 		for (var i = 0; i < array.length; i++) {
@@ -74,10 +68,11 @@ $(document).ready(function() {
 		var date = new Date();
 		var dateHours = leftPad(date.getHours(), 2);		
 		var dateMinutes = leftPad(date.getMinutes(), 2);
+		var dateSeconds = leftPad(date.getSeconds(), 2);
 		
 		// Format: Fri, May 16 2013, 11:01
 		dateText = $.datepicker.formatDate("D, M d yy", date);		
-		$(document).find("#trackDateTime").val(dateText  +", "+dateHours+":"+dateMinutes);
+		$(document).find("#trackDateTime").val(dateText  +", "+dateHours+":"+dateMinutes+":"+dateSeconds);
 	}
 	
 	function clearAll(){
