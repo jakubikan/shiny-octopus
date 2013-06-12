@@ -10,7 +10,8 @@
 	map : null,
 	overlay: null,
 	longClickStoped: false,
-	//var mapTypeIds = ["ROADMAP","SATELLITE","OSM"];
+	doTrack: true,
+	
 	mapOptions : {
 		disableDoubleClickZoom: true,
 		center: new google.maps.LatLng(47.667272, 9.171036),
@@ -137,9 +138,41 @@
 			self.loadContextMenu.call(this,self,event);
 		});
 		*/
-		
+		self.connectToBoatServer.call(this,self,47.667272, 9.171036);
 
 	
+    },
+
+    connectToBoatServer : function(mapModule){
+    	center = mapModule.map.getCenter();
+    	lat = center.lat();
+    	lng = center.lng();
+    	$.ajax({
+    	  type : 'get',
+    	  url : './cometServer.php',
+    	  dataType : 'json', 
+    	  data : {
+    	  	'lat' : lat,
+    		'lng' : lng
+    	  },
+    	  success : function(response) {
+    	  	if(mapModule.doTrack){
+    	  		newCenter = google.maps.LatLng(response.lat,response.lng);
+    	  		mapModule.map.setCenter(newCenter);
+    	  	};	  	
+    	  },
+    	  complete : function(response) {
+    	    // send a new ajax request when this request is finished
+    	    if (!self.noerror) {
+    	      // if a connection problem occurs, try to reconnect each 5 seconds
+    	      setTimeout(function(){ mapModule.connectToBoatServer.call(this,mapModule); }, 5000);           
+    	    }else {
+    	      // persistent connection
+    	      mapModule.connectToBoatServer,call(this,mapModule);
+    	    }
+    	    noerror = false; 
+    	  }
+    	});
     },
 
     drawCrosshairOrMarker : function(self, event){
@@ -174,7 +207,6 @@
     loadContextMenu : function(self, event) {
     	self.fire('lngLatChanged',  event, function() { });
     	self.fire('contextRequest',  event, function() { });
-    	
     },
     
     drawNewMarkerAt : function (latLng) {
