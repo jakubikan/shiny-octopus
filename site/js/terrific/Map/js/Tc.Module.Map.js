@@ -137,7 +137,7 @@
 			$.ajax({
 				type: "POST",
 				url: url,
-				dataType: "json",
+				dataType: "jsonp",
 				success: function(data) {
 					console.log(data);	
 				}
