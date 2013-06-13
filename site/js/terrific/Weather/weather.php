@@ -1,8 +1,9 @@
 <!-- Content -->
 <div class="mod mod-weather">
 	<h2 align="center">Weather information</h2>
+	<div class="container-fluid">
 	<form method="post" class="form-horizontal">
-		<div class="row-fluid well">
+		<div class="row well">
         	<div class="span6">
            	 	<div class="control-group">
                 	<div class="row-fluid"> 
@@ -16,7 +17,7 @@
                 </div>
             </div>
         </div>
-		<div class="row-fluid well">
+		<div class="row well">
 			<div class="span4">
 				<div class="control-group">
 					<div class="row-fluid"> 
@@ -123,5 +124,6 @@
 			</div>
 		</div>
 	</form>
+</div>
 </div>
 <!-- Content -->
