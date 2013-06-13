@@ -1,11 +1,13 @@
 <div class="mod mod-map" data-connectors="1">
-	<div class="row-fluid">
-		<div class="span2"></div>
+	<div class="row-fluid well">
 		<div class="span9" >
-			<div id="latlng">
-				<div id="lat">Latitude</div>
-				<div id="long">Longitude</div>
-			</div>
+        	<div class="control-group">
+                <div id="latlng" class="row-fluid">
+                    <div id="lat">Latitude</div>
+                    <div id="long">Longitude</div>
+                    <button id="weatherBtn">Click for current weather data</button>
+                </div>
+           	</div>
 			<div id="map-canvas">
 			</div>
 			<?php include("js/terrific/ContextMenu/contextmenu.php")?>

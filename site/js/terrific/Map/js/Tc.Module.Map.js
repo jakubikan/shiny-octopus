@@ -132,6 +132,18 @@
 		
 		});
 
+
+		$('#weatherBtn').on('click', function() {
+			url = 'http://openweathermap.org/data/2.1/find/city?lat='+self.map.center.lat()+"&lon="+self.map.center.lng()+"&cnt=1";
+			$.ajax({
+				type: "POST",
+				url: url,
+				dataType: "jsonp",
+				success: function(data) {
+					console.log(data);	
+				}
+			});	
+		});
 		
 		/*
 		google.maps.event.addListener(self.map, 'longpress', function(event){

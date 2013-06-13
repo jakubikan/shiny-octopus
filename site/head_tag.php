@@ -40,7 +40,8 @@
 		
 		<!--  Helper -->
 		<script type="text/javascript" src="js/static/helper.js"></script>
-		<script type="text/javascript" src="js/static/helper2.js"></script>
+		<script type="text/javascript" src="js/static/helperWeather.js"></script>
+        <script type="text/javascript" src="js/static/helperMap.js"></script>
 		<!-- Custom Modul Js -->
 		<script type="text/javascript" src="js/terrific/Header/js/Tc.Module.Header.js"></script>
 		<script type="text/javascript" src="js/terrific/Footer/js/Tc.Module.Footer.js"></script>
