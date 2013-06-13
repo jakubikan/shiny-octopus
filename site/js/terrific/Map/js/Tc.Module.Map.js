@@ -11,6 +11,7 @@
 	overlay: null,
 	longClickStoped: false,
 	doTrack: true,
+	Server: null,
 	
 	mapOptions : {
 		disableDoubleClickZoom: true,
@@ -94,7 +95,8 @@
 			name: "Wind",
 			maxZoom: 18
 		}));
-		
+
+		Server = new FancyWebSocket('ws://127.0.0.1:9300');
 		/*
 
 		*/
@@ -125,22 +127,39 @@
 		google.maps.event.addListener(self.map, 'click', function(event){
 			//self.onMapClick.call(this, self, event);
 	    	//self.fire('lngLatChanged',  event, function() { });
+
+			self.connectToBoatServer.call(this,self,47.667272, 9.171036);
 		});
 		
 		
 		google.maps.event.addListener(self.map, 'mousedown', function(event){
 		
 		});
+/*
+		Server.bind('open',function(){
+			$.('#track',self.$ctx).html("Connection to boat server established");
+		});
+*/
+		Server.bind('updatePosition',function(lat,lng){
+			self.updateBoatPosition.call(this,self,lat,lng);
+		});
+/*
+		Server.bind('close',function(){
+			$.('#track',self.$ctx).html("Connection to boat server closed");
+		});
+*/
 
-		
 		/*
 		google.maps.event.addListener(self.map, 'longpress', function(event){
 			self.loadContextMenu.call(this,self,event);
 		});
 		*/
-		self.connectToBoatServer.call(this,self,47.667272, 9.171036);
 
 	
+    },
+
+    updateBoatPosition : function(self,lat,lng){
+
     },
 
     connectToBoatServer : function(mapModule){
@@ -149,7 +168,7 @@
     	lng = center.lng();
     	$.ajax({
     	  type : 'get',
-    	  url : './cometServer.php',
+    	  url : './js/terrific/Map/cometServer.php',
     	  dataType : 'json', 
     	  data : {
     	  	'lat' : lat,
@@ -219,13 +238,16 @@
 		});				
 
 		google.maps.event.addListener(marker, 'rightclick', function(event){
-			/*
+			
 			projection = self.overlay.getProjection();
 			event.pixel = projection.fromLatLngToContainerPixel(event.latLng);
-			self.loadContextMenu.call(this,self,event);*/	
+			radPosition = this.getPosition();
+			position = self.convertDMS(radPosition.lat(),radPosition.lng());
+			//self.loadContextMenu.call(this,self,event);*/	
 			//self.removeMarker.call(this,self);
 			//self.drawRoute.call(this,self);
-			self.distanceToCrosshair.call(this,self);
+			//self.distanceToCrosshair.call(this,self);
+			self.fire('contextRequest',{event:event,marker:this,koords:position},function(){});
 		});
 
 		self.markers.push(marker);
@@ -237,18 +259,18 @@
 		
 		return marker;
     },
-    distanceToCrosshair : function(self){
-    	if(self.crosshair ==null)
+    onCalculateDistance : function(marker){
+    	if(this.crosshair ==null)
     		return;
-    	var distance = google.maps.geometry.spherical.computeDistanceBetween (self.crosshair.getPosition(), this.getPosition());
-    	$("#distanceToCrosshair",self.$ctx).html(distance.toFixed(2)+ " Meter");
+    	distance = google.maps.geometry.spherical.computeDistanceBetween (this.crosshair.getPosition(), marker.getPosition());
+    	$("#distanceToCrosshair",this.$ctx).html(distance.toFixed(2)+ " Meter");
     },
-    drawRoute : function(self){
-    	if(self.markers.length > 1){
+    onMakeRoute : function(){
+    	if(this.markers.length > 1){
     		points = [];
-    		for (var i = 0; i < self.markers.length; i++) {
-    			points.push(self.markers[i].getPosition());
-    			self.markers[i].setMap(null);
+    		for (var i = 0; i < this.markers.length; i++) {
+    			points.push(this.markers[i].getPosition());
+    			this.markers[i].setMap(null);
     		};
     		route = new google.maps.Polyline({
 				path: points,
@@ -260,28 +282,28 @@
 			});	
 			google.maps.event.addListener(route, 'rightclick', function(event){
 				this.setMap(null);
-				idx = self.routes.indexOf(this);
-				self.routes.splice(idx,1);
+				idx = this.routes.indexOf(this);
+				this.routes.splice(idx,1);
 			});
 			google.maps.event.addListener(route, 'dblclick', function(event){
 				this.setMap(null);
 				this.getPath().forEach(function(item, index){
-					self.drawNewMarkerAt(item);
+					this.drawNewMarkerAt(item);
 				});
 
 			});
-			route.setMap(self.map);
-			self.routes.push(route);
-			self.markers=[];
+			route.setMap(this.map);
+			this.routes.push(route);
+			this.markers=[];
 
 
     	}
     },
 
-    removeMarker : function(self){
-    		this.setMap(null);
-			index = self.markers.indexOf(this);
-			self.markers.splice(index,1);
+    onRemoveMarker : function(marker){
+    		marker.setMap(null);
+			index = this.markers.indexOf(marker);
+			this.markers.splice(index,1);
     },
     
     onMarkerAdd : function(event) {

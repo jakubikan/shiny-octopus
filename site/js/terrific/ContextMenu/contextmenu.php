@@ -12,15 +12,15 @@
 			</a>
 		</li>
 		<li>
-			<a tabindex="-1" href="#" data-id="calculate-distance">
+			<a tabindex="-1" href="#" data-id="make-route">
 				<i class="icon-resize-full"></i>
-				<span>Abstand von hier</span>
+				<span>Erstelle Route aus Markern</span>
 			</a>
 		</li>
 		<li>
-			<a tabindex="-1" href="#" data-id="make-goal">
+			<a tabindex="-1" href="#" data-id="calculate-distance">
 				<i class="icon-screenshot"></i>
-				<span>Zum Ziel machen</span>
+				<span>Abstand zum Fadenkreuz</span>
 			</a>
 		</li>
 	</ul>

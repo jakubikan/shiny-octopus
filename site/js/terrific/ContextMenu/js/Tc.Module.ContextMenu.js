@@ -1,5 +1,6 @@
 (function($) {
 	Tc.Module.ContextMenu = Tc.Module.extend({
+		currentMarker:null,
 		on : function(callback) {
 			var self = this;
 			self.sandbox.subscribe(1, self);
@@ -9,12 +10,15 @@
 		after : function() {
 			var self = this;
 			
-			$("[data-id='remove-marker']",self.$ctx).bind("click",function(e) {
+			$("[data-id='remove-marker']",self.$ctx).on("click",function(e) {
+				/*
 				lat = self.$ctx.data("lat");
 				lng = self.$ctx.data("lng");
 				
 				$.extend(e, {latLng: new google.maps.LatLng(lat, lng) })
 				self.addMarker.call(this, self, e);
+				*/
+				self.fire("removeMarker",self.currentMarker,function(){});
 				
 				$('.dropdown-menu', self.$ctx).addClass("fade");
 				
@@ -23,11 +27,12 @@
 			});
 			
 			$("[data-id='calculate-distance']",self.$ctx).bind("click",function(e) {
-				lat = self.$ctx.data("lat");
+				/*lat = self.$ctx.data("lat");
 				lng = self.$ctx.data("lng");
 				
 				$.extend(e, {latLng: new google.maps.LatLng(lat, lng) })
-				
+				*/
+				self.fire("calculateDistance",self.currentMarker,function(){});
 				
 				$('.dropdown-menu', self.$ctx).addClass("fade");
 				
@@ -35,12 +40,13 @@
 				
 			});
 			
-			$("[data-id='make-goal']",self.$ctx).bind("click",function(e) {
-				lat = self.$ctx.data("lat");
+			$("[data-id='make-route']",self.$ctx).bind("click",function(e) {
+				/*lat = self.$ctx.data("lat");
 				lng = self.$ctx.data("lng");
 				
 				$.extend(e, {latLng: new google.maps.LatLng(lat, lng) })
-				
+				*/
+				self.fire("makeRoute",null,function(){});
 			$('.dropdown-menu', self.$ctx).addClass("fade");
 				
 				
@@ -54,17 +60,17 @@
 			var self = this;
 			console.log("Context requested");
 			
-			
+			self.currentMarker = event.marker;
 			$(".dropdown-menu", self.$ctx).removeClass("fade");
 			$(".dropdown-menu", self.$ctx).dropdown("toggle");
 			$(".dropdown-menu", self.$ctx).css({
 				display : "visible",
-				"left" : event.pixel.x,
-				"top" : event.pixel.y,
+				"left" : event.event.pixel.x,
+				"top" : event.event.pixel.y,
 			});
 			$("[data-id='position']", self.$ctx)
-				.html( 	"Lat: " + self.$ctx.data("lat") + 
-						" Lng: " + self.$ctx.data("lng"));
+				.html( 	"Lat: " + event.koords.latDMS + 
+						" Lng: " + event.koords.lngDMS);
 
 		},
 
