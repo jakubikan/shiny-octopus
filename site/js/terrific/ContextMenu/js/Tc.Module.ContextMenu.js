@@ -1,6 +1,6 @@
 (function($) {
 	Tc.Module.ContextMenu = Tc.Module.extend({
-		currentMarker:null,
+		currentMarker:null, //REFAK: MARKER
 		on : function(callback) {
 			var self = this;
 			self.sandbox.subscribe(1, self);
@@ -9,7 +9,7 @@
 		},
 		after : function() {
 			var self = this;
-			
+			//REFAK: MARKER
 			$("[data-id='remove-marker']",self.$ctx).on("click",function(e) {
 				/*
 				lat = self.$ctx.data("lat");
@@ -47,10 +47,17 @@
 				$.extend(e, {latLng: new google.maps.LatLng(lat, lng) })
 				*/
 				self.fire("makeRoute",null,function(){});
-			$('.dropdown-menu', self.$ctx).addClass("fade");
-				
+				$('.dropdown-menu', self.$ctx).addClass("fade");			
+			});
+			//REFAK: MARKER END
+			//REFAK: ROUTE
+			$("[data-id='remove-route']",self.$ctx).bind("click",function(e) {
+
+				self.fire("makeRoute",null,function(){});
+				$('.dropdown-menu', self.$ctx).addClass("fade");				
 				
 			});
+			//REFAK: ROUTE END
 			
 			
 
@@ -61,6 +68,7 @@
 			console.log("Context requested");
 			
 			self.currentMarker = event.marker;
+
 			$(".dropdown-menu", self.$ctx).removeClass("fade");
 			$(".dropdown-menu", self.$ctx).dropdown("toggle");
 			$(".dropdown-menu", self.$ctx).css({

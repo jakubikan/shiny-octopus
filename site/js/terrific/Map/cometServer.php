@@ -1,5 +1,6 @@
 <?php
 	//TODO: eingehende x y werte zufällig verändern
+	//echo "CometServer responds";
 	$lat = $_GET['lat'];
 	$lng = (double)$_GET['lng'];
 	sleep(1);
