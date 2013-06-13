@@ -80,7 +80,7 @@
 			$data = $_POST['data'];
 			if(($data) != "\n"){
 				$sql = "SELECT * FROM ".$WEATHERTABLENAME." WHERE
-															ID = ".$data['id'].";";
+															ID = ".$data['ID'].";";
 																									
 				$resultArray = mysql_query($sql);
 				$row = mysql_fetch_row($resultArray);
@@ -95,8 +95,6 @@
 		case('select'):
 			$data = $_POST['data'];
 			if(($data) != "\n"){
-				
-				
 				$iter = 0;
 				$sql = "SELECT ID, DateTime FROM ".$WEATHERTABLENAME." ";
 				$resultArray = mysql_query($sql);
@@ -109,7 +107,13 @@
 				}
 				mysql_free_result($resultArray);
 			}
-			
+			break;
+		case ('delete'):
+			$data = $_POST['data'];
+			if(($data) != "\n"){
+				$sql = "DELETE FROM ".$WEATHERTABLENAME." WHERE ID = ".$data['ID'].";";
+				$result = mysql_query($sql);
+			}
 			break;
 	}	
 	echo json_encode($result);

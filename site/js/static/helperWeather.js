@@ -1,11 +1,12 @@
 $(document).ready(function() {
-	var gifVisible = "visible";
 	var formID = null;
 	var formData;
 	var selectSelector = {selector : '#entry'};
 	var map = {};
 
 	$('#loadgif').height($('#entry').height());
+	$('#delEntryIcon').height($('#entry').height());
+	hideDel();
 	fillSelect();
 
     $('a[href^="#"]').bind('click.smoothscroll',function (e) {
@@ -24,6 +25,10 @@ $(document).ready(function() {
 	function showGif() { $('#loadgif').show(); }
 	
 	function hideGif() { $('#loadgif').hide(); }
+	
+	function showDel() { $('#delEntryIcon').show(); }
+	
+	function hideDel() { $('#delEntryIcon').hide(); }
 
 	function getDOMElement(array, id) {
 		for (var i = 0; i < array.length; i++) {
@@ -32,8 +37,6 @@ $(document).ready(function() {
 	}
 		
 	function setFieldData(formData) {
-		console.log("Fetched data: "+formData);
-		
 		var inputs = $(document).find('input');
 		var selects = $(document).find('select');
 		formID = formData[0];
@@ -72,17 +75,17 @@ $(document).ready(function() {
 		
 		// Format: Fri, May 16 2013, 11:01
 		dateText = $.datepicker.formatDate("D, M d yy", date);		
-		$(document).find("#trackDateTime").val(dateText  +", "+dateHours+":"+dateMinutes+":"+dateSeconds);
+		$("#trackDateTime").val(dateText  +", "+dateHours+":"+dateMinutes+":"+dateSeconds);
 	}
 	
 	function clearAll(){
 		clearFields();
 		formID = null;
-		$(document).find('#entry').val('-New Entry-');
+		$('#entry').value = '-New Entry-';
 	}
 	
 	function updateCurrSelected() {
-		$(document).find('#entry').value = formData != null && formData.dateandtime != null ? 
+		$('#entry').value = formData != null && formData.dateandtime != null ? 
 										   formData.dateandtime : '-New Entry-';	
 	}
 	
@@ -150,10 +153,16 @@ $(document).ready(function() {
 		}
 	});
 	
+	$('#delEntryIcon').on('click', function() {
+		var entry = $('#entry').val();
+		if (entry != null) deleteEntry({ID: map[entry]});
+		
+	});
+	
 	$(document).find('#entry').on('change', function() {
 		var entry = $(this).find(':selected').text();
 		if (entry == '-New Entry-') { clearAll(); }
-		else fetchWeatherData({"id" : map[entry]});	
+		else fetchWeatherData ({ID : map[entry]});	
 	});	
 	
 	function sendWeatherForm(data) {
@@ -169,6 +178,8 @@ $(document).ready(function() {
 			success: function(data) {
 				formID = data;
 				hideGif();
+				fillSelect();
+				if ($('#entry').val() != '-New Entry-') showDel();										
 			}
 		});
 	}
@@ -187,6 +198,7 @@ $(document).ready(function() {
 				formData = data;
 				setFieldData(data);
 				hideGif();
+				if ($('#entry').val() != '-New Entry-') showDel();
 			}
 		});		
 	}
@@ -202,13 +214,31 @@ $(document).ready(function() {
 			},
 			dataType: "json",
 			success: function(data) {
-				hideGif();	
+				hideGif();
+				if ($('#entry').val() != '-New Entry-') showDel();
+			}
+		});	
+	}
+	
+	function deleteEntry(index) {
+		hideDel(); showGif();
+		$.ajax({
+			type: "POST",
+			url: "php/weather_process.php",
+			data: { 
+				'action': 'delete',
+				'data': index
+			},
+			dataType: "json",
+			success: function(data) {
+				hideGif();
+				fillSelect();
 			}
 		});	
 	}
 	
 	function fillSelect() {
-		showGif();
+		hideDel(); showGif();
 		$.ajax({
 			type: "POST",
 			url: "php/weather_process.php",
@@ -225,11 +255,9 @@ $(document).ready(function() {
 					if (map[data[o]] == null) {
 						map[data[o]['DateTime']] = data[o]['ID'];
 					}
-					if (map[data[o]] != data[o]['ID']) {
-						map[data[o]['DateTime']] = data[o]['ID'] + " #";
-					}
 					$(document).find('#entry').append("<option>"+data[o]['DateTime']+"</option>");
 					hideGif();
+					if ($('#entry').val() != '-New Entry-') showDel();
 				}
 				updateCurrSelected();
 			}

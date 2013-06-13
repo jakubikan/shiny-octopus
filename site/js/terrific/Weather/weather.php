@@ -11,6 +11,7 @@
 						class="input-medium-xlarge" id="entry" name="entry" tabindex='1'>                            
 						</select>
                         <img id="loadgif" src="../../../../img/animation/ajax-loader.gif"/>
+                        <img id="delEntryIcon" src="../../../../img/animation/delete_icon.gif"/>
 					</div>
                 </div>
             </div>
@@ -58,7 +59,7 @@
 						<input class="input-medium-short weather-form-input" id="temp" type="text" name="temp" tabindex="3" data-validation="temperature"/>
 						<span>°C</span>
 					</div>
-					<span class="help-block fade row-fluid offset3">Please insert a number between -273.15 and 273.15</span>
+					<!--<span class="help-block fade row-fluid offset3">Please insert a number between -273.15 and 273.15</span>-->
 				</div>
 			  <div class="control-group">
 					<label class="control-label">Clouds</label> <select

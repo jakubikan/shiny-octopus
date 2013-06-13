@@ -15,7 +15,7 @@
 						class="input-medium waypt-formelement" type="date" id="wtime" />
 				</div>
 				<div class="control-group">
-					<label class="control-label">Vorsegel</label> <select
+					<label class="control-label">Head sail</label> <select
 						name="vorsegel" id="vorsegel" class="waypt-formelement"></select>
 				</div>
 			</div>
@@ -29,7 +29,7 @@
 						class="input-medium waypt-formelement" type="text" id="lng" />
 				</div>
 				<div class="control-group">
-					<label class="control-label">Fahrt nach</label> <select
+					<label class="control-label">Destination</label> <select
 						name="fahrtziel" id="marker" class="waypt-formelement"></select>
 				</div>
 				<div class="control-group">
@@ -48,7 +48,7 @@
 				</div>
 	
 				<div class="control-group">
-					<label class="control-label">Manoever</label> <select
+					<label class="control-label">Maneuver</label> <select
 						name="manoever" id="manoever" class="waypt-formelement"></select>
 				</div>
 				<div class="control-group">
