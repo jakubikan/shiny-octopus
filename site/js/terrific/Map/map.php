@@ -6,7 +6,10 @@
 				<div id="lat">Latitude</div>
 				<div id="long">Longitude</div>
 			</div>
-			<div id="track"></div>
+			<div id="tracking">
+				<button type="button" id="trackingButton" doTrack="false">Track</button>
+				<div id="track"></div>
+			</div>
 			<div id="map-canvas">
 			</div>
 			<?php include("js/terrific/ContextMenu/contextmenu.php")?>

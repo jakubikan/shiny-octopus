@@ -5,11 +5,24 @@ set_time_limit(0);
 // include the web sockets server script (the server is started at the far bottom of this file)
 require 'class.PHPWebSocket.php';
 
-function wsOnUpdatePosition($clientID)
+function wsOnSendAndUpdatePosition($clientID,$lng){
+	global $Server;
+	$Server->log($lng);
+	sleep(1);
+	$answer = $lng + 0.001;
+	$Server->log($answer);
+	$Server->wsSend($clientID,$answer);
+}
 
 // when a client sends data to the server
 function wsOnMessage($clientID, $message, $messageLength, $binary) {
 	global $Server;
+	$Server->log($message);
+	sleep(1);
+	$answer = $message + 0.001;
+	$Server->log($answer);
+	$Server->wsSend($clientID,$answer);
+	/*
 	$ip = long2ip( $Server->wsClients[$clientID][6] );
 
 	// check if message length is 0
@@ -28,6 +41,8 @@ function wsOnMessage($clientID, $message, $messageLength, $binary) {
 				$Server->wsSend($id, $message);
 			
 		}
+		*/
+
 }
 
 // when a client connects
@@ -62,11 +77,13 @@ function wsOnClose($clientID, $status) {
 
 // start the server
 $Server = new PHPWebSocket();
-$Server->bind('updatePosition', 'wsOnUpdatePosition');
+$Server->bind('message', 'wsOnMessage');
 $Server->bind('open', 'wsOnOpen');
 $Server->bind('close', 'wsOnClose');
 // for other computers to connect, you will probably need to change this to your LAN IP or external IP,
 // alternatively use: gethostbyaddr(gethostbyname($_SERVER['SERVER_NAME']))
+$Server->log( "Listening on 127.0.0.1:9300" );
 $Server->wsStartServer('127.0.0.1', 9300);
+
 
 ?>

@@ -96,7 +96,7 @@
 			maxZoom: 18
 		}));
 
-		Server = new FancyWebSocket('ws://127.0.0.1:9300');
+		self.Server = new FancyWebSocket('ws://127.0.0.1:9300');
 		/*
 
 		*/
@@ -135,19 +135,34 @@
 		google.maps.event.addListener(self.map, 'mousedown', function(event){
 		
 		});
-/*
-		Server.bind('open',function(){
-			$.('#track',self.$ctx).html("Connection to boat server established");
+
+		$('#trackingButton',self.$ctx).bind("click",function(e){
+			doTrackTag = $('#trackingButton',self.$ctx);
+			doTrack = doTrackTag.attr("doTrack");
+			if(doTrack == "false"){
+				self.Server.connect();
+				doTrackTag.html("Stop Tracking");
+				doTrackTag.attr("doTrack",true);
+				self.sendBoatPosition.call(this,self);
+			}else{
+				self.Server.disconnect();
+				doTrackTag.html("Track");
+				doTrackTag.attr("doTrack",false);
+			}
+
 		});
-*/
-		Server.bind('updatePosition',function(lat,lng){
-			self.updateBoatPosition.call(this,self,lat,lng);
+		self.Server.bind('open',function(){
+			$('#track',self.$ctx).html("Connection to boat server established");
 		});
-/*
-		Server.bind('close',function(){
-			$.('#track',self.$ctx).html("Connection to boat server closed");
+
+		self.Server.bind('message',function(lng){
+			self.updateBoatPosition.call(this,self,lng);
 		});
-*/
+
+		self.Server.bind('close',function(){
+			$('#track',self.$ctx).html("Connection to boat server closed");
+		});
+
 
 		/*
 		google.maps.event.addListener(self.map, 'longpress', function(event){
@@ -158,8 +173,17 @@
 	
     },
 
-    updateBoatPosition : function(self,lat,lng){
+    sendBoatPosition : function(self){
+    	latlng = self.map.getCenter();
+    	self.Server.send( 'message','test' );
+    },
 
+    updateBoatPosition : function(self,lng){
+    	center = self.map.getCenter();
+    	center.lng = lng;
+    	self.map.setCenter(center);
+    	self.drawNewMarkerAt.call(self,center);
+    	self.sendBoatPosition.call(self);
     },
 
     connectToBoatServer : function(mapModule){
