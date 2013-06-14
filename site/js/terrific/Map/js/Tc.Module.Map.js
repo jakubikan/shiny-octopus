@@ -236,11 +236,7 @@
     			event.pixel = projection.fromLatLngToContainerPixel(event.latLng);
     			radPosition = this.getPosition();
     			position = self.convertDMS(radPosition.lat(),radPosition.lng());
-    			//self.loadContextMenu.call(this,self,event);*/	
-    			//self.removeMarker.call(this,self);
-    			//self.drawRoute.call(this,self);
-    			//self.distanceToCrosshair.call(this,self);			
-    			self.fire('contextRequest',{event:event,obj:self,koords:position},function(){}); //REFAK: CROSS
+    			self.fire('contextRequest',{event:event,obj:self,koords:position},["crossmenu"],function(){}); //REFAK: CROSS
 			});
 			google.maps.event.addListener(self.crosshair, 'drag', function(event){
 				degLatLngs = self.crosshair.getPosition();
@@ -283,7 +279,7 @@
 			//self.removeMarker.call(this,self);
 			//self.drawRoute.call(this,self);
 			//self.distanceToCrosshair.call(this,self);			
-			self.fire('contextRequest',{event:event,obj:this,koords:position},function(){}); //REFAK: MARKER
+			self.fire('contextRequest',{event:event,obj:this,koords:position}, ["markermenu"],function(){}); //REFAK: MARKER
 		});
 
 		self.markers.push(marker);
@@ -325,7 +321,7 @@
 				//Ich muss dieses gesamte modul Mitgeben damit ich nach dem Klicken auf ein Kontext eintrag
 				//inner halb eines terrific events zugriff auf die Funktionen hier kriege
 				obj = {route:this,self:self};
-				self.fire('contextRequest',{event:event,obj:obj,koords:position},function(){}); //REFAK: ROUTE
+				self.fire('contextRequest',{event:event,obj:obj,koords:position},["routemenu"],function(){}); //REFAK: ROUTE
 			});
 			/*
 			google.maps.event.addListener(route, 'dblclick', function(event){
