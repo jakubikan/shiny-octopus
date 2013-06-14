@@ -1,4 +1,4 @@
-<div class="mod mod-map" data-connectors="1">
+<div class="mod mod-map" data-connectors="crossmenu,markermenu,routemenu">
 	<div class="row-fluid">
 		<div class="span2"></div>
 		<div class="span9" >
@@ -9,7 +9,10 @@
 			<div id="track"></div>
 			<div id="map-canvas">
 			</div>
-			<?php include("js/terrific/ContextMenu/contextmenu.php")?>
+			<?php include("js/terrific/ContextMenuCross/contextmenu.php")?>
+			<?php include("js/terrific/ContextMenuCross/contextmenucross.php")?>
+			<?php include("js/terrific/ContextMenuMarker/contextmenumarker.php")?>
+			<?php include("js/terrific/ContextMenuRoute/contextmenuroute.php")?>
 			<div id="CrossHair">
 				FadenKreuz
 				<div id="crossLat">fga</div>
