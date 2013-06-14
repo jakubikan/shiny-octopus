@@ -9,6 +9,7 @@
 			var self = this;
 			$("[data-id='cross-marker-switch']",self.$ctx).bind("click",function(e) {
 				self.fire("switchCrossToMarker",self.currentWorkingObject,function(){});		
+				e.stopImmediatePropagation();
 				self.closeContextMenu.call(this,self);	
 				
 			});

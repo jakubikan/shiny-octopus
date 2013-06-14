@@ -9,7 +9,6 @@
 			<div id="track"></div>
 			<div id="map-canvas">
 			</div>
-			<?php include("js/terrific/ContextMenuCross/contextmenu.php")?>
 			<?php include("js/terrific/ContextMenuCross/contextmenucross.php")?>
 			<?php include("js/terrific/ContextMenuMarker/contextmenumarker.php")?>
 			<?php include("js/terrific/ContextMenuRoute/contextmenuroute.php")?>

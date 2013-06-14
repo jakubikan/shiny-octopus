@@ -1,4 +1,5 @@
-<div class="mod mod-context-menu-route" data-connectors="routemenu" data-lng="" data-lat="">
+<div class="mod mod-context-menu-route" data-connectors="routemenu,context" data-lng="" data-lat="">
+	<a class="dropdown-toggle hide" data-toggle="dropdown" href="#">Dropdown trigger</a>
 	<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
 		<li class="disabled">
 			<a tabindex="-1" href="#">

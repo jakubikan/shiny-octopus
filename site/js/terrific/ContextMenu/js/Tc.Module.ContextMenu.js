@@ -7,10 +7,14 @@
 		},
 		after : function() {
 		},
+		
+		onCloseContextMenu: function() {
+			var self = this;
+			self.closeContextMenu.call(this, self);
+		},
 
 		closeContextMenu : function(self){
-			$('.dropdown-menu', self.$ctx).addClass("hide");
-			$(".dropdown-menu", self.$ctx).toggleClass("open",false);
+			$(".dropdown-menu", self.$ctx).parent().removeClass("open")
 
 		},
 
@@ -18,13 +22,13 @@
 			var self = this;
 			console.log("Context requested");
 			
+			self.fire("closeContextMenu", null, ["context"], function(){});
+			
 			self.currentWorkingObject = event.obj;
 			
 			map = event.obj.map;
 			canvas = map.getDiv();
 			position = $(canvas).position();
-
-			$(".dropdown-menu", self.$ctx).removeClass("hide");
 			$(".dropdown-menu", self.$ctx).dropdown("toggle");
 			$(".dropdown-menu", self.$ctx).css({
 				display : "visible",
