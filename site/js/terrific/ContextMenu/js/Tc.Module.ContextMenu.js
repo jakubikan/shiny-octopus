@@ -1,6 +1,6 @@
 (function($) {
 	Tc.Module.ContextMenu = Tc.Module.extend({
-		currentMarker:null, //REFAK: MARKER
+		currentWorkingObject:null, 
 		on : function(callback) {
 			var self = this;
 			self.sandbox.subscribe(1, self);
@@ -18,9 +18,9 @@
 				$.extend(e, {latLng: new google.maps.LatLng(lat, lng) })
 				self.addMarker.call(this, self, e);
 				*/
-				self.fire("removeMarker",self.currentMarker,function(){});
+				self.fire("removeMarker",self.currentWorkingObject,function(){});
 				
-				$('.dropdown-menu', self.$ctx).addClass("fade");
+				self.closeContextMenu.call(this,self);
 				
 				
 				
@@ -32,9 +32,9 @@
 				
 				$.extend(e, {latLng: new google.maps.LatLng(lat, lng) })
 				*/
-				self.fire("calculateDistance",self.currentMarker,function(){});
+				self.fire("calculateDistance",self.currentWorkingObject,function(){});
 				
-				$('.dropdown-menu', self.$ctx).addClass("fade");
+				self.closeContextMenu.call(this,self);
 				
 				
 				
@@ -47,19 +47,39 @@
 				$.extend(e, {latLng: new google.maps.LatLng(lat, lng) })
 				*/
 				self.fire("makeRoute",null,function(){});
-				$('.dropdown-menu', self.$ctx).addClass("fade");			
+				self.closeContextMenu.call(this,self);			
 			});
 			//REFAK: MARKER END
 			//REFAK: ROUTE
 			$("[data-id='remove-route']",self.$ctx).bind("click",function(e) {
 
-				self.fire("makeRoute",null,function(){});
-				$('.dropdown-menu', self.$ctx).addClass("fade");				
+				self.fire("removeRoute",self.currentWorkingObject,function(){});	
+				self.closeContextMenu.call(this,self);		
+				
+			});
+			$("[data-id='route-marker-switch']",self.$ctx).bind("click",function(e) {
+
+				self.fire("switchRouteToMarkers",self.currentWorkingObject,function(){});		
+				self.closeContextMenu.call(this,self);	
 				
 			});
 			//REFAK: ROUTE END
+			//REFAK: CROSS
+			$("[data-id='cross-marker-switch']",self.$ctx).bind("click",function(e) {
+
+				self.fire("switchCrossToMarker",self.currentWorkingObject,function(){});		
+				self.closeContextMenu.call(this,self);	
+				
+			});
+			//REFAK: CROSS END
 			
 			
+
+		},
+
+		closeContextMenu : function(self){
+			$('.dropdown-menu', self.$ctx).addClass("fade");
+			$(".dropdown-menu", self.$ctx).toggleClass("open",false);
 
 		},
 
@@ -67,7 +87,7 @@
 			var self = this;
 			console.log("Context requested");
 			
-			self.currentMarker = event.marker;
+			self.currentWorkingObject = event.obj;
 
 			$(".dropdown-menu", self.$ctx).removeClass("fade");
 			$(".dropdown-menu", self.$ctx).dropdown("toggle");

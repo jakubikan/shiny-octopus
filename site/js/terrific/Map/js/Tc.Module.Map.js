@@ -208,9 +208,15 @@
 			});
 
     		google.maps.event.addListener(self.crosshair, 'rightclick', function(event){
-    			self.setMarkerDrawRoute.call(this,self,event);
-    			self.crosshair.setMap(null);
-    			self.crosshair = null;
+    			projection = self.overlay.getProjection();
+    			event.pixel = projection.fromLatLngToContainerPixel(event.latLng);
+    			radPosition = this.getPosition();
+    			position = self.convertDMS(radPosition.lat(),radPosition.lng());
+    			//self.loadContextMenu.call(this,self,event);*/	
+    			//self.removeMarker.call(this,self);
+    			//self.drawRoute.call(this,self);
+    			//self.distanceToCrosshair.call(this,self);			
+    			self.fire('contextRequest',{event:event,obj:self,koords:position},function(){}); //REFAK: CROSS
 			});
 			google.maps.event.addListener(self.crosshair, 'drag', function(event){
 				degLatLngs = self.crosshair.getPosition();
@@ -222,7 +228,13 @@
     		self.setMarkerDrawRoute.call(this,self,event);
     	}
     },
-    
+
+    onSwitchCrossToMarker : function(self){
+    	self.drawNewMarkerAt.call(self,this.crosshair.getPosition());
+    	this.crosshair.setMap(null);
+    	this.crosshair = null;
+    },
+
     loadContextMenu : function(self, event) {
     	self.fire('lngLatChanged',  event, function() { });
     	self.fire('contextRequest',  event, function() { });
@@ -246,8 +258,8 @@
 			//self.loadContextMenu.call(this,self,event);*/	
 			//self.removeMarker.call(this,self);
 			//self.drawRoute.call(this,self);
-			//self.distanceToCrosshair.call(this,self);
-			self.fire('contextRequest',{event:event,marker:this,koords:position},function(){});
+			//self.distanceToCrosshair.call(this,self);			
+			self.fire('contextRequest',{event:event,obj:this,koords:position},function(){}); //REFAK: MARKER
 		});
 
 		self.markers.push(marker);
@@ -266,6 +278,7 @@
     	$("#distanceToCrosshair",this.$ctx).html(distance.toFixed(2)+ " Meter");
     },
     onMakeRoute : function(){
+    	var self = this;
     	if(this.markers.length > 1){
     		points = [];
     		for (var i = 0; i < this.markers.length; i++) {
@@ -281,10 +294,16 @@
 				editable: true
 			});	
 			google.maps.event.addListener(route, 'rightclick', function(event){
-				this.setMap(null);
-				idx = this.routes.indexOf(this);
-				this.routes.splice(idx,1);
+				projection = self.overlay.getProjection();
+				event.pixel = projection.fromLatLngToContainerPixel(event.latLng);
+				radPosition = this.getPath().getAt(1);
+				position = self.convertDMS(radPosition.lat(),radPosition.lng());
+				//Ich muss dieses gesamte modul Mitgeben damit ich nach dem Klicken auf ein Kontext eintrag
+				//inner halb eines terrific events zugriff auf die Funktionen hier kriege
+				obj = {route:this,self:self};
+				self.fire('contextRequest',{event:event,obj:obj,koords:position},function(){}); //REFAK: ROUTE
 			});
+			/*
 			google.maps.event.addListener(route, 'dblclick', function(event){
 				this.setMap(null);
 				this.getPath().forEach(function(item, index){
@@ -292,12 +311,26 @@
 				});
 
 			});
+*/
 			route.setMap(this.map);
 			this.routes.push(route);
 			this.markers=[];
 
 
     	}
+    },
+
+    onSwitchRouteToMarkers : function(obj){
+    	obj.route.getPath().forEach(function(item, index){
+    		obj.self.drawNewMarkerAt.call(obj.self,item);
+    	});
+    	obj.self.onRemoveRoute.call(obj.self,route);
+    },
+
+    onRemoveRoute : function(route){
+    	route.setMap(null);
+    	idx = this.routes.indexOf(route);
+    	this.routes.splice(idx,1);
     },
 
     onRemoveMarker : function(marker){

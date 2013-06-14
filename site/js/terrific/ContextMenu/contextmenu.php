@@ -5,7 +5,7 @@
 				<span class="nav-header" data-id="position">Position</span>
 			</a>
 		</li>
-		<!--REFAKT MARKER-->
+		<!--REFAK: MARKER-->
 		<li >
 			<a tabindex="-1" href="#" data-id="remove-marker">
 				<i class="icon-flag"></i>
@@ -24,8 +24,8 @@
 				<span>Abstand zum Fadenkreuz</span>
 			</a>
 		</li>
-		<!--REFAKT: MARKER END-->
-		<!--REFAKT: ROUTE-->
+		<!--REFAK: MARKER END-->
+		<!--REFAK: ROUTE-->
 		<li >
 			<a tabindex="-1" href="#" data-id="remove-route">
 				<i class="icon-flag"></i>
@@ -33,19 +33,19 @@
 			</a>
 		</li>
 		<li>
-			<a tabindex="-1" href="#" data-id="make-marker">
+			<a tabindex="-1" href="#" data-id="route-marker-switch">
 				<i class="icon-resize-full"></i>
 				<span>Erstelle Marker aus Route</span>
 			</a>
 		</li>
-		<!--REFAKT: ROUTE END-->		
-		<!--REFAKT: CROSS-->
+		<!--REFAK: ROUTE END-->		
+		<!--REFAK: CROSS-->
 		<li >
-			<a tabindex="-1" href="#" data-id="marker-switch">
+			<a tabindex="-1" href="#" data-id="cross-marker-switch">
 				<i class="icon-flag"></i>
 				<span>Ändere zu Marker</span>
 			</a>
 		</li>
-		<!--REFAKT: CROSS END-->
+		<!--REFAK: CROSS END-->
 	</ul>
 </div>
