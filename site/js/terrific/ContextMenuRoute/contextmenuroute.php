@@ -1,4 +1,4 @@
-<div class="mod mod-context-menu-route" data-connectors="1" data-lng="" data-lat="">
+<div class="mod mod-context-menu-route" data-connectors="routemenu" data-lng="" data-lat="">
 	<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
 		<li class="disabled">
 			<a tabindex="-1" href="#">
