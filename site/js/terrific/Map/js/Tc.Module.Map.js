@@ -320,7 +320,7 @@
 				position = self.convertDMS(radPosition.lat(),radPosition.lng());
 				//Ich muss dieses gesamte modul Mitgeben damit ich nach dem Klicken auf ein Kontext eintrag
 				//inner halb eines terrific events zugriff auf die Funktionen hier kriege
-				obj = {route:this,self:self};
+				obj = {route:this,self:self,map:self.map};
 				self.fire('contextRequest',{event:event,obj:obj,koords:position},["routemenu"],function(){}); //REFAK: ROUTE
 			});
 			/*
@@ -344,12 +344,12 @@
     	obj.route.getPath().forEach(function(item, index){
     		obj.self.drawNewMarkerAt.call(obj.self,item);
     	});
-    	obj.self.onRemoveRoute.call(obj.self,route);
+    	obj.self.onRemoveRoute.call(obj.self,obj);
     },
 
-    onRemoveRoute : function(route){
-    	route.setMap(null);
-    	idx = this.routes.indexOf(route);
+    onRemoveRoute : function(obj){
+    	obj.route.setMap(null);
+    	idx = this.routes.indexOf(obj.route);
     	this.routes.splice(idx,1);
     },
 
