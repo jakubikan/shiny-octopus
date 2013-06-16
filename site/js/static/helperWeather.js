@@ -8,7 +8,7 @@ $(document).ready(function() {
 	$('#delEntryIcon').height($('#entry').height());
 	hideDel();
 	fillSelect();
-
+/*
     $('a[href^="#"]').bind('click.smoothscroll',function (e) {
         e.preventDefault();
       
@@ -21,7 +21,7 @@ $(document).ready(function() {
         });
 		
     });	
-		
+*/		
 	function showGif() { $('#loadgif').show(); }
 	
 	function hideGif() { $('#loadgif').hide(); }

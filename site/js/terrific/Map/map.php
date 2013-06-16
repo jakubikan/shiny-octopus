@@ -1,4 +1,4 @@
-<div class="mod mod-map" data-connectors="1">
+<div class="mod mod-map" data-connectors="crossmenu,markermenu,routemenu">
 	<div class="row-fluid well">
 		<div class="span9" >
         	<div class="control-group">
@@ -8,9 +8,16 @@
                     <button id="weatherBtn">Click for current weather data</button>
                 </div>
            	</div>
+			<!-- Tracking will einfach nich
+			<div id="tracking">
+				<button type="button" id="trackingButton" doTrack="false">Track</button>
+				<div id="track"></div>
+			</div>-->
 			<div id="map-canvas">
 			</div>
-			<?php include("js/terrific/ContextMenu/contextmenu.php")?>
+			<?php include("js/terrific/ContextMenuCross/contextmenucross.php")?>
+			<?php include("js/terrific/ContextMenuMarker/contextmenumarker.php")?>
+			<?php include("js/terrific/ContextMenuRoute/contextmenuroute.php")?>
 			<div id="CrossHair">
 				FadenKreuz
 				<div id="crossLat">fga</div>
