@@ -10,7 +10,9 @@
 	map : null,
 	overlay: null,
 	longClickStoped: false,
-	//var mapTypeIds = ["ROADMAP","SATELLITE","OSM"];
+	doTrack: true,
+	Server: null,
+	
 	mapOptions : {
 		disableDoubleClickZoom: true,
 		center: new google.maps.LatLng(47.667272, 9.171036),
@@ -93,7 +95,8 @@
 			name: "Wind",
 			maxZoom: 18
 		}));
-		
+
+		self.Server = new FancyWebSocket('ws://127.0.0.1:9300');
 		/*
 
 		*/
@@ -124,6 +127,8 @@
 		google.maps.event.addListener(self.map, 'click', function(event){
 			//self.onMapClick.call(this, self, event);
 	    	//self.fire('lngLatChanged',  event, function() { });
+
+			self.connectToBoatServer.call(this,self,47.667272, 9.171036);
 		});
 		
 		
@@ -144,14 +149,86 @@
 			});	
 		});
 		
+		$('#trackingButton',self.$ctx).bind("click",function(e){
+			doTrackTag = $('#trackingButton',self.$ctx);
+			doTrack = doTrackTag.attr("doTrack");
+			if(doTrack == "false"){
+				self.Server.connect();
+				doTrackTag.html("Stop Tracking");
+				doTrackTag.attr("doTrack",true);
+				self.sendBoatPosition.call(this,self);
+			}else{
+				self.Server.disconnect();
+				doTrackTag.html("Track");
+				doTrackTag.attr("doTrack",false);
+			}
+
+		});
+		self.Server.bind('open',function(){
+			$('#track',self.$ctx).html("Connection to boat server established");
+		});
+
+		self.Server.bind('message',function(lng){
+			self.updateBoatPosition.call(this,self,lng);
+		});
+
+		self.Server.bind('close',function(){
+			$('#track',self.$ctx).html("Connection to boat server closed");
+		});
+
+
 		/*
 		google.maps.event.addListener(self.map, 'longpress', function(event){
 			self.loadContextMenu.call(this,self,event);
 		});
 		*/
-		
 
 	
+    },
+
+    sendBoatPosition : function(self){
+    	latlng = self.map.getCenter();
+    	self.Server.send( 'message','test' );
+    },
+
+    updateBoatPosition : function(self,lng){
+    	center = self.map.getCenter();
+    	center.lng = lng;
+    	self.map.setCenter(center);
+    	self.drawNewMarkerAt.call(self,center);
+    	self.sendBoatPosition.call(self);
+    },
+
+    connectToBoatServer : function(mapModule){
+    	center = mapModule.map.getCenter();
+    	lat = center.lat();
+    	lng = center.lng();
+    	$.ajax({
+    	  type : 'get',
+    	  url : './js/terrific/Map/cometServer.php',
+    	  dataType : 'json', 
+    	  data : {
+    	  	'lat' : lat,
+    		'lng' : lng
+    	  },
+    	  success : function(response) {
+    	  	if(mapModule.doTrack){
+    	  		newCenter = google.maps.LatLng(response.lat,response.lng);
+    	  		mapModule.map.setCenter(newCenter);
+    	  	};	  	
+    	  },
+    	  complete : function(response) {
+    	    // send a new ajax request when this request is finished
+    	    if (!self.noerror) {
+    	      // if a connection problem occurs, try to reconnect each 5 seconds
+    	      setTimeout(function(){ mapModule.connectToBoatServer.call(this,mapModule); }, 5000);           
+    	    }else {
+    	      // persistent connection
+    	      mapModule.connectToBoatServer,call(this,mapModule);
+    	    }
+    	    noerror = false; 
+    	  }
+    	});
     },
 
     drawCrosshairOrMarker : function(self, event){
@@ -168,9 +245,11 @@
 			});
 
     		google.maps.event.addListener(self.crosshair, 'rightclick', function(event){
-    			self.setMarkerDrawRoute.call(this,self,event);
-    			self.crosshair.setMap(null);
-    			self.crosshair = null;
+    			projection = self.overlay.getProjection();
+    			event.pixel = projection.fromLatLngToContainerPixel(event.latLng);
+    			radPosition = this.getPosition();
+    			position = self.convertDMS(radPosition.lat(),radPosition.lng());
+    			self.fire('contextRequest',{event:event,obj:self,koords:position},["crossmenu"],function(){}); //REFAK: CROSS
 			});
 			google.maps.event.addListener(self.crosshair, 'drag', function(event){
 				degLatLngs = self.crosshair.getPosition();
@@ -182,11 +261,16 @@
     		self.setMarkerDrawRoute.call(this,self,event);
     	}
     },
-    
+
+    onSwitchCrossToMarker : function(self){
+    	self.drawNewMarkerAt.call(self,this.crosshair.getPosition());
+    	this.crosshair.setMap(null);
+    	this.crosshair = null;
+    },
+
     loadContextMenu : function(self, event) {
     	self.fire('lngLatChanged',  event, function() { });
     	self.fire('contextRequest',  event, function() { });
-    	
     },
     
     drawNewMarkerAt : function (latLng) {
@@ -199,13 +283,16 @@
 		});				
 
 		google.maps.event.addListener(marker, 'rightclick', function(event){
-			/*
+			
 			projection = self.overlay.getProjection();
 			event.pixel = projection.fromLatLngToContainerPixel(event.latLng);
-			self.loadContextMenu.call(this,self,event);*/	
+			radPosition = this.getPosition();
+			position = self.convertDMS(radPosition.lat(),radPosition.lng());
+			//self.loadContextMenu.call(this,self,event);*/	
 			//self.removeMarker.call(this,self);
 			//self.drawRoute.call(this,self);
-			self.distanceToCrosshair.call(this,self);
+			//self.distanceToCrosshair.call(this,self);			
+			self.fire('contextRequest',{event:event,obj:this,koords:position}, ["markermenu"],function(){}); //REFAK: MARKER
 		});
 
 		self.markers.push(marker);
@@ -217,18 +304,19 @@
 		
 		return marker;
     },
-    distanceToCrosshair : function(self){
-    	if(self.crosshair ==null)
+    onCalculateDistance : function(marker){
+    	if(this.crosshair ==null)
     		return;
-    	var distance = google.maps.geometry.spherical.computeDistanceBetween (self.crosshair.getPosition(), this.getPosition());
-    	$("#distanceToCrosshair",self.$ctx).html(distance.toFixed(2)+ " Meter");
+    	distance = google.maps.geometry.spherical.computeDistanceBetween (this.crosshair.getPosition(), marker.getPosition());
+    	$("#distanceToCrosshair",this.$ctx).html(distance.toFixed(2)+ " Meter");
     },
-    drawRoute : function(self){
-    	if(self.markers.length > 1){
+    onMakeRoute : function(){
+    	var self = this;
+    	if(this.markers.length > 1){
     		points = [];
-    		for (var i = 0; i < self.markers.length; i++) {
-    			points.push(self.markers[i].getPosition());
-    			self.markers[i].setMap(null);
+    		for (var i = 0; i < this.markers.length; i++) {
+    			points.push(this.markers[i].getPosition());
+    			this.markers[i].setMap(null);
     		};
     		route = new google.maps.Polyline({
 				path: points,
@@ -239,29 +327,49 @@
 				editable: true
 			});	
 			google.maps.event.addListener(route, 'rightclick', function(event){
-				this.setMap(null);
-				idx = self.routes.indexOf(this);
-				self.routes.splice(idx,1);
+				projection = self.overlay.getProjection();
+				event.pixel = projection.fromLatLngToContainerPixel(event.latLng);
+				radPosition = this.getPath().getAt(1);
+				position = self.convertDMS(radPosition.lat(),radPosition.lng());
+				//Ich muss dieses gesamte modul Mitgeben damit ich nach dem Klicken auf ein Kontext eintrag
+				//inner halb eines terrific events zugriff auf die Funktionen hier kriege
+				obj = {route:this,self:self,map:self.map};
+				self.fire('contextRequest',{event:event,obj:obj,koords:position},["routemenu"],function(){}); //REFAK: ROUTE
 			});
+			/*
 			google.maps.event.addListener(route, 'dblclick', function(event){
 				this.setMap(null);
 				this.getPath().forEach(function(item, index){
-					self.drawNewMarkerAt(item);
+					this.drawNewMarkerAt(item);
 				});
 
 			});
-			route.setMap(self.map);
-			self.routes.push(route);
-			self.markers=[];
+*/
+			route.setMap(this.map);
+			this.routes.push(route);
+			this.markers=[];
 
 
     	}
     },
 
-    removeMarker : function(self){
-    		this.setMap(null);
-			index = self.markers.indexOf(this);
-			self.markers.splice(index,1);
+    onSwitchRouteToMarkers : function(obj){
+    	obj.route.getPath().forEach(function(item, index){
+    		obj.self.drawNewMarkerAt.call(obj.self,item);
+    	});
+    	obj.self.onRemoveRoute.call(obj.self,obj);
+    },
+
+    onRemoveRoute : function(obj){
+    	obj.route.setMap(null);
+    	idx = this.routes.indexOf(obj.route);
+    	this.routes.splice(idx,1);
+    },
+
+    onRemoveMarker : function(marker){
+    		marker.setMap(null);
+			index = this.markers.indexOf(marker);
+			this.markers.splice(index,1);
     },
     
     onMarkerAdd : function(event) {
