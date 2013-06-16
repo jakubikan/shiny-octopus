@@ -96,7 +96,7 @@
 														 	Rain='".$data['rain']."',
 														 	WaveHeight=".$data['waveheight'].",
 														 	WaveDirection='".$data['wavedirection']."',
-															DateTime='".$data['datetime']."',
+															DateTime='".$data['dateandtime']."' 
 														 	WHERE ID = ".$data['ID'].";";
 																									
 				$result = mysql_query($sql);																		

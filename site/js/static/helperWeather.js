@@ -5,6 +5,7 @@ $(document).ready(function() {
 	var waypointForm;		// true if the requests have to be sent to waypoint-process.php, 
 							// false if they will be sent to weather-process.php
 	var map = {};
+	var firstWeatherFetch = true;
 
 	if ( $("#lat").length > 0 && $('#lng').length > 0) waypointForm = true;
  	else waypointForm = false;
@@ -116,6 +117,7 @@ $(document).ready(function() {
 		clearFields();
 		formID = null;
 		$('#entry').value = '-New Entry-';
+		firstWeatherFetch = true;
 	}
 	
 	function updateCurrSelected() {
@@ -127,8 +129,8 @@ $(document).ready(function() {
 	$('.form-input').keyup(function(e) { 
 	
 		if (e.keyCode == 13 || e.keyCode == 9) { //Enter or TAB is pressed.
-			var inputs = $(document).find('input');
-			var selects = $(document).find('select');
+			var inputs = $(document).find('.form-input');
+			var selects = $(document).find('.form-select');
 			if (waypointForm) {
 			formData={// weather data
 					  ID: formID,													
@@ -184,7 +186,35 @@ $(document).ready(function() {
 				sendWeatherForm(formData);
 				fillSelect();
 			}
-			else updateSentData(formData);
+			else {
+				// Create regexes for check of lat, lng and date&time to fetch weather data from openweathermap.
+				var dblTester = new RegExp("(\\d+)(\\.)(\\d+)", ["i"]);
+				var re1='((?:Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday|Tues|Thur|Thurs|Sun|Mon|Tue|Wed|Thu|Fri|Sat))';	// Day Of Week 1
+				var re2='(,)';	// Any Single Character 1
+				var re3='.*?';	// Non-greedy match on filler
+				var re4='((?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?|Sept|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?))';	// Month 1
+				var re5='(\\s+)';	// White Space 1
+				var re6='((?:(?:[0-2]?\\d{1})|(?:[3][01]{1})))(?![\\d])';	// Day 1
+				var re7='(\\s+)';	// White Space 2
+				var re8='((?:(?:[1]{1}\\d{1}\\d{1}\\d{1})|(?:[2]{1}\\d{3})))(?![\\d])';	// Year 1
+				var re9='(,)';	// Any Single Character 2
+				var re10='(\\s+)';	// White Space 3
+				var re11='((?:(?:[0-1][0-9])|(?:[2][0-3])|(?:[0-9])):(?:[0-5][0-9])(?::[0-5][0-9])?(?:\\s?(?:am|AM|pm|PM))?)';	// HourMinuteSec 1
+				
+				var dateTimeTester = new RegExp(re1+re2+re3+re4+re5+re6+re7+re8+re9+re10+re11,["i"]);
+				console.log(dblTester.exec($('#lat').val()));
+				console.log(dblTester.exec($('#lng').val()));
+				console.log(dateTimeTester.exec($('#trackDateTime').val()));
+				if (firstWeatherFetch &&
+					dblTester.exec($('#lat').val()) != null &&
+					dblTester.exec($('#lng').val()) != null &&
+					dateTimeTester.exec($('#trackDateTime').val()) != null) {
+					data={lat: $('#lat').val(),
+						  lng: $('#lng').val(),
+						  date: $('#trackDateTime').val()};
+					fetchWeatherFromSite(data);
+				} else updateSentData(formData);
+			}
 			if (e.keyCode == 13) { //Enter is pressed.
 				clearAll();
 			}			
@@ -248,7 +278,7 @@ $(document).ready(function() {
 					  					
 			// send 
 			if (formID == null) sendWeatherForm(formData);
-			else updateSentData(formData);
+			else updateSentData(formData);	
 			if (e.keyCode == 13) { //Enter is pressed.
 				clearAll();
 			}
@@ -363,7 +393,83 @@ $(document).ready(function() {
 				}
 				updateCurrSelected();
 			}
-		});
-		
+		});		
+	}
+	
+	function fetchWeatherFromSite(data){		
+		console.log("http://openweathermap.org/data/2.1/find/city?lat="+data['lat']+"&lon="+data['lng']+"&cnt=1");
+		$.ajax({
+			type: "POST",
+			url: "http://openweathermap.org/data/2.1/find/city?lat="+data['lat']+"&lon="+data['lng']+"&cnt=1", 
+			dataType: "jsonp",
+			success: function(data) {
+				if (data['cod'] == 200) {
+					formData[11] = data['list'][0]['wind']['speed'];
+					formData[12] = getDirectionFromDegrees(data['list'][0]['wind']['deg']);
+					formData[13] = data['list'][0]['main']['pressure'];
+					formData[14] = data['list'][0]['main']['temp'] - 273.15;
+					formData[15] = getCloudiness(data['list'][0]['clouds']['all']);
+					formData[16] = getRainByCode(data['list'][0]['weather'][0]['id']);
+					setFieldData(formData);
+					updateSentData(formData);
+				}
+			}
+	    });
+	}
+	
+	function getDirectionFromDegrees(degrees) {
+		if (degrees > 337.5 && degrees <= 359.9 || degrees >= 0 && degrees <= 22.5) return "North";
+		else if (degrees > 22.5 && degrees <= 67.5)  return "North-East";
+		else if (degrees > 67.5 && degrees <= 112.5) return "East";
+		else if (degrees > 112.5 && degrees <= 157.5) return "South-East";
+		else if (degrees > 157.5 && degrees <= 202.5) return "South";
+		else if (degrees > 205.5 && degrees <= 247.5) return "South-West";
+		else if (degrees > 247.5 && degrees <= 292.5) return "West";
+		else if (degrees > 292.5 && degrees <= 337.5) return "North-West";
+		else return "-Please select-";
+	}
+	
+	function getCloudiness(percentage) {
+		if (percentage < 20) return "Sunny";
+		else if (percentage < 40) return "Partly Cloudy";
+		else if (percentage < 60) return "Cloudy";
+		else if (percentage < 80) return "Rain";
+		else if (percentage < 90) return "Snow";
+		else if (percentage < 100) return "Thunder / Storm";
+		else return "-Please select-";
+	}
+	
+	function getRainByCode(code){
+		switch(code) {
+			case 300:
+			case 301:	
+			case 302:
+				return "0 - 2 mm/sqm";
+				break;
+			case 310: 
+			case 311:
+			case 312:
+				return "2 - 4 mm/sqm";
+				break;
+			case 500:
+			case 321:
+				return "4 - 8 mm/sqm";
+				break;
+			case 501:
+			case 502:
+			case 503:
+				return "8 - 15 mm/sqm";
+				break;
+			case 504:
+			case 511:
+			case 520:
+				return "15 - 25 mm/sqm";
+				break;
+			case 521:
+			case 522:
+				return ">25 mm/sqm";
+				break;
+			default: return "-Please select-";
+		}		
 	}
 });

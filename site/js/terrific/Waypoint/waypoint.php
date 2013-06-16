@@ -102,12 +102,12 @@
             <div class="row well">
                 <div class="span4">
                     <div class="control-group">
-                        <div class="row-fluid"> 
+                      <div class="row-fluid"> 
                             <label class="control-label">Wind Strength</label> 
                             <input id="windStrength" class="input-medium-short form-input"  type="number"
                                 name="windStrength" autofocus tabindex="11" data-validation="windstrength" />
-                            <span>knots</span>
-                        </div>
+                          m/s
+                      </div>
                         <span class="help-block fade row-fluid offset3">Please insert a number</span>
                     </div>
                     <div class="control-group">
