@@ -22,7 +22,7 @@
                     <div class="control-group">
                         <div class="row-fluid"> 
                             <label class="control-label">Wind Strength</label> 
-                            <input id="windStrength" class="input-medium-short weather-form-input"  type="number"
+                            <input id="windStrength" class="input-medium-short form-input"  type="number"
                                 name="windStrength" autofocus tabindex="2" data-validation="windstrength" />
                             <span>knots</span>
                         </div>
@@ -31,7 +31,7 @@
                     <div class="control-group">
                         <label class="control-label">Wind Direction</label> 
                         <select
-                            class="input-medium weather-form-select" id="windDirection" name="windDirection" tabindex='5'>
+                            class="input-medium form-select" id="windDirection" name="windDirection" tabindex='5'>
                             <option selected>-Please select-</option>
                             <option>North</option>
                             <option>North-East</option>
@@ -46,7 +46,7 @@
                     <div class="control-group">
                         <div class="row-fluid">
                             <label class="control-label">Air Pressure</label> 
-                            <input class="input-medium-short weather-form-input" type="number" id="airPressure"
+                            <input class="input-medium-short form-input" type="number" id="airPressure"
                                 name="airPressure" tabindex='8' data-validation="airpreasure" />
                             <span>hPa</span>
                         </div>
@@ -57,14 +57,14 @@
                     <div class="control-group">
                         <div class="row-fluid">
                             <label class="control-label">Temperature</label> 
-                            <input class="input-medium-short weather-form-input" id="temp" type="text" name="temp" tabindex="3" data-validation="temperature"/>
+                            <input class="input-medium-short form-input" id="temp" type="text" name="temp" tabindex="3" data-validation="temperature"/>
                             <span>°C</span>
                         </div>
                         <!--<span class="help-block fade row-fluid offset3">Please insert a number between -273.15 and 273.15</span>-->
                     </div>
                   <div class="control-group">
                         <label class="control-label">Clouds</label> <select
-                            class="input-medium high-select weather-form-select" id="clouds" name="clouds" tabindex='6'>
+                            class="input-medium high-select form-select" id="clouds" name="clouds" tabindex='6'>
                             <option selected>-Please select-</option>
                             <option id="select-sunny">Sunny</option>
                             <option id="select-partlycloudy">Partly cloudy</option>
@@ -76,7 +76,7 @@
                     </div>
                   <div class="control-group">
                         <label class="control-label">Rain</label> <select
-                            class="input-medium weather-form-select" name="rain" id="rain" tabindex='9'>
+                            class="input-medium form-select" name="rain" id="rain" tabindex='9'>
                             <option selected>-Please select-</option>
                             <option>0 - 2 mm/sqm</option>
                             <option>2 - 4 mm/sqm</option>
@@ -91,7 +91,7 @@
                     <div class="control-group">
                         <div class="row-fluid">
                             <label class="control-label">Wave Height</label> 
-                            <input class="input-medium-short weather-form-input" type="text" id="waveHeight"
+                            <input class="input-medium-short form-input" type="text" id="waveHeight"
                                 name="waveHeight"  tabindex='4' data-validation="meters"/> 
                                 <span>m</span>
                         </div>
@@ -99,7 +99,7 @@
                     </div>
                     <div class="control-group">
                         <label class="control-label">Wave Direction</label> <select
-                            class="input-medium weather-form-select"  id="waveDirection" tabindex='7'
+                            class="input-medium form-select"  id="waveDirection" tabindex='7'
                             name="waveDirection">
                             <option selected>-Please select-</option>
                             <option>North</option>
@@ -116,7 +116,7 @@
                     <div class="control-group">
                         <div class="row-fluid"> 
                             <label class="control-label">Date and time of tracking</label> 
-                            <input type="datetime-local" class="input-medium-large weather-form-input" name="trackDateTime"
+                            <input type="datetime-local" class="input-medium-large form-input" name="trackDateTime"
                                 id="trackDateTime" tabindex='10'>						
                         </div>
                     </div>
