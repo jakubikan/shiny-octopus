@@ -1,7 +1,7 @@
 <?php 
 	include("dbconnect.php");
 	$DBNAME = "seapal";
-	$WAYPOINTTABLENAME = "Waypoint";
+	$WAYPOINTTABLENAME = "waypoint";
 	$connection = ConnectDatabase();
 	if (!mysql_query("CREATE DATABASE IF NOT EXISTS ".$DBNAME,$connection)) {
 		die("Error creating Database: ".mysql_error());
@@ -10,12 +10,10 @@
 	SelectDB($connection);
 	
 	$sql = "CREATE TABLE IF NOT EXISTS ".$WAYPOINTTABLENAME."(	Name varchar(255),
-																Time varchar(255),
-																Date varchar(255),
 																HeadSail varchar(255),
-																Lat varchar(255),
-																Lng varchar(255),
-																Dest varchar(255),
+																Latitude varchar(255),
+																Longitude varchar(255),
+																Destination varchar(255),
 																DTM varchar(255),
 																COG varchar(255),																
 																SOG varchar(255),
@@ -43,12 +41,10 @@
 			$data = $_POST['data'];
 			if(($data) != "\n"){
 				$sql = "INSERT INTO ".$WAYPOINTTABLENAME." VALUES(	'".$data['name']."',
-																	'".$data['time']."',
-																	'".$data['date']."',
 																	'".$data['headsail']."',
-																	'".$data['lat']."',
-																	'".$data['lng']."',
-																	'".$data['dest']."',
+																	'".$data['latitude']."',
+																	'".$data['longitude']."',
+																	'".$data['destination']."',
 																	'".$data['dtm']."',
 																	'".$data['cog']."',
 																	'".$data['sog']."',
@@ -62,7 +58,8 @@
 																	'".$data['clouds']."',
 																	'".$data['rain']."',
 																	".$data['waveheight'].",
-																	'".$data['wavedirection']."'
+																	'".$data['wavedirection']."',
+																	'".$data['dateandtime']."'
 																);";
 																									
 				if(!mysql_query($sql)){
@@ -82,12 +79,10 @@
 			$data = $_POST['data'];
 			if(($data) != "\n"){
 				$sql = "UPDATE ".$WAYPOINTTABLENAME." SET 	Name='".$data['name']."',
-															Time='".$data['time']."',
-															Date='".$data['date']."',
 															Headsail='".$data['headsail']."',
-															Lat='".$data['lat']."',
-															Lng='".$data['lng']."',
-															Dest='".$data['dest']."',
+															Lat='".$data['latitude']."',
+															Lng='".$data['longitude']."',
+															Dest='".$data['destination']."',
 															DTM='".$data['dtm']."',
 															COG='".$data['cog']."',
 															SOG='".$data['sog']."',
@@ -101,6 +96,7 @@
 														 	Rain='".$data['rain']."',
 														 	WaveHeight=".$data['waveheight'].",
 														 	WaveDirection='".$data['wavedirection']."',
+															DateTime='".$data['datetime']."',
 														 	WHERE ID = ".$data['ID'].";";
 																									
 				$result = mysql_query($sql);																		
@@ -119,7 +115,7 @@
 				$row = mysql_fetch_row($resultArray);
 				$result = $row;																		
 				if(!$result){
-					die("Error: ".mysql_error()."    ");
+					echo "No entry!";
 				}				
 				mysql_free_result($resultArray);
 			}
@@ -129,14 +125,14 @@
 			$data = $_POST['data'];
 			if(($data) != "\n"){
 				$iter = 0;
-				$sql = "SELECT ID, Time, Date FROM ".$WAYPOINTTABLENAME." ";
+				$sql = "SELECT ID, DateTime FROM ".$WAYPOINTTABLENAME." ";
 				$resultArray = mysql_query($sql);
 				while ($row = mysql_fetch_array($resultArray)) {
 					$result[$iter] = $row;
 					$iter++;
 				}
 				if(!$result){
-					die("Error: ".mysql_error()."    ");
+					echo "No Entry!";
 				}
 				mysql_free_result($resultArray);
 			}

@@ -20,47 +20,78 @@
                 <div class="span4">
                     <div class="control-group">
                         <label class="control-label">Name</label> <input
-                            class="input-medium waypt-formelement" type="text" id="name" autofocus tabindex='1'/>
+                            class="input-medium form-input" type="text" id="name" autofocus tabindex='1'/>
                     </div>
                     <div class="control-group">
-                        <label class="control-label">COG</label> <input class="input-medium waypt-formelement"
+                        <label class="control-label">COG</label> <input class="input-medium form-input"
                             type="text" id="cog" tabindex='4'/>
                     </div>
                     <div class="control-group">
-                        <label class="control-label">Maneuver</label> <select
-                            name="manoever" id="manoever" class="waypt-formelement input-medium-large" tabindex='7'></select>
+                        <label class="control-label">Maneuver</label> 
+                        	<select
+                            name="maneuver" id="maneuver" class="form-select input-medium-large" tabindex='7'>
+                            	<option selected>-Please select-</option>
+                                <option>Option1</option>
+                                <option>Option2</option>
+                                <option>Option3</option>
+                            </select>
                     </div>
                     <div class="control-group">
-                        <label class="control-label">DTM</label> <input class="input-medium waypt-formelement"
+                        <label class="control-label">DTM</label> <input class="input-medium form-input"
                             type="text" id="dtm" tabindex='9'/>
                     </div>
                 </div>
                 <div class="span4">
                     <div class="control-group">
                         <label class="control-label">Latitude</label> <input
-                            class="input-medium waypt-formelement" type="text" id="lat" tabindex='2'/>
+                            class="input-medium form-input" type="text" id="lat" tabindex='2'/>
                     </div>                    
                     <div class="control-group">
-                        <label class="control-label">SOG</label> <input class="input-medium waypt-formelement"
+                        <label class="control-label">SOG</label> <input class="input-medium form-input"
                             type="text" id="sog" tabindex='5'/>
                     </div>
                     <div class="control-group">
-                        <label class="control-label">Head sail</label> <select
-                            name="vorsegel" id="vorsegel" class="waypt-formelement input-medium-large" tabindex='8'></select>
+                        <label class="control-label">Head sail</label> 
+                        <select
+                            name="vorsegel" id="headSail" class="form-select input-medium-large" tabindex='8'>
+                            <option selected>-Please select-</option>
+                            <option>Option1</option>
+                            <option>Option2</option>
+                            <option>Option3</option>
+                        </select>
                     </div>                    
                     <div class="control-group">
-                        <label class="control-label">BTM</label> <input class="input-medium waypt-formelement"
+                        <label class="control-label">BTM</label> <input class="input-medium form-input"
                             type="text" id="btm" tabindex='10'/>
                     </div>                    
                 </div>
                 <div class="span4">        			
                     <div class="control-group">
                         <label class="control-label">Longitude</label> <input
-                            class="input-medium waypt-formelement" type="text" id="lng" tabindex='3'/>
+                            class="input-medium form-input" type="text" id="lng" tabindex='3'/>
                     </div>
                     <div class="control-group">
-                        <label class="control-label">Destination</label> <select
-                            name="fahrtziel" id="marker" class="waypt-formelement input-medium-large" tabindex='6'></select>
+                        <label class="control-label">Destination</label> 
+                        	<select
+                            name="fahrtziel" id="dest" class="form-select input-medium-large" tabindex='6'>
+                            	<option selected>-Please select-</option>
+                                <option>Bregenz</option>
+                                <option>Fischbach</option>
+                                <option>Friedrichshafen</option>
+                                <option>Hagnau</option>
+                                <option>Haltnau</option>
+                                <option>Schloss Helmsdorf</option>
+                                <option>Immenstaad</option>
+                                <option>Kirchberg</option>
+                                <option>Konstanz</option>
+                                <option>Kressbronn</option>
+                                <option>Langenargen</option>
+                                <option>Lindau</option>
+                                <option>Lochau</option>
+                                <option>Meersburg</option>
+                                <option>Nonnenhorn</option>
+                                <option>Wasserburg</option>
+                            </select>
                     </div>
                 </div>
             </div>
@@ -73,7 +104,7 @@
                     <div class="control-group">
                         <div class="row-fluid"> 
                             <label class="control-label">Wind Strength</label> 
-                            <input id="windStrength" class="input-medium-short weather-form-input"  type="number"
+                            <input id="windStrength" class="input-medium-short form-input"  type="number"
                                 name="windStrength" autofocus tabindex="11" data-validation="windstrength" />
                             <span>knots</span>
                         </div>
@@ -82,7 +113,7 @@
                     <div class="control-group">
                         <label class="control-label">Wind Direction</label> 
                         <select
-                            class="input-medium weather-form-select" id="windDirection" name="windDirection" tabindex='14'>
+                            class="input-medium form-select" id="windDirection" name="windDirection" tabindex='14'>
                             <option selected>-Please select-</option>
                             <option>North</option>
                             <option>North-East</option>
@@ -97,7 +128,7 @@
                     <div class="control-group">
                         <div class="row-fluid">
                             <label class="control-label">Air Pressure</label> 
-                            <input class="input-medium-short weather-form-input" type="number" id="airPressure"
+                            <input class="input-medium-short form-input" type="number" id="airPressure"
                                 name="airPressure" tabindex='17' data-validation="airpreasure" />
                             <span>hPa</span>
                         </div>
@@ -108,14 +139,14 @@
                     <div class="control-group">
                         <div class="row-fluid">
                             <label class="control-label">Temperature</label> 
-                            <input class="input-medium-short weather-form-input" id="temp" type="text" name="temp" tabindex="12" data-validation="temperature"/>
+                            <input class="input-medium-short form-input" id="temp" type="text" name="temp" tabindex="12" data-validation="temperature"/>
                             <span>°C</span>
                         </div>
                         <span class="help-block fade row-fluid offset3">Please insert a number between -273.15 and 273.15</span>
                     </div>
                     <div class="control-group">
                         <label class="control-label">Clouds</label> <select
-                            class="input-medium high-select weather-form-select" id="clouds" name="clouds" tabindex='15'>
+                            class="input-medium high-select form-select" id="clouds" name="clouds" tabindex='15'>
                             <option selected>-Please select-</option>
                             <option id="select-sunny">Sunny</option>
                             <option id="select-partlycloudy">Partly cloudy</option>
@@ -127,7 +158,7 @@
                     </div>
                     <div class="control-group">
                         <label class="control-label">Rain</label> <select
-                            class="input-medium weather-form-select" name="rain" id="rain" tabindex='18'>
+                            class="input-medium form-select" name="rain" id="rain" tabindex='18'>
                             <option selected>-Please select-</option>
                             <option>0 - 2 mm/sqm</option>
                             <option>2 - 4 mm/sqm</option>
@@ -142,7 +173,7 @@
                     <div class="control-group">
                         <div class="row-fluid">
                             <label class="control-label">Wave Height</label> 
-                            <input class="input-medium-short weather-form-input" type="text" id="waveHeight"
+                            <input class="input-medium-short form-input" type="text" id="waveHeight"
                                 name="waveHeight"  tabindex='13' data-validation="meters"/> 
                                 <span>m</span>
                         </div>
@@ -150,7 +181,7 @@
                     </div>
                     <div class="control-group">
                         <label class="control-label">Wave Direction</label> <select
-                            class="input-medium weather-form-select"  id="waveDirection" tabindex='16'
+                            class="input-medium form-select"  id="waveDirection" tabindex='16'
                             name="waveDirection">
                             <option selected>-Please select-</option>
                             <option>North</option>
@@ -167,7 +198,7 @@
                     <div class="control-group">
                         <div class="row-fluid"> 
                             <label class="control-label">Date and time of tracking</label> 
-                            <input type="datetime-local" class="input-medium-large weather-form-input" name="trackDateTime"
+                            <input type="datetime-local" class="input-medium-large form-input" name="trackDateTime"
                                 id="trackDateTime" tabindex='19'>						
                         </div>
                     </div>
