@@ -10,7 +10,7 @@
 		<li >
 			<a tabindex="-1" href="#" data-id="cross-marker-switch">
 				<i class="icon-flag"></i>
-				<span>Ändere zu Marker</span>
+				<span>Switch to marker</span>
 			</a>
 		</li>
 		<!--REFAK: CROSS END-->

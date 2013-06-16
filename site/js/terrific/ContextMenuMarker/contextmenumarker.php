@@ -10,19 +10,19 @@
 		<li >
 			<a tabindex="-1" href="#" data-id="remove-marker">
 				<i class="icon-flag"></i>
-				<span>Remove Marker</span>
+				<span>Remove marker</span>
 			</a>
 		</li>
 		<li>
 			<a tabindex="-1" href="#" data-id="make-route">
 				<i class="icon-resize-full"></i>
-				<span>Erstelle Route aus Markern</span>
+				<span>Create route from markers</span>
 			</a>
 		</li>
 		<li>
 			<a tabindex="-1" href="#" data-id="calculate-distance">
 				<i class="icon-screenshot"></i>
-				<span>Abstand zum Fadenkreuz</span>
+				<span>Distance from crosshair</span>
 			</a>
 		</li>
 		<!--REFAK: MARKER END-->

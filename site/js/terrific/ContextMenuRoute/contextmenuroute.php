@@ -10,13 +10,13 @@
 		<li >
 			<a tabindex="-1" href="#" data-id="remove-route">
 				<i class="icon-flag"></i>
-				<span>Remove Route</span>
+				<span>Remove route</span>
 			</a>
 		</li>
 		<li>
 			<a tabindex="-1" href="#" data-id="route-marker-switch">
 				<i class="icon-resize-full"></i>
-				<span>Erstelle Marker aus Route</span>
+				<span>Create markers from route</span>
 			</a>
 		</li>
 		<!--REFAK: ROUTE END-->		

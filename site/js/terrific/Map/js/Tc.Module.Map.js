@@ -115,7 +115,7 @@
 		google.maps.event.addListener(self.map, 'center_changed', function(event) {
 			self.centerChanged.call(this, self);
 		});
-		
+		self.centerChanged.call(self.map, self);
 		
 		// Right Click Event Listener
 		
@@ -128,7 +128,7 @@
 			//self.onMapClick.call(this, self, event);
 	    	//self.fire('lngLatChanged',  event, function() { });
 
-			self.connectToBoatServer.call(this,self,47.667272, 9.171036);
+		//	self.connectToBoatServer.call(this,self,47.667272, 9.171036);
 		});
 		
 		
@@ -138,13 +138,14 @@
 
 
 		$('#weatherBtn').on('click', function() {
-			url = 'http://openweathermap.org/data/2.1/find/city?lat='+self.map.center.lat()+"&lon="+self.map.center.lng()+"&cnt=1";
+			url = 'http://openweathermap.org/data/2.5/weather?lat='+self.map.center.lat()+
+					"&lon="+self.map.center.lng()+"&units=metric&lang=de";
 			$.ajax({
 				type: "POST",
 				url: url,
 				dataType: "jsonp",
 				success: function(data) {
-					console.log(data);	
+					self.showCurrentWeather(data);
 				}
 			});	
 		});
@@ -184,6 +185,10 @@
 		*/
 
 	
+    },
+
+    showCurrentWeather : function(data){
+
     },
 
     sendBoatPosition : function(self){
@@ -252,20 +257,29 @@
     			self.fire('contextRequest',{event:event,obj:self,koords:position},["crossmenu"],function(){}); //REFAK: CROSS
 			});
 			google.maps.event.addListener(self.crosshair, 'drag', function(event){
-				degLatLngs = self.crosshair.getPosition();
-				latLngs = self.convertDMS(degLatLngs.lat(), degLatLngs.lng());
-				$("#crossLat",self.$ctx).html(latLngs.latDMS+ " Lat");
-				$("#crossLong",self.$ctx).html(latLngs.lngDMS+ " Long");
+				self.crosshairDragged(self);
 			});
+			self.crosshairDragged(self);
     	} else {
     		self.setMarkerDrawRoute.call(this,self,event);
     	}
+    },
+
+    crosshairDragged : function(self){
+    	degLatLngs = self.crosshair.getPosition();
+    	latLngs = self.convertDMS(degLatLngs.lat(), degLatLngs.lng());
+    	$("#crossKoordsDisplayTitle",self.$ctx).html("Crosshair:");
+    	$("#crossKoordsDisplayLat",self.$ctx).html("LAT: "+latLngs.latDMS);
+    	$("#crossKoordsDisplayLng",self.$ctx).html("LNG: "+latLngs.lngDMS);
     },
 
     onSwitchCrossToMarker : function(self){
     	self.drawNewMarkerAt.call(self,this.crosshair.getPosition());
     	this.crosshair.setMap(null);
     	this.crosshair = null;
+    	$("#crossKoordsDisplayTitle",self.$ctx).html("");
+    	$("#crossKoordsDisplayLat",self.$ctx).html("");
+    	$("#crossKoordsDisplayLng",self.$ctx).html("");
     },
 
     loadContextMenu : function(self, event) {
@@ -308,7 +322,8 @@
     	if(this.crosshair ==null)
     		return;
     	distance = google.maps.geometry.spherical.computeDistanceBetween (this.crosshair.getPosition(), marker.getPosition());
-    	$("#distanceToCrosshair",this.$ctx).html(distance.toFixed(2)+ " Meter");
+    	$("#distanceDisplayTitle",this.$ctx).html("Crosshair distance:");
+    	$("#distanceDisplayValue",this.$ctx).html(distance.toFixed(2)+ " meter");
     },
     onMakeRoute : function(){
     	var self = this;
@@ -382,8 +397,8 @@
     centerChanged : function(self) {
 		center = this.center;
 		dms = self.convertDMS(center.lat(), center.lng());
-		$("#lat",self.$ctx).html(dms.latDMS+" Lat");
-		$("#long",self.$ctx).html(dms.lngDMS+" Long");
+		$("#centerKoordsDisplayLat",self.$ctx).html("LAT: "+dms.latDMS);
+		$("#centerKoordsDisplayLng",self.$ctx).html("LNG: "+dms.lngDMS);
     },
     
     /*
