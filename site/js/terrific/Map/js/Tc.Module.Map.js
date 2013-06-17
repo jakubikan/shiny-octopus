@@ -40,8 +40,8 @@
 		
 		
 		
-		$canvas.height($canvas.width()/2);
-		self.$ctx.height($canvas.width()/2);
+		$canvas.height(500);
+		//self.$ctx.height($canvas.width()/2);
 		
 		
 		// Open Street Map
@@ -139,15 +139,16 @@
 
 		$('#weatherBtn').on('click', function() {
 			url = 'http://openweathermap.org/data/2.5/weather?lat='+self.map.center.lat()+
-					"&lon="+self.map.center.lng()+"&units=metric&lang=de";
+					"&lon="+self.map.center.lng()+"&units=metric&lang=en";
 			$.ajax({
 				type: "POST",
 				url: url,
 				dataType: "jsonp",
 				success: function(data) {
-					self.showCurrentWeather(data);
+					self.showCurrentWeather(self,data);
 				}
 			});	
+			self.getForecast(self);
 		});
 		
 		$('#trackingButton',self.$ctx).bind("click",function(e){
@@ -187,8 +188,91 @@
 	
     },
 
-    showCurrentWeather : function(data){
+    getForecast : function(self){
+    	url = 'http://openweathermap.org/data/2.5/forecast?lat='+self.map.center.lat()+
+					"&lon="+self.map.center.lng()+"&units=metric&lang=en";
+			$.ajax({
+				type: "POST",
+				url: url,
+				dataType: "jsonp",
+				success: function(data) {
+					forecastContent = "";
+					for (var i = 0; i < data.list.length; i++) {
+						forecastContent = forecastContent +
+											"<div class=\"span2\">"+
+											self.div(data.list[i].dt_txt)+
+											self.createWeatherString(self,data.list[i])+
+											"---</div>";
+					};
+					$("#weatherForecast",self.$ctx).html(
+						"<h4 align=\"left\">Weather Forecast:</h4>"+
+						forecastContent
+					);
+				}
+			});	
+    },
 
+    showCurrentWeather : function(self,data){
+    	/*
+    						<div id="CurWeatherTitle">Current Weather:</div>
+					<div id="CurWeatherWTitle">Wind:</div>
+					<div id="CurWeatherWSpeed">Speed: 20 m/s</div>
+					<div id="CurWeatherWDirection">Direction: NE (45°)</div>	
+					<img src="http://openweathermap.org/img/w/10d.png" id="CurWeatherIcon"/>
+					<div id="CurWeatherTemp">20 °C</div>
+					<div id="CurWeatherDescription">moderate rain</div>
+					<div id="CurWeatherPressure">101 hPa</div>
+					<div id="CurWeatherHumidity">Humidity: 50%</div>
+					<div id="CurWeatherClouds">Clouds: 40 %</div>
+				*/
+		$("#CurWeather",self.$ctx).html(
+			"<div>Current Weather:</div>"+
+			self.createWeatherString(self,data)
+		);
+		/*
+    	$("#CurWeatherWSpeed",self.$ctx).html("Speed: "+data.wind.speed+" m/s");
+    	$("#CurWeatherWDirection",self.$ctx).html("Direction: "+data.wind.deg+"°"); //Erweitern auf Windrichtungen
+    	$("#CurWeatherTemp",self.$ctx).html(data.main.temp+"°C");
+    	$("#CurWeatherHumidity",self.$ctx).html("Humidity: "+data.main.humidity+"%");
+    	$("#CurWeatherPressure",self.$ctx).html("Pressure: "+data.main.pressure+" hPa");
+    	$("#CurWeatherClouds",self.$ctx).html("Clouds: "+data.clouds.all+" %");
+    	//$("#CurWeatherPRain",self.$ctx).html("Rain: "+data.rain.3h+" mm/3h"); //mit dem variablen Namen 3h gibts Probleme
+    	//$("#CurWeatherPSnow",self.$ctx).html("Snow: "+data.snow.3h+" mm/3h"); //Optional
+    	$("#CurWeatherDescription",self.$ctx).html(data.weather[0].description); //Optional
+    	$("#CurWeatherIcon",self.$ctx).attr("src","http://openweathermap.org/img/w/"+data.weather[0].icon+".png"); //Optional
+    	*/
+    },
+
+    createWeatherString : function(self,data){
+    	wSpeed = self.div("Speed: "+data.wind.speed+" m/s");
+    	wDirection = self.div("Direction: "+data.wind.deg+"°");    	
+    	temp = self.div(data.main.temp+"°C");
+    	humidity = self.div("Humidity: "+data.main.humidity+"%");
+    	pressure = self.div("Pressure: "+data.main.pressure+" hPa");
+    	clouds = self.div("Clouds: "+data.clouds.all+" %");
+    	description = "";
+    	if(data.weather[0].description){
+    		description = self.div(data.weather[0].description);
+    	}
+    	icon = "";
+    	if(data.weather[0].icon){
+    		icon = "<img src=\"http://openweathermap.org/img/w/"+data.weather[0].icon+".png\"/>";
+    	}
+    	return icon+
+    			"<div>Wind: </div>"+    			
+    			wSpeed+
+    			wDirection+    			
+    			temp+
+    			description+
+    			pressure+
+    			humidity+
+    			clouds;
+    	//$("#CurWeatherPRain",self.$ctx).html("Rain: "+data.rain.3h+" mm/3h"); //mit dem variablen Namen 3h gibts Probleme
+    	//$("#CurWeatherPSnow",self.$ctx).html("Snow: "+data.snow.3h+" mm/3h"); //Optional
+    },
+
+    div : function(value){
+    	return "<div>"+value+"</div>";
     },
 
     sendBoatPosition : function(self){
