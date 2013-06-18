@@ -11,7 +11,7 @@
                             class="input-medium-xlarge" id="entry" name="entry" tabindex='1'>                            
                             </select>
                             <img id="loadgif" src="../../../../img/animation/ajax-loader.gif"/>
-                            <img id="delEntryIcon" src="../../../../img/animation/delete_icon.gif"/>
+                            <a href="javascript:void(0);"><img id="delEntryIcon" src="../../../../img/animation/delete_icon.gif" /></a>
                         </div>
                     </div>
                 </div>
@@ -198,7 +198,7 @@
                     <div class="control-group">
                         <div class="row-fluid"> 
                             <label class="control-label">Date and time of tracking</label> 
-                            <input type="datetime-local" class="input-medium-large form-input" name="trackDateTime"
+                            <input type="text" class="input-medium-large form-input" name="trackDateTime"
                                 id="trackDateTime" tabindex='19'>						
                         </div>
                     </div>

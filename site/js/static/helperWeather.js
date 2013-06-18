@@ -141,6 +141,7 @@ $(document).ready(function() {
 		formID = null;
 		$('#entry').value = '-New Entry-';
 		firstWeatherFetch = true;
+		hideDel();
 	}
 	
 	function updateCurrSelected() {
@@ -149,7 +150,7 @@ $(document).ready(function() {
 	}
 	
 	// automated form submit after key is released on form input elements.
-	$('.form-input').keyup(function(e) { 
+	$('.form-input').keydown(function(e) { 
 	
 		if (e.keyCode == 13 || e.keyCode == 9) { //Enter or TAB is pressed.
 			var inputs = $(document).find('.form-input');
@@ -211,7 +212,7 @@ $(document).ready(function() {
 			}
 			else {
 				// Create regexes for check of lat, lng and date&time to fetch weather data from openweathermap.
-				// Src: http://txt2re.com/index-javascript.php3?s=Sun,%20Jun%2016%202013,%2022:51:39&5&-47&6&22&17&23&4&-48&24&2;
+				// SRC for this: http://txt2re.com/index-javascript.php3?s=Sun,%20Jun%2016%202013,%2022:51:39&5&-47&6&22&17&23&4&-48&24&2;
 				var dblTester = new RegExp("(\\d+)(\\.)(\\d+)", ["i"]);
 				var re1='((?:Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday|Tues|Thur|Thurs|Sun|Mon|Tue|Wed|Thu|Fri|Sat))';	// Day Of Week 1
 				var re2='(,)';	// Any Single Character 1
@@ -226,10 +227,9 @@ $(document).ready(function() {
 				var re11='((?:(?:[0-1][0-9])|(?:[2][0-3])|(?:[0-9])):(?:[0-5][0-9])(?::[0-5][0-9])?(?:\\s?(?:am|AM|pm|PM))?)';	// HourMinuteSec 1
 				
 				var dateTimeTester = new RegExp(re1+re2+re3+re4+re5+re6+re7+re8+re9+re10+re11,["i"]);
-				console.log(dblTester.exec($('#lat').val()));
-				console.log(dblTester.exec($('#lng').val()));
-				console.log(dateTimeTester.exec($('#trackDateTime').val()));
-				if (firstWeatherFetch &&
+				var weatherPreviouslySet = formData.windstrength!=0|| formData.winddirection!="null" || formData.airpressure!=0 || formData.temperature!=0 || formData.clouds!="null" || formData.rain!="null" || formData.waveheight!=0 || formData.wavedirection!="null";
+				if (!weatherPreviouslySet && 
+					firstWeatherFetch &&
 					dblTester.exec($('#lat').val()) != null &&
 					dblTester.exec($('#lng').val()) != null &&
 					dateTimeTester.exec($('#trackDateTime').val()) != null) {
@@ -246,7 +246,7 @@ $(document).ready(function() {
 	});	
 	
 	// automated form submit after select entry has been selected.
-	$('.form-select').keyup(function(e) { 
+	$('.form-select').keydown(function(e) { 
 		if (e.keyCode == 13 || e.keyCode == 9) { //Enter or TAB is pressed.
 			var inputs = $(document).find('input');
 			var selects = $(document).find('select');
@@ -452,8 +452,7 @@ $(document).ready(function() {
 		});		
 	}
 	
-	function fetchWeatherFromSite(data){		
-		console.log("http://openweathermap.org/data/2.1/find/city?lat="+data['lat']+"&lon="+data['lng']+"&cnt=1");
+	function fetchWeatherFromSite(data){
 		$.ajax({
 			type: "POST",
 			url: "http://openweathermap.org/data/2.1/find/city?lat="+data['lat']+"&lon="+data['lng']+"&cnt=1", 

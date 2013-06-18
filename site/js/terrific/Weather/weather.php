@@ -116,7 +116,7 @@
                     <div class="control-group">
                         <div class="row-fluid"> 
                             <label class="control-label">Date and time of tracking</label> 
-                            <input type="datetime-local" class="input-medium-large form-input" name="trackDateTime"
+                            <input class="input-medium-large form-input" name="trackDateTime"
                                 id="trackDateTime" tabindex='10'>						
                         </div>
                     </div>
