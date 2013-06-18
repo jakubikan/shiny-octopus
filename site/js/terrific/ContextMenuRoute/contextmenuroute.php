@@ -8,13 +8,13 @@
 		</li>
 		<!--REFAK: ROUTE-->
 		<li >
-			<a tabindex="-1" href="#" data-id="remove-route">
+			<a tabindex="-1" href="javascript:void(0);" data-id="remove-route">
 				<i class="icon-flag"></i>
 				<span>Remove route</span>
 			</a>
 		</li>
 		<li>
-			<a tabindex="-1" href="#" data-id="route-marker-switch">
+			<a tabindex="-1" href="javascript:void(0);" data-id="route-marker-switch">
 				<i class="icon-resize-full"></i>
 				<span>Create markers from route</span>
 			</a>
