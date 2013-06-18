@@ -8,7 +8,7 @@
 		</li>
 		<!--REFAK: CROSS-->
 		<li >
-			<a tabindex="-1" href="#" data-id="cross-marker-switch">
+			<a tabindex="-1" href="javascript:void(0);" data-id="cross-marker-switch">
 				<i class="icon-flag"></i>
 				<span>Switch to marker</span>
 			</a>
