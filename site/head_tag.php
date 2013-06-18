@@ -27,6 +27,9 @@
 		<link href="js/terrific/Waypoint/css/waypoint.css" rel="stylesheet">
 		<link href="js/terrific/Map/css/map.css" rel="stylesheet">
 		<link href="js/terrific/ContextMenu/css/contextmenu.css" rel="stylesheet">
+		<link href="js/terrific/ContextMenuCross/css/contextmenucross.css" rel="stylesheet">
+		<link href="js/terrific/ContextMenuMarker/css/contextmenumarker.css" rel="stylesheet">
+		<link href="js/terrific/ContextMenuRoute/css/contextmenuroute.css" rel="stylesheet">
 		<link href="js/terrific/Appmenu/css/appmenu.css" rel="stylesheet">
 		
 		
@@ -42,6 +45,7 @@
 		<script type="text/javascript" src="js/static/helper.js"></script>
 		<script type="text/javascript" src="js/static/helperWeather.js"></script>
         <script type="text/javascript" src="js/static/helperMap.js"></script>
+		<script type="text/javascript" src="js/static/Websocket/fancywebsocket.js"></script>
 		<!-- Custom Modul Js -->
 		<script type="text/javascript" src="js/terrific/Header/js/Tc.Module.Header.js"></script>
 		<script type="text/javascript" src="js/terrific/Footer/js/Tc.Module.Footer.js"></script>
@@ -49,6 +53,9 @@
 		<script type="text/javascript" src="js/terrific/Waypoint/js/Tc.Module.Waypoint.js"></script>
 		<script type="text/javascript" src="js/terrific/Map/js/Tc.Module.Map.js"></script>
 		<script type="text/javascript" src="js/terrific/ContextMenu/js/Tc.Module.ContextMenu.js"></script>
+		<script type="text/javascript" src="js/terrific/ContextMenuCross/js/Tc.Module.ContextMenuCross.js"></script>
+		<script type="text/javascript" src="js/terrific/ContextMenuMarker/js/Tc.Module.ContextMenuMarker.js"></script>
+		<script type="text/javascript" src="js/terrific/ContextMenuRoute/js/Tc.Module.ContextMenuRoute.js"></script>
 		<script type="text/javascript" src="js/terrific/Appmenu/js/Tc.Module.Appmenu.js"></script>
 		
 		<script type="text/javascript" src="js/static/main.js"></script>

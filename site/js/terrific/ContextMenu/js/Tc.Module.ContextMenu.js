@@ -1,52 +1,20 @@
 (function($) {
 	Tc.Module.ContextMenu = Tc.Module.extend({
+		currentWorkingObject:null, 
 		on : function(callback) {
 			var self = this;
-			self.sandbox.subscribe(1, self);
-
 			callback();
 		},
 		after : function() {
+		},
+		
+		onCloseContextMenu: function() {
 			var self = this;
-			
-			$("[data-id='remove-marker']",self.$ctx).bind("click",function(e) {
-				lat = self.$ctx.data("lat");
-				lng = self.$ctx.data("lng");
-				
-				$.extend(e, {latLng: new google.maps.LatLng(lat, lng) })
-				self.addMarker.call(this, self, e);
-				
-				$('.dropdown-menu', self.$ctx).addClass("fade");
-				
-				
-				
-			});
-			
-			$("[data-id='calculate-distance']",self.$ctx).bind("click",function(e) {
-				lat = self.$ctx.data("lat");
-				lng = self.$ctx.data("lng");
-				
-				$.extend(e, {latLng: new google.maps.LatLng(lat, lng) })
-				
-				
-				$('.dropdown-menu', self.$ctx).addClass("fade");
-				
-				
-				
-			});
-			
-			$("[data-id='make-goal']",self.$ctx).bind("click",function(e) {
-				lat = self.$ctx.data("lat");
-				lng = self.$ctx.data("lng");
-				
-				$.extend(e, {latLng: new google.maps.LatLng(lat, lng) })
-				
-			$('.dropdown-menu', self.$ctx).addClass("fade");
-				
-				
-			});
-			
-			
+			self.closeContextMenu.call(this, self);
+		},
+
+		closeContextMenu : function(self){
+			$(".dropdown-menu", self.$ctx).parent().removeClass("open")
 
 		},
 
@@ -54,41 +22,24 @@
 			var self = this;
 			console.log("Context requested");
 			
+			self.fire("closeContextMenu", null, ["context"], function(){});
 			
-			$(".dropdown-menu", self.$ctx).removeClass("fade");
+			self.currentWorkingObject = event.obj;
+			
+			map = event.obj.map;
+			canvas = map.getDiv();
+			position = $(canvas).position();
 			$(".dropdown-menu", self.$ctx).dropdown("toggle");
 			$(".dropdown-menu", self.$ctx).css({
 				display : "visible",
-				"left" : event.pixel.x,
-				"top" : event.pixel.y,
+				"left" : event.event.pixel.x + position.left,
+				"top" : event.event.pixel.y + position.top,
 			});
 			$("[data-id='position']", self.$ctx)
-				.html( 	"Lat: " + self.$ctx.data("lat") + 
-						" Lng: " + self.$ctx.data("lng"));
+				.html( 	"Lat: " + event.koords.latDMS + 
+						" Lng: " + event.koords.lngDMS);
 
 		},
 
-		onHideContext : function(event) {
-			$('.dropdown-menu', self.$ctx).addClass("fade");
-		},
-
-		onLngLatChanged : function(event) {
-			var self = this;
-			self.$ctx.data("lat", event.latLng.lat());
-			self.$ctx.data("lng", event.latLng.lng());
-		},
-		
-		addMarker : function(self, event) {
-			self.fire("markerAdd", event, function() {} );
-			
-		},
-		
-		makeGoal : function(event) {
-			
-		},
-		
-		calculateDistance : function(event) {
-			
-		}
 	});
 })(Tc.$);

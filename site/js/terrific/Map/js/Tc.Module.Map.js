@@ -11,6 +11,7 @@
 	overlay: null,
 	longClickStoped: false,
 	doTrack: true,
+	Server: null,
 	
 	mapOptions : {
 		disableDoubleClickZoom: true,
@@ -39,8 +40,8 @@
 		
 		
 		
-		$canvas.height($canvas.width()/2);
-		self.$ctx.height($canvas.width()/2);
+		$canvas.height(500);
+		//self.$ctx.height($canvas.width()/2);
 		
 		
 		// Open Street Map
@@ -94,7 +95,8 @@
 			name: "Wind",
 			maxZoom: 18
 		}));
-		
+
+		self.Server = new FancyWebSocket('ws://127.0.0.1:9300');
 		/*
 
 		*/
@@ -113,7 +115,7 @@
 		google.maps.event.addListener(self.map, 'center_changed', function(event) {
 			self.centerChanged.call(this, self);
 		});
-		
+		self.centerChanged.call(self.map, self);
 		
 		// Right Click Event Listener
 		
@@ -125,6 +127,8 @@
 		google.maps.event.addListener(self.map, 'click', function(event){
 			//self.onMapClick.call(this, self, event);
 	    	//self.fire('lngLatChanged',  event, function() { });
+
+		//	self.connectToBoatServer.call(this,self,47.667272, 9.171036);
 		});
 		
 		
@@ -134,25 +138,154 @@
 
 
 		$('#weatherBtn').on('click', function() {
-			url = 'http://openweathermap.org/data/2.1/find/city?lat='+self.map.center.lat()+"&lon="+self.map.center.lng()+"&cnt=1";
+			url = 'http://openweathermap.org/data/2.5/weather?lat='+self.map.center.lat()+
+					"&lon="+self.map.center.lng()+"&units=metric&lang=en";
 			$.ajax({
 				type: "POST",
 				url: url,
 				dataType: "jsonp",
 				success: function(data) {
-					console.log(data);	
+					self.showCurrentWeather(self,data);
 				}
 			});	
+			self.getForecast(self);
 		});
 		
+		$('#trackingButton',self.$ctx).bind("click",function(e){
+			doTrackTag = $('#trackingButton',self.$ctx);
+			doTrack = doTrackTag.attr("doTrack");
+			if(doTrack == "false"){
+				self.Server.connect();
+				doTrackTag.html("Stop Tracking");
+				doTrackTag.attr("doTrack",true);
+				self.sendBoatPosition.call(this,self);
+			}else{
+				self.Server.disconnect();
+				doTrackTag.html("Track");
+				doTrackTag.attr("doTrack",false);
+			}
+
+		});
+		self.Server.bind('open',function(){
+			$('#track',self.$ctx).html("Connection to boat server established");
+		});
+
+		self.Server.bind('message',function(lng){
+			self.updateBoatPosition.call(this,self,lng);
+		});
+
+		self.Server.bind('close',function(){
+			$('#track',self.$ctx).html("Connection to boat server closed");
+		});
+
+
 		/*
 		google.maps.event.addListener(self.map, 'longpress', function(event){
 			self.loadContextMenu.call(this,self,event);
 		});
 		*/
-		self.connectToBoatServer.call(this,self,47.667272, 9.171036);
 
 	
+    },
+
+    getForecast : function(self){
+    	url = 'http://openweathermap.org/data/2.5/forecast?lat='+self.map.center.lat()+
+					"&lon="+self.map.center.lng()+"&units=metric&lang=en";
+			$.ajax({
+				type: "POST",
+				url: url,
+				dataType: "jsonp",
+				success: function(data) {
+					forecastContent = "";
+					for (var i = 0; i < data.list.length; i++) {
+						forecastContent = forecastContent +
+											"<div class=\"span2\">"+
+											self.div(data.list[i].dt_txt)+
+											self.createWeatherString(self,data.list[i])+
+											"---</div>";
+					};
+					$("#weatherForecast",self.$ctx).html(
+						"<h4 align=\"left\">Weather Forecast:</h4>"+
+						forecastContent
+					);
+				}
+			});	
+    },
+
+    showCurrentWeather : function(self,data){
+    	/*
+    						<div id="CurWeatherTitle">Current Weather:</div>
+					<div id="CurWeatherWTitle">Wind:</div>
+					<div id="CurWeatherWSpeed">Speed: 20 m/s</div>
+					<div id="CurWeatherWDirection">Direction: NE (45°)</div>	
+					<img src="http://openweathermap.org/img/w/10d.png" id="CurWeatherIcon"/>
+					<div id="CurWeatherTemp">20 °C</div>
+					<div id="CurWeatherDescription">moderate rain</div>
+					<div id="CurWeatherPressure">101 hPa</div>
+					<div id="CurWeatherHumidity">Humidity: 50%</div>
+					<div id="CurWeatherClouds">Clouds: 40 %</div>
+				*/
+		$("#CurWeather",self.$ctx).html(
+			"<div>Current Weather:</div>"+
+			self.createWeatherString(self,data)
+		);
+		/*
+    	$("#CurWeatherWSpeed",self.$ctx).html("Speed: "+data.wind.speed+" m/s");
+    	$("#CurWeatherWDirection",self.$ctx).html("Direction: "+data.wind.deg+"°"); //Erweitern auf Windrichtungen
+    	$("#CurWeatherTemp",self.$ctx).html(data.main.temp+"°C");
+    	$("#CurWeatherHumidity",self.$ctx).html("Humidity: "+data.main.humidity+"%");
+    	$("#CurWeatherPressure",self.$ctx).html("Pressure: "+data.main.pressure+" hPa");
+    	$("#CurWeatherClouds",self.$ctx).html("Clouds: "+data.clouds.all+" %");
+    	//$("#CurWeatherPRain",self.$ctx).html("Rain: "+data.rain.3h+" mm/3h"); //mit dem variablen Namen 3h gibts Probleme
+    	//$("#CurWeatherPSnow",self.$ctx).html("Snow: "+data.snow.3h+" mm/3h"); //Optional
+    	$("#CurWeatherDescription",self.$ctx).html(data.weather[0].description); //Optional
+    	$("#CurWeatherIcon",self.$ctx).attr("src","http://openweathermap.org/img/w/"+data.weather[0].icon+".png"); //Optional
+    	*/
+    },
+
+    createWeatherString : function(self,data){
+    	wSpeed = self.div("Speed: "+data.wind.speed+" m/s");
+    	wDirection = self.div("Direction: "+data.wind.deg+"°");    	
+    	temp = self.div(data.main.temp+"°C");
+    	humidity = self.div("Humidity: "+data.main.humidity+"%");
+    	pressure = self.div("Pressure: "+data.main.pressure+" hPa");
+    	clouds = self.div("Clouds: "+data.clouds.all+" %");
+    	description = "";
+    	if(data.weather[0].description){
+    		description = self.div(data.weather[0].description);
+    	}
+    	icon = "";
+    	if(data.weather[0].icon){
+    		icon = "<img src=\"http://openweathermap.org/img/w/"+data.weather[0].icon+".png\"/>";
+    	}
+    	return icon+
+    			"<div>Wind: </div>"+    			
+    			wSpeed+
+    			wDirection+    			
+    			temp+
+    			description+
+    			pressure+
+    			humidity+
+    			clouds;
+    	//$("#CurWeatherPRain",self.$ctx).html("Rain: "+data.rain.3h+" mm/3h"); //mit dem variablen Namen 3h gibts Probleme
+    	//$("#CurWeatherPSnow",self.$ctx).html("Snow: "+data.snow.3h+" mm/3h"); //Optional
+    },
+
+    div : function(value){
+    	return "<div>"+value+"</div>";
+    },
+
+    sendBoatPosition : function(self){
+    	latlng = self.map.getCenter();
+    	self.Server.send( 'message','test' );
+    },
+
+    updateBoatPosition : function(self,lng){
+    	center = self.map.getCenter();
+    	center.lng = lng;
+    	self.map.setCenter(center);
+    	self.drawNewMarkerAt.call(self,center);
+    	self.sendBoatPosition.call(self);
     },
 
     connectToBoatServer : function(mapModule){
@@ -161,7 +294,7 @@
     	lng = center.lng();
     	$.ajax({
     	  type : 'get',
-    	  url : './cometServer.php',
+    	  url : './js/terrific/Map/cometServer.php',
     	  dataType : 'json', 
     	  data : {
     	  	'lat' : lat,
@@ -201,21 +334,38 @@
 			});
 
     		google.maps.event.addListener(self.crosshair, 'rightclick', function(event){
-    			self.setMarkerDrawRoute.call(this,self,event);
-    			self.crosshair.setMap(null);
-    			self.crosshair = null;
+    			projection = self.overlay.getProjection();
+    			event.pixel = projection.fromLatLngToContainerPixel(event.latLng);
+    			radPosition = this.getPosition();
+    			position = self.convertDMS(radPosition.lat(),radPosition.lng());
+    			self.fire('contextRequest',{event:event,obj:self,koords:position},["crossmenu"],function(){}); //REFAK: CROSS
 			});
 			google.maps.event.addListener(self.crosshair, 'drag', function(event){
-				degLatLngs = self.crosshair.getPosition();
-				latLngs = self.convertDMS(degLatLngs.lat(), degLatLngs.lng());
-				$("#crossLat",self.$ctx).html(latLngs.latDMS+ " Lat");
-				$("#crossLong",self.$ctx).html(latLngs.lngDMS+ " Long");
+				self.crosshairDragged(self);
 			});
+			self.crosshairDragged(self);
     	} else {
     		self.setMarkerDrawRoute.call(this,self,event);
     	}
     },
-    
+
+    crosshairDragged : function(self){
+    	degLatLngs = self.crosshair.getPosition();
+    	latLngs = self.convertDMS(degLatLngs.lat(), degLatLngs.lng());
+    	$("#crossKoordsDisplayTitle",self.$ctx).html("Crosshair:");
+    	$("#crossKoordsDisplayLat",self.$ctx).html("LAT: "+latLngs.latDMS);
+    	$("#crossKoordsDisplayLng",self.$ctx).html("LNG: "+latLngs.lngDMS);
+    },
+
+    onSwitchCrossToMarker : function(self){
+    	self.drawNewMarkerAt.call(self,this.crosshair.getPosition());
+    	this.crosshair.setMap(null);
+    	this.crosshair = null;
+    	$("#crossKoordsDisplayTitle",self.$ctx).html("");
+    	$("#crossKoordsDisplayLat",self.$ctx).html("");
+    	$("#crossKoordsDisplayLng",self.$ctx).html("");
+    },
+
     loadContextMenu : function(self, event) {
     	self.fire('lngLatChanged',  event, function() { });
     	self.fire('contextRequest',  event, function() { });
@@ -231,13 +381,16 @@
 		});				
 
 		google.maps.event.addListener(marker, 'rightclick', function(event){
-			/*
+			
 			projection = self.overlay.getProjection();
 			event.pixel = projection.fromLatLngToContainerPixel(event.latLng);
-			self.loadContextMenu.call(this,self,event);*/	
+			radPosition = this.getPosition();
+			position = self.convertDMS(radPosition.lat(),radPosition.lng());
+			//self.loadContextMenu.call(this,self,event);*/	
 			//self.removeMarker.call(this,self);
 			//self.drawRoute.call(this,self);
-			self.distanceToCrosshair.call(this,self);
+			//self.distanceToCrosshair.call(this,self);			
+			self.fire('contextRequest',{event:event,obj:this,koords:position}, ["markermenu"],function(){}); //REFAK: MARKER
 		});
 
 		self.markers.push(marker);
@@ -249,18 +402,20 @@
 		
 		return marker;
     },
-    distanceToCrosshair : function(self){
-    	if(self.crosshair ==null)
+    onCalculateDistance : function(marker){
+    	if(this.crosshair ==null)
     		return;
-    	var distance = google.maps.geometry.spherical.computeDistanceBetween (self.crosshair.getPosition(), this.getPosition());
-    	$("#distanceToCrosshair",self.$ctx).html(distance.toFixed(2)+ " Meter");
+    	distance = google.maps.geometry.spherical.computeDistanceBetween (this.crosshair.getPosition(), marker.getPosition());
+    	$("#distanceDisplayTitle",this.$ctx).html("Crosshair distance:");
+    	$("#distanceDisplayValue",this.$ctx).html(distance.toFixed(2)+ " meter");
     },
-    drawRoute : function(self){
-    	if(self.markers.length > 1){
+    onMakeRoute : function(){
+    	var self = this;
+    	if(this.markers.length > 1){
     		points = [];
-    		for (var i = 0; i < self.markers.length; i++) {
-    			points.push(self.markers[i].getPosition());
-    			self.markers[i].setMap(null);
+    		for (var i = 0; i < this.markers.length; i++) {
+    			points.push(this.markers[i].getPosition());
+    			this.markers[i].setMap(null);
     		};
     		route = new google.maps.Polyline({
 				path: points,
@@ -271,29 +426,49 @@
 				editable: true
 			});	
 			google.maps.event.addListener(route, 'rightclick', function(event){
-				this.setMap(null);
-				idx = self.routes.indexOf(this);
-				self.routes.splice(idx,1);
+				projection = self.overlay.getProjection();
+				event.pixel = projection.fromLatLngToContainerPixel(event.latLng);
+				radPosition = this.getPath().getAt(1);
+				position = self.convertDMS(radPosition.lat(),radPosition.lng());
+				//Ich muss dieses gesamte modul Mitgeben damit ich nach dem Klicken auf ein Kontext eintrag
+				//inner halb eines terrific events zugriff auf die Funktionen hier kriege
+				obj = {route:this,self:self,map:self.map};
+				self.fire('contextRequest',{event:event,obj:obj,koords:position},["routemenu"],function(){}); //REFAK: ROUTE
 			});
+			/*
 			google.maps.event.addListener(route, 'dblclick', function(event){
 				this.setMap(null);
 				this.getPath().forEach(function(item, index){
-					self.drawNewMarkerAt(item);
+					this.drawNewMarkerAt(item);
 				});
 
 			});
-			route.setMap(self.map);
-			self.routes.push(route);
-			self.markers=[];
+*/
+			route.setMap(this.map);
+			this.routes.push(route);
+			this.markers=[];
 
 
     	}
     },
 
-    removeMarker : function(self){
-    		this.setMap(null);
-			index = self.markers.indexOf(this);
-			self.markers.splice(index,1);
+    onSwitchRouteToMarkers : function(obj){
+    	obj.route.getPath().forEach(function(item, index){
+    		obj.self.drawNewMarkerAt.call(obj.self,item);
+    	});
+    	obj.self.onRemoveRoute.call(obj.self,obj);
+    },
+
+    onRemoveRoute : function(obj){
+    	obj.route.setMap(null);
+    	idx = this.routes.indexOf(obj.route);
+    	this.routes.splice(idx,1);
+    },
+
+    onRemoveMarker : function(marker){
+    		marker.setMap(null);
+			index = this.markers.indexOf(marker);
+			this.markers.splice(index,1);
     },
     
     onMarkerAdd : function(event) {
@@ -306,8 +481,8 @@
     centerChanged : function(self) {
 		center = this.center;
 		dms = self.convertDMS(center.lat(), center.lng());
-		$("#lat",self.$ctx).html(dms.latDMS+" Lat");
-		$("#long",self.$ctx).html(dms.lngDMS+" Long");
+		$("#centerKoordsDisplayLat",self.$ctx).html("LAT: "+dms.latDMS);
+		$("#centerKoordsDisplayLng",self.$ctx).html("LNG: "+dms.lngDMS);
     },
     
     /*
