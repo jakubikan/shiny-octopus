@@ -1,6 +1,29 @@
 $(document).ready(function() {
+	var DUMMY_SELECT = '-Please select-';
 	var formID = null;
-	var formData;
+	var formData = {ID: null,													
+					windstrength: null,
+					winddirection: null,
+				  	airpressure: null,
+				  	temperature: null,
+				  	clouds: null,
+				  	rain: null,
+				  	waveheight: null,
+				  	wavedirection: null,
+				  	dateandtime: null,
+
+				  	// waypoint data
+				  	name: null,		
+				  	latitude: null,
+				  	longitude: null, 
+				  	cog: null,
+				  	sog: null,
+				  	destination: null,
+				  	maneuver: null,
+				  	headsail: null,
+				  	dtm: null,
+				  	btm: null
+				};
 	var selectSelector = {selector : '#entry'};
 	var waypointForm;		// true if the requests have to be sent to waypoint-process.php, 
 							// false if they will be sent to weather-process.php
@@ -49,40 +72,40 @@ $(document).ready(function() {
 		var selects = $(document).find('select');
 		if (waypointForm) {
 			// Weather data
-			formID = formData[10];
-			getDOMElement(inputs, "windStrength").value = formData[11] != 0 ? formData[11] : "";
-			getDOMElement(selects, "windDirection").value = formData[12] != 'null' ? formData[12] : "-Please select-";
-			getDOMElement(inputs, "airPressure").value = formData[13] != 0 ? formData[13] : "";
-			getDOMElement(inputs, "temp").value = formData[14] != 0 ? formData[14] : "";
-			getDOMElement(selects, "clouds").value = formData[15] != 'null' ? formData[15] : "-Please select-";
-			getDOMElement(selects, "rain").value = formData[16] != 'null' ? formData[16] : "-Please select-";
-			getDOMElement(inputs, "waveHeight").value = formData[17] != 0 ? formData[17] : "";
-			getDOMElement(selects, "waveDirection").value = formData[18] != 'null' ? formData[18] : "-Please select-";
-			getDOMElement(inputs, "trackDateTime").value = formData[19] != 0 ? formData[19] : "";
+			formID = formData.ID;
+			getDOMElement(inputs, "windStrength").value = typeof formData.windstrength != 'undefined' && formData.windstrength != 0 ? formData.windstrength : "";
+			getDOMElement(selects, "windDirection").value = typeof formData.winddirection != 'undefined' && formData.winddirection != 'null' ? formData.winddirection : DUMMY_SELECT;
+			getDOMElement(inputs, "airPressure").value = typeof formData.airpressure != 'undefined' && formData.airpressure != 0 ? formData.airpressure : "";
+			getDOMElement(inputs, "temp").value = typeof formData.temperature != 'undefined' && formData.temperature != 0 ? formData.temperature : "";
+			getDOMElement(selects, "clouds").value = typeof formData.clouds != 'undefined' && formData.clouds != 'null' ? formData.clouds : DUMMY_SELECT;
+			getDOMElement(selects, "rain").value = typeof formData.rain != 'undefined' && formData.rain != 'null' ? formData.rain : DUMMY_SELECT;
+			getDOMElement(inputs, "waveHeight").value = typeof formData.waveheight != 'undefined' && formData.waveheight != 0 ? formData.waveheight : "";
+			getDOMElement(selects, "waveDirection").value = typeof formData.wavedirection != 'undefined' && formData.wavedirection != 'null' ? formData.wavedirection : DUMMY_SELECT;
+			getDOMElement(inputs, "trackDateTime").value = typeof formData.dateandtime != 'undefined' && formData.dateandtime != 0 ? formData.dateandtime : "";
 		
 			// Waypoint data
-			getDOMElement(inputs, "name").value = formData[0] != 'null' ? formData[0] : "";
-			getDOMElement(selects, "headSail").value = formData[1] != 'null' ? formData[1] : "-Please select-";
-			getDOMElement(inputs, "lat").value = formData[2] != 'null' ? formData[2] : "";
-			getDOMElement(inputs, "lng").value = formData[3] != 'null' ? formData[3] : "";
-			getDOMElement(selects, "dest").value = formData[4] != 'null' ? formData[4] : "-Please select-";
-			getDOMElement(inputs, "dtm").value = formData[5] != 'null' ? formData[5] : "";
-			getDOMElement(inputs, "cog").value = formData[6] != 'null' ? formData[6] : "";
-			getDOMElement(inputs, "sog").value = formData[7] != 'null' ? formData[7] : "";
-			getDOMElement(selects, "maneuver").value = formData[8] != 'null' ? formData[8] : "-Please select-";
-			getDOMElement(inputs, "btm").value = formData[9] != 'null' ? formData[9] : "";
+			getDOMElement(inputs, "name").value = typeof formData.name != 'undefined' && formData.name != 'null' ? formData.name : "";
+			getDOMElement(selects, "headSail").value = typeof formData.headsail != 'undefined' && formData.headsail != 'null' ? formData.headsail : DUMMY_SELECT;
+			getDOMElement(inputs, "lat").value = typeof formData.latitude != 'undefined' && formData.latitude != 'null' ? formData.latitude : "";
+			getDOMElement(inputs, "lng").value = typeof formData.longitude != 'undefined' && formData.longitude != 'null' ? formData.longitude : "";
+			getDOMElement(selects, "dest").value = typeof formData.destination != 'undefined' && formData.destination != 'null' ? formData.destination : DUMMY_SELECT;
+			getDOMElement(inputs, "dtm").value = typeof formData.dtm != 'undefined' && formData.dtm != 'null' ? formData.dtm : "";
+			getDOMElement(inputs, "cog").value = typeof formData.cog != 'undefined' && formData.cog != 'null' ? formData.cog : "";
+			getDOMElement(inputs, "sog").value = typeof formData.sog != 'undefined' && formData.sog != 'null' ? formData.sog : "";
+			getDOMElement(selects, "maneuver").value = typeof formData.maneuver != 'undefined' && formData.maneuver != 'null' ? formData.maneuver : DUMMY_SELECT;
+			getDOMElement(inputs, "btm").value = typeof formData.btm != 'undefined' && formData.btm != 'null' ? formData.btm : "";
 			
 		} else {
-			formID = formData[0];
-			getDOMElement(inputs, "windStrength").value = formData[1] != 0 ? formData[1] : "";
-			getDOMElement(selects, "windDirection").value = formData[3] != 'null' ? formData[3] : "-Please select-";
-			getDOMElement(inputs, "airPressure").value = formData[5] != 0 ? formData[5] : "";
-			getDOMElement(inputs, "temp").value = formData[2] != 0 ? formData[2] : "";
-			getDOMElement(selects, "clouds").value = formData[4] != 'null' ? formData[4] : "-Please select-";
-			getDOMElement(selects, "rain").value = formData[6] != 'null' ? formData[6] : "-Please select-";
-			getDOMElement(inputs, "waveHeight").value = formData[7] != 0 ? formData[7] : "";
-			getDOMElement(selects, "waveDirection").value = formData[8] != 'null' ? formData[8] : "-Please select-";
-			getDOMElement(inputs, "trackDateTime").value = formData[9] != 0 ? formData[9] : "";
+			formID = formData.ID;
+			getDOMElement(inputs, "windStrength").value = typeof formData.windstrength != 'undefined' && formData.windstrength != 0 ? formData.windstrength : "";
+			getDOMElement(selects, "windDirection").value = typeof formData.winddirection != 'undefined' && formData.winddirection != 'null' ? formData.winddirection : DUMMY_SELECT;
+			getDOMElement(inputs, "airPressure").value = typeof formData.airpressure != 'undefined' && formData.airpressure != 0 ? formData.airpressure : "";
+			getDOMElement(inputs, "temp").value = typeof formData.temperature != 'undefined' && formData.temperature != 0 ? formData.temperature : "";
+			getDOMElement(selects, "clouds").value = typeof formData.clouds != 'undefined' && formData.clouds != 'null' ? formData.clouds : DUMMY_SELECT;
+			getDOMElement(selects, "rain").value = typeof formData.rain != 'undefined' && formData.rain != 'null' ? formData.rain : DUMMY_SELECT;
+			getDOMElement(inputs, "waveHeight").value = typeof formData.waveheight!= 'undefined' && formData.waveheight != 0 ? formData.waveheight : "";
+			getDOMElement(selects, "waveDirection").value = typeof formData.wavedirection != 'undefined' && formData.wavedirection != 'null' ? formData.wavedirection : DUMMY_SELECT;
+			getDOMElement(inputs, "trackDateTime").value = typeof formData.dateandtime != 'undefined' && formData.dateandtime != 0 ? formData.dateandtime : "";
 		}
 	}
 	
@@ -101,7 +124,7 @@ $(document).ready(function() {
 			$(this).val("");
 		});
 		selects.each(function(index, element) {
-			$(this).val("-Please select-");
+			$(this).val(DUMMY_SELECT);
 		});
 		var date = new Date();
 		var dateHours = leftPad(date.getHours(), 2);		
@@ -135,16 +158,16 @@ $(document).ready(function() {
 			formData={// weather data
 					  ID: formID,													
 					  windstrength: getDOMElement(inputs, "windStrength").value || 0,
-					  winddirection: getDOMElement(selects, 'windDirection').value === '-Please select-' ? 
+					  winddirection: getDOMElement(selects, 'windDirection').value === DUMMY_SELECT ? 
 												   "null" : getDOMElement(selects, 'windDirection').value,
 					  airpressure: getDOMElement(inputs, 'airPressure').value || 0,
 					  temperature: getDOMElement(inputs, 'temp').value || 0,
-					  clouds: getDOMElement(selects, 'clouds').value === '-Please select-' ? 
+					  clouds: getDOMElement(selects, 'clouds').value === DUMMY_SELECT ? 
 											"null" : getDOMElement(selects, 'clouds').value,
-					  rain: getDOMElement(selects, 'rain').value === '-Please select-' ? 
+					  rain: getDOMElement(selects, 'rain').value === DUMMY_SELECT ? 
 										  "null" : getDOMElement(selects, 'rain').value,
 					  waveheight: getDOMElement(inputs, 'waveHeight').value || 0,
-					  wavedirection: getDOMElement(selects, 'waveDirection').value === '-Please select-' ? 
+					  wavedirection: getDOMElement(selects, 'waveDirection').value === DUMMY_SELECT ? 
 												   "null" : getDOMElement(selects, 'waveDirection').value,
 					  dateandtime: getDOMElement(inputs, 'trackDateTime').value || "null",
 
@@ -154,11 +177,11 @@ $(document).ready(function() {
 					  longitude: getDOMElement(inputs, 'lng').value || "null", 
 					  cog: getDOMElement(inputs, 'cog').value || "null",
 					  sog: getDOMElement(inputs, 'sog').value || "null",
-					  destination: getDOMElement(selects, 'dest').value === '-Please select-' ? 
+					  destination: getDOMElement(selects, 'dest').value === DUMMY_SELECT ? 
 												   "null" : getDOMElement(selects, 'dest').value,
-					  maneuver: getDOMElement(selects, 'maneuver').value === '-Please select-' ? 
+					  maneuver: getDOMElement(selects, 'maneuver').value === DUMMY_SELECT ? 
 												   "null" : getDOMElement(selects, 'maneuver').value,
-					  headsail: getDOMElement(selects, 'headSail').value === '-Please select-' ? 
+					  headsail: getDOMElement(selects, 'headSail').value === DUMMY_SELECT ? 
 												   "null" : getDOMElement(selects, 'headSail').value,
 					  dtm: getDOMElement(inputs, 'dtm').value || "null",
 					  btm: getDOMElement(inputs, 'btm').value || "null"
@@ -166,16 +189,16 @@ $(document).ready(function() {
 			} else {
 			formData={ID: formID,
 					  windstrength: getDOMElement(inputs, "windStrength").value || 0,
-					  winddirection: getDOMElement(selects, 'windDirection').value === '-Please select-' ? 
+					  winddirection: getDOMElement(selects, 'windDirection').value === DUMMY_SELECT ? 
 					  							   "null" : getDOMElement(selects, 'windDirection').value,
 					  airpressure: getDOMElement(inputs, 'airPressure').value || 0,
 					  temperature: getDOMElement(inputs, 'temp').value || 0,
-					  clouds: getDOMElement(selects, 'clouds').value === '-Please select-' ? 
+					  clouds: getDOMElement(selects, 'clouds').value === DUMMY_SELECT ? 
 			  							    "null" : getDOMElement(selects, 'clouds').value,
-					  rain: getDOMElement(selects, 'rain').value === '-Please select-' ? 
+					  rain: getDOMElement(selects, 'rain').value === DUMMY_SELECT ? 
 			  							  "null" : getDOMElement(selects, 'rain').value,
 					  waveheight: getDOMElement(inputs, 'waveHeight').value || 0,
-					  wavedirection: getDOMElement(selects, 'waveDirection').value === '-Please select-' ? 
+					  wavedirection: getDOMElement(selects, 'waveDirection').value === DUMMY_SELECT ? 
 			  							    	   "null" : getDOMElement(selects, 'waveDirection').value,
 					  dateandtime: getDOMElement(inputs, 'trackDateTime').value || "null"
 					  };
@@ -188,6 +211,7 @@ $(document).ready(function() {
 			}
 			else {
 				// Create regexes for check of lat, lng and date&time to fetch weather data from openweathermap.
+				// Src: http://txt2re.com/index-javascript.php3?s=Sun,%20Jun%2016%202013,%2022:51:39&5&-47&6&22&17&23&4&-48&24&2;
 				var dblTester = new RegExp("(\\d+)(\\.)(\\d+)", ["i"]);
 				var re1='((?:Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday|Tues|Thur|Thurs|Sun|Mon|Tue|Wed|Thu|Fri|Sat))';	// Day Of Week 1
 				var re2='(,)';	// Any Single Character 1
@@ -230,16 +254,16 @@ $(document).ready(function() {
 			formData={// weather data
 					  ID: formID,													
 					  windstrength: getDOMElement(inputs, "windStrength").value || 0,
-					  winddirection: getDOMElement(selects, 'windDirection').value === '-Please select-' ? 
+					  winddirection: getDOMElement(selects, 'windDirection').value === DUMMY_SELECT ? 
 												   "null" : getDOMElement(selects, 'windDirection').value,
 					  airpressure: getDOMElement(inputs, 'airPressure').value || 0,
 					  temperature: getDOMElement(inputs, 'temp').value || 0,
-					  clouds: getDOMElement(selects, 'clouds').value === '-Please select-' ? 
+					  clouds: getDOMElement(selects, 'clouds').value === DUMMY_SELECT ? 
 											"null" : getDOMElement(selects, 'clouds').value,
-					  rain: getDOMElement(selects, 'rain').value === '-Please select-' ? 
+					  rain: getDOMElement(selects, 'rain').value === DUMMY_SELECT ? 
 										  "null" : getDOMElement(selects, 'rain').value,
 					  waveheight: getDOMElement(inputs, 'waveHeight').value || 0,
-					  wavedirection: getDOMElement(selects, 'waveDirection').value === '-Please select-' ? 
+					  wavedirection: getDOMElement(selects, 'waveDirection').value === DUMMY_SELECT ? 
 												   "null" : getDOMElement(selects, 'waveDirection').value,
 					  dateandtime: getDOMElement(inputs, 'trackDateTime').value || "null",
 
@@ -249,11 +273,11 @@ $(document).ready(function() {
 					  longitude: getDOMElement(inputs, 'lng').value || "null", 
 					  cog: getDOMElement(inputs, 'cog').value || "null",
 					  sog: getDOMElement(inputs, 'sog').value || "null",
-					  destination: getDOMElement(selects, 'dest').value === '-Please select-' ? 
+					  destination: getDOMElement(selects, 'dest').value === DUMMY_SELECT ? 
 												   "null" : getDOMElement(selects, 'dest').value,
-					  maneuver: getDOMElement(selects, 'maneuver').value === '-Please select-' ? 
+					  maneuver: getDOMElement(selects, 'maneuver').value === DUMMY_SELECT ? 
 												   "null" : getDOMElement(selects, 'maneuver').value,
-					  headsail: getDOMElement(selects, 'headSail').value === '-Please select-' ? 
+					  headsail: getDOMElement(selects, 'headSail').value === DUMMY_SELECT ? 
 												   "null" : getDOMElement(selects, 'headSail').value,
 					  dtm: getDOMElement(inputs, 'dtm').value || "null",
 					  btm: getDOMElement(inputs, 'btm').value || "null"
@@ -261,16 +285,16 @@ $(document).ready(function() {
 			} else {
 			formData={ID: formID,
 					  windstrength: getDOMElement(inputs, "windStrength").value || 0,
-					  winddirection: getDOMElement(selects, 'windDirection').value === '-Please select-' ? 
+					  winddirection: getDOMElement(selects, 'windDirection').value === DUMMY_SELECT ? 
 					  							   "null" : getDOMElement(selects, 'windDirection').value,
 					  airpressure: getDOMElement(inputs, 'airPressure').value || 0,
 					  temperature: getDOMElement(inputs, 'temp').value || 0,
-					  clouds: getDOMElement(selects, 'clouds').value === '-Please select-' ? 
+					  clouds: getDOMElement(selects, 'clouds').value === DUMMY_SELECT ? 
 			  							    "null" : getDOMElement(selects, 'clouds').value,
-					  rain: getDOMElement(selects, 'rain').value === '-Please select-' ? 
+					  rain: getDOMElement(selects, 'rain').value === DUMMY_SELECT ? 
 			  							  "null" : getDOMElement(selects, 'rain').value,
 					  waveheight: getDOMElement(inputs, 'waveHeight').value || 0,
-					  wavedirection: getDOMElement(selects, 'waveDirection').value === '-Please select-' ? 
+					  wavedirection: getDOMElement(selects, 'waveDirection').value === DUMMY_SELECT ? 
 			  							    	   "null" : getDOMElement(selects, 'waveDirection').value,
 					  dateandtime: getDOMElement(inputs, 'trackDateTime').value || "null"
 					  };
@@ -327,8 +351,40 @@ $(document).ready(function() {
 			},
 			dataType: "json",
 			success: function(data){
-				formData = data;
-				setFieldData(data);
+				if (waypointForm) {
+					formData.name = data[0];
+					formData.headsail = data[1];
+					formData.latitude = data[2];
+					formData.longitude = data[3];
+					formData.destination = data[4];
+					formData.dtm = data[5];
+					formData.cog = data[6];
+					formData.sog = data[7];
+					formData.maneuver = data[8];
+					formData.btm = data[9];										
+					formData.ID = data[10];
+					formData.windstrength = data[11];
+					formData.winddirection = data[12];
+					formData.airpressure = data[13];
+					formData.temperature = data[14];
+					formData.clouds = data[15];
+					formData.rain = data[16];
+					formData.waveheight = data[17];
+					formData.wavedirection = data[18];
+					formData.dateandtime = data[19];
+				} else {
+					formData.ID = data[0];
+					formData.windstrength = data[1];
+					formData.temperature = data[2];
+					formData.winddirection = data[3];
+					formData.clouds = data[4];
+					formData.airpressure = data[5];
+					formData.rain = data[6];
+					formData.waveheight = data[7];
+					formData.wavedirection = data[8];
+					formData.dateandtime = data[9];
+				}
+				setFieldData(formData);
 				hideGif();
 				if ($('#entry').val() != '-New Entry-') showDel();
 			}
@@ -404,12 +460,12 @@ $(document).ready(function() {
 			dataType: "jsonp",
 			success: function(data) {
 				if (data['cod'] == 200) {
-					formData[11] = data['list'][0]['wind']['speed'];
-					formData[12] = getDirectionFromDegrees(data['list'][0]['wind']['deg']);
-					formData[13] = data['list'][0]['main']['pressure'];
-					formData[14] = data['list'][0]['main']['temp'] - 273.15;
-					formData[15] = getCloudiness(data['list'][0]['clouds']['all']);
-					formData[16] = getRainByCode(data['list'][0]['weather'][0]['id']);
+					formData.windstrength = data['list'][0]['wind']['speed'];
+					formData.winddirection = getDirectionFromDegrees(data['list'][0]['wind']['deg']);
+					formData.airpressure = data['list'][0]['main']['pressure'];
+					formData.temperature = data['list'][0]['main']['temp'] - 273.15;
+					formData.clouds = getCloudiness(data['list'][0]['clouds']['all']);
+					formData.rain = getRainByCode(data['list'][0]['weather'][0]['id']);
 					setFieldData(formData);
 					updateSentData(formData);
 				}
@@ -426,7 +482,7 @@ $(document).ready(function() {
 		else if (degrees > 205.5 && degrees <= 247.5) return "South-West";
 		else if (degrees > 247.5 && degrees <= 292.5) return "West";
 		else if (degrees > 292.5 && degrees <= 337.5) return "North-West";
-		else return "-Please select-";
+		else return DUMMY_SELECT;
 	}
 	
 	function getCloudiness(percentage) {
@@ -436,7 +492,7 @@ $(document).ready(function() {
 		else if (percentage < 80) return "Rain";
 		else if (percentage < 90) return "Snow";
 		else if (percentage < 100) return "Thunder / Storm";
-		else return "-Please select-";
+		else return DUMMY_SELECT;
 	}
 	
 	function getRainByCode(code){
@@ -469,7 +525,7 @@ $(document).ready(function() {
 			case 522:
 				return ">25 mm/sqm";
 				break;
-			default: return "-Please select-";
+			default: return DUMMY_SELECT;
 		}		
 	}
 });
