@@ -37,6 +37,7 @@
         <script type="text/javascript" src="../lib/js/jquery-ui.js"></script>
         <script type="text/javascript" src="../lib/js/terrific-2.0.1.js"></script>
         <script type="text/javascript" src="../lib/bootstrap/js/bootstrap.js"></script>
+        <script type="text/javascript" src="../lib/js/swipe.js"></script>
         <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?
 			key=AIzaSyBAgciq8z1_C5aadB3D08yzrc-1YlTOEQ0&sensor=false&libraries=geometry">
         </script>

@@ -10,16 +10,17 @@
 	        	</div>
 				<button id="weatherBtn">Weather</button>
 	        	<div id="crossKoordsDisplay">
-					<div id="crossKoordsDisplayTitle"></div>
+					Crosshair:
 					<div id="crossKoordsDisplayLat"></div>
 					<div id="crossKoordsDisplayLng"></div>
 				</div>
 				<div id="distanceDisplay">
-					<div id="distanceDisplayTitle"></div>
+					Crosshair distance:
 					<div id="distanceDisplayValue"></div>
 				</div>
-				<div id="CurWeather">	<!--				
-					<div id="CurWeatherTitle">Current Weather:</div>
+				<div id="CurWeather" align="center">		
+					<div align="left"><b>Current Weather:</b></div>
+					<div id="CurWeatherDisplay"></div><!--
 					<div id="CurWeatherWTitle">Wind:</div>
 					<div id="CurWeatherWSpeed">Speed: 20 m/s</div>
 					<div id="CurWeatherWDirection">Direction: NE (45°)</div>	
@@ -35,7 +36,17 @@
 					<div id="CurWeatherPSnow">Snow: 3 mm/3h</div>
 					-->
 				</div>
+				<div id="weatherForecast" align="center">
+					<div align="left"><b>Weather Forecast</b></div>
+					<div id="forecastSwipe" class="swipe">
+						<div class='swipe-wrap'>
 
+						</div>
+					</div>
+					<button id="prevForecastItem" align="left">Prev</button>
+					<button id="nextForecastItem" align="right">Next</button>
+					<div id="forecastSlidePosition"></div>
+				</div>
 
 				<!-- Tracking will einfach nich
 				<div id="tracking">
@@ -49,7 +60,7 @@
 			<?php include("js/terrific/ContextMenuRoute/contextmenuroute.php") ?>
 				
 			<div id="map-canvas"></div>
-			<div id="weatherForecast" align="center"></div>
+			
 		</div>
 
 	</div>
