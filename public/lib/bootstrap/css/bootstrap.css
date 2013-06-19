@@ -1313,25 +1313,6 @@ textarea::-webkit-input-placeholder {
 	vertical-align: middle;
 }
 
-#select-sunny {
-	background-image:url(../../../img/icons/weather/sun.png);	
-}
-#select-partlycloudy {
-	background-image:url(../../../img/icons/weather/sunclouds.png);	
-}
-#select-cloudy {
-	background-image:url(../../../img/icons/weather/clouds.png);	
-}
-#select-rain {
-	background-image:url(../../../img/icons/weather/rain.png);	
-}
-#select-snow {
-	background-image:url(../../../img/icons/weather/snow.png);	
-}
-#select-thunder {
-	background-image:url(../../../img/icons/weather/thunder.png);	
-}
-
 .input-large {
   width: 210px;
 }
