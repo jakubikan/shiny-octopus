@@ -20,19 +20,48 @@ import models.*;
 public class Waypoints extends Controller {
 	
 	public static Result create() {
-		return TODO;
+		JsonNode  b = request().body().asJson();
+		Waypoint json = Json.fromJson(b, Waypoint.class);
+
+		if (json == null) {
+			return badRequest();
+			
+		}
+
+		json.save();
+		return ok(Json.toJson(json));
+
 	}
 
 	public static Result update(long id) {
-		return TODO;
+		Waypoint result = Waypoint.find.byId(id);
+		JsonNode  b = request().body().asJson();
+		Waypoint json = Json.fromJson(b, Waypoint.class);
+		if (json == null || result == null) {
+			return badRequest();
+			
+		}
+		result.update(json);
+		return ok(Json.toJson(result));
+
 
 	}
 	public static Result delete(long id) {
-		return TODO;
+		Waypoint result = Waypoint.find.byId(id);
+		if (result == null) {
+			return badRequest();
+		}
+		result.delete();
+		return ok();
+
 	}
 	
 	public static Result all() {
-		return null;
+		JsonNode result = Json.toJson(Waypoint.find.all());
+		if (result == null) {
+			return badRequest();
+		}
+		return ok(result);
 		
 	}
 
