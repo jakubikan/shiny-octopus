@@ -12,327 +12,388 @@ public class Waypoint extends Model {
 
 	@Id
 	@Column(name = "ID")
-	private long id;
+	private long ID;
 
 	@Column(name = "Name")
-	private String name;
+	private String Name;
 	@Column(name = "HeadSail")
-	private String headSail;
+	private String HeadSail;
 	@Column(name = "Lat")
-	private String lat;
+	private String Lat;
 	@Column(name = "Lng")
-	private String lng;
+	private String Lng;
 	@Column(name = "Dest")
-	private String dest;
+	private String Dest;
 	@Column(name = "DTM")
-	private String dtm;
+	private String DTM;
 	@Column(name = "COG")
-	private String cog;
+	private String COG;
 	@Column(name = "SOG")
-	private String sog;
+	private String SOG;
 	@Column(name = "Maneuver")
-	private String maneuver;
+	private String Maneuver;
 	@Column(name = "BTM")
-	private String btm;
-
+	private String BTM;
 	@Column(name = "WindStrength")
-	private int windStrength;
+	private int WindStrength;
 	@Column(name = "WindDirection")
-	private String windDirection;
-
+	private String WindDirection;
 	@Column(name = "AirPressure")
-	private int airPressure;
+	private int AirPressure;
 	@Column(name = "Temperature")
-	private int temperature;
+	private int Temperature;
 	@Column(name = "Clouds")
-	private String clouds;
+	private String Clouds;
 	@Column(name = "Rain")
-	private String rain;
-
+	private String Rain;
 	@Column(name = "WaveHeight")
-	private int waveHeight;
+	private int WaveHeight;
 	@Column(name = "WaveDirection")
-	private String waveDirection;
+	private String WaveDirection;
 	@Column(name = "DateTime")
-	private String dateTime;
+	private String DateTime;
 
 
 	public static Finder<Long, Waypoint> find = new Finder<Long, Waypoint>(
 			Long.class, Waypoint.class);
 
-	/**
-	 * @return the id
-	 */
-	public long getId() {
-		return id;
-	}
 
 	/**
-	 * @param id
-	 *            the id to set
+	 * @return the iD
 	 */
-	public void setId(long id) {
-		this.id = id;
+	public long getID() {
+		return ID;
 	}
+
+
+	/**
+	 * @param iD the iD to set
+	 */
+	public void setID(long iD) {
+		ID = iD;
+	}
+
 
 	/**
 	 * @return the name
 	 */
 	public String getName() {
-		return name;
+		return Name;
 	}
 
+
 	/**
-	 * @param name
-	 *            the name to set
+	 * @param name the name to set
 	 */
 	public void setName(String name) {
-		this.name = name;
+		Name = name;
 	}
+
 
 	/**
 	 * @return the headSail
 	 */
 	public String getHeadSail() {
-		return headSail;
+		return HeadSail;
 	}
 
+
 	/**
-	 * @param headSail
-	 *            the headSail to set
+	 * @param headSail the headSail to set
 	 */
 	public void setHeadSail(String headSail) {
-		this.headSail = headSail;
+		HeadSail = headSail;
 	}
+
 
 	/**
 	 * @return the lat
 	 */
 	public String getLat() {
-		return lat;
+		return Lat;
 	}
 
+
 	/**
-	 * @param lat
-	 *            the lat to set
+	 * @param lat the lat to set
 	 */
 	public void setLat(String lat) {
-		this.lat = lat;
+		Lat = lat;
 	}
+
 
 	/**
 	 * @return the lng
 	 */
 	public String getLng() {
-		return lng;
+		return Lng;
 	}
 
+
 	/**
-	 * @param lng
-	 *            the lng to set
+	 * @param lng the lng to set
 	 */
 	public void setLng(String lng) {
-		this.lng = lng;
+		Lng = lng;
 	}
+
 
 	/**
 	 * @return the dest
 	 */
 	public String getDest() {
-		return dest;
+		return Dest;
 	}
 
+
 	/**
-	 * @param dest
-	 *            the dest to set
+	 * @param dest the dest to set
 	 */
 	public void setDest(String dest) {
-		this.dest = dest;
+		Dest = dest;
 	}
 
-	/**
-	 * @return the dtm
-	 */
-	public String getDtm() {
-		return dtm;
-	}
 
 	/**
-	 * @param dtm
-	 *            the dtm to set
+	 * @return the dTM
 	 */
-	public void setDtm(String dtm) {
-		this.dtm = dtm;
+	public String getDTM() {
+		return DTM;
 	}
 
-	/**
-	 * @return the cog
-	 */
-	public String getCog() {
-		return cog;
-	}
 
 	/**
-	 * @param cog
-	 *            the cog to set
+	 * @param dTM the dTM to set
 	 */
-	public void setCog(String cog) {
-		this.cog = cog;
+	public void setDTM(String dTM) {
+		DTM = dTM;
 	}
 
-	/**
-	 * @return the sog
-	 */
-	public String getSog() {
-		return sog;
-	}
 
 	/**
-	 * @param sog
-	 *            the sog to set
+	 * @return the cOG
 	 */
-	public void setSog(String sog) {
-		this.sog = sog;
+	public String getCOG() {
+		return COG;
 	}
+
+
+	/**
+	 * @param cOG the cOG to set
+	 */
+	public void setCOG(String cOG) {
+		COG = cOG;
+	}
+
+
+	/**
+	 * @return the sOG
+	 */
+	public String getSOG() {
+		return SOG;
+	}
+
+
+	/**
+	 * @param sOG the sOG to set
+	 */
+	public void setSOG(String sOG) {
+		SOG = sOG;
+	}
+
 
 	/**
 	 * @return the maneuver
 	 */
 	public String getManeuver() {
-		return maneuver;
+		return Maneuver;
 	}
 
+
 	/**
-	 * @param maneuver
-	 *            the maneuver to set
+	 * @param maneuver the maneuver to set
 	 */
 	public void setManeuver(String maneuver) {
-		this.maneuver = maneuver;
+		Maneuver = maneuver;
 	}
 
-	/**
-	 * @return the btm
-	 */
-	public String getBtm() {
-		return btm;
-	}
 
 	/**
-	 * @param btm
-	 *            the btm to set
+	 * @return the bTM
 	 */
-	public void setBtm(String btm) {
-		this.btm = btm;
+	public String getBTM() {
+		return BTM;
 	}
+
+
+	/**
+	 * @param bTM the bTM to set
+	 */
+	public void setBTM(String bTM) {
+		BTM = bTM;
+	}
+
 
 	/**
 	 * @return the windStrength
 	 */
 	public int getWindStrength() {
-		return windStrength;
+		return WindStrength;
 	}
+
+
 	/**
 	 * @param windStrength the windStrength to set
 	 */
 	public void setWindStrength(int windStrength) {
-		this.windStrength = windStrength;
+		WindStrength = windStrength;
 	}
+
+
 	/**
 	 * @return the windDirection
 	 */
 	public String getWindDirection() {
-		return windDirection;
+		return WindDirection;
 	}
+
+
 	/**
 	 * @param windDirection the windDirection to set
 	 */
 	public void setWindDirection(String windDirection) {
-		this.windDirection = windDirection;
+		WindDirection = windDirection;
 	}
+
+
 	/**
 	 * @return the airPressure
 	 */
 	public int getAirPressure() {
-		return airPressure;
+		return AirPressure;
 	}
+
+
 	/**
 	 * @param airPressure the airPressure to set
 	 */
 	public void setAirPressure(int airPressure) {
-		this.airPressure = airPressure;
+		AirPressure = airPressure;
 	}
+
+
 	/**
 	 * @return the temperature
 	 */
 	public int getTemperature() {
-		return temperature;
+		return Temperature;
 	}
+
+
 	/**
 	 * @param temperature the temperature to set
 	 */
 	public void setTemperature(int temperature) {
-		this.temperature = temperature;
+		Temperature = temperature;
 	}
+
+
 	/**
 	 * @return the clouds
 	 */
 	public String getClouds() {
-		return clouds;
+		return Clouds;
 	}
+
+
 	/**
 	 * @param clouds the clouds to set
 	 */
 	public void setClouds(String clouds) {
-		this.clouds = clouds;
+		Clouds = clouds;
 	}
+
+
 	/**
 	 * @return the rain
 	 */
 	public String getRain() {
-		return rain;
+		return Rain;
 	}
+
+
 	/**
 	 * @param rain the rain to set
 	 */
 	public void setRain(String rain) {
-		this.rain = rain;
+		Rain = rain;
 	}
+
+
 	/**
 	 * @return the waveHeight
 	 */
 	public int getWaveHeight() {
-		return waveHeight;
+		return WaveHeight;
 	}
+
+
 	/**
 	 * @param waveHeight the waveHeight to set
 	 */
 	public void setWaveHeight(int waveHeight) {
-		this.waveHeight = waveHeight;
+		WaveHeight = waveHeight;
 	}
+
+
 	/**
 	 * @return the waveDirection
 	 */
 	public String getWaveDirection() {
-		return waveDirection;
+		return WaveDirection;
 	}
+
+
 	/**
 	 * @param waveDirection the waveDirection to set
 	 */
 	public void setWaveDirection(String waveDirection) {
-		this.waveDirection = waveDirection;
+		WaveDirection = waveDirection;
 	}
+
+
 	/**
 	 * @return the dateTime
 	 */
 	public String getDateTime() {
-		return dateTime;
+		return DateTime;
 	}
+
+
 	/**
 	 * @param dateTime the dateTime to set
 	 */
 	public void setDateTime(String dateTime) {
-		this.dateTime = dateTime;
+		DateTime = dateTime;
 	}
+
+
+	/**
+	 * @return the find
+	 */
+	public static Finder<Long, Waypoint> getFind() {
+		return find;
+	}
+
+
+	/**
+	 * @param find the find to set
+	 */
+	public static void setFind(Finder<Long, Waypoint> find) {
+		Waypoint.find = find;
+	}
+
+
 
 
 }

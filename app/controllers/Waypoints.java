@@ -52,7 +52,7 @@ public class Waypoints extends Controller {
 			return badRequest();
 		}
 		result.delete();
-		return ok();
+		return ok(Json.toJson(result));
 
 	}
 	
