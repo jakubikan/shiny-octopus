@@ -283,12 +283,10 @@
 	makeAjaxProcessPost: function (self, action, data, before_ajax, success_function) {
 		before_ajax();
 		$.ajax({
-			type: "POST",
-			url:  "php/waypoint_process.php" ,
-			data: { 
-				'action': action,
-				'data': data
-			},
+			type: (data.formID != null ? "POST" : "GET"),
+			url:  "/api/waypoint/" + action + (data.formID != null ? "/" + data.formID : ""),
+			data:  data,
+			contentType: "application/json",
 			dataType: "json",
 			success: function(data) {
 				success_function.call(this,data);
@@ -303,7 +301,7 @@
 	
 	sendWeatherForm: function (self, data) {
 		self.makeAjaxProcessPost(self, 
-			"send", data, 
+			"create", data, 
 			function(){
 				self.showGif(self);
 			},
@@ -389,7 +387,7 @@
 	},
 	
 	fillSelect: function (self) {
-		self.makeAjaxProcessPost(self, "select", self.selectSelector,
+		self.makeAjaxProcessPost(self, "all", self.selectSelector,
 			function() {
 				self.hideDel(self); 
 				self.showGif(self);
@@ -400,9 +398,9 @@
 				self.$entry.append("<option>-New Entry-</option>");
 				for (o in data) {
 					if (self.map[data[o]] == null) {
-						self.map[data[o]['DateTime']] = data[o]['ID'];
+						self.map[data[o]['dateTime']] = data[o]['ID'];
 					}
-					self.$entry.append("<option>"+data[o]['DateTime']+"</option>");
+					self.$entry.append("<option>"+data[o]['dateTime']+"</option>");
 					self.hideGif();
 					if (self.$entry.val() != '-New Entry-')  {
 						self.showDel(self);
