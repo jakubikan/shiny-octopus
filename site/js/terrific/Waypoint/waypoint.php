@@ -8,7 +8,7 @@
                         <div class="row-fluid"> 
                             <label class="control-label">Choose existing entry: </label> 
                             <select
-                            class="input-medium-xlarge" id="entry" name="entry" tabindex='1'>                            
+                            class="input-medium-xlarge" data-id="entry" name="entry" tabindex='1'>                            
                             </select>
                             <img  data-id="loadgif" src="../../../../img/animation/ajax-loader.gif"/>
                             <a href="javascript:void(0);"><img data-id="delEntryIcon" src="../../../../img/animation/delete_icon.gif" /></a>
