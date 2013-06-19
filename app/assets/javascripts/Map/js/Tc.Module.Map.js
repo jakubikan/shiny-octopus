@@ -96,7 +96,7 @@
 			maxZoom: 18
 		}));
 
-		self.Server = new FancyWebSocket('ws://127.0.0.1:9300');
+		//self.Server = new FancyWebSocket('ws://127.0.0.1:9300');
 		$("#weatherForecast",self.$ctx).hide();
 		$("#crossKoordsDisplay",self.$ctx).hide();
 		$("#distanceDisplay",self.$ctx).hide();
@@ -171,6 +171,7 @@
 			}
 
 		});
+		/*
 		self.Server.bind('open',function(){
 			$('#track',self.$ctx).html("Connection to boat server established");
 		});
@@ -182,7 +183,7 @@
 		self.Server.bind('close',function(){
 			$('#track',self.$ctx).html("Connection to boat server closed");
 		});
-
+		*/
 
 		/*
 		google.maps.event.addListener(self.map, 'longpress', function(event){
