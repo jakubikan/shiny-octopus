@@ -1,18 +1,26 @@
+@iconSize: 30px;
+@maxTextWidth: (2*@iconSize);
+
 .mod-map #map-canvas img {
   max-width: none;
 }
 
 .weather-title {
-	padding-top: 5px;
-	padding-left: 10px;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	text-decoration: underline;
+	font-weight: bold;
+	float: center;
 }
 
+#centerCoordsDisplay,
 #weatherForecast,
 #CurWeather {
-	background-color: rgb(220, 220, 220);
+	background-color: #e6e6e6;
 	border-radius: 4px;
-	border-weight: 3px;
 	margin: 5px;
+	padding-bottom: 15px;
+	text-align: center;
 }
 
 .no-left-margin {
@@ -20,22 +28,43 @@
 }
 
 #weatherBtn {
-	margin-left: 10%;	
+	margin-top: 15px;
+	margin-left: 10%;
 	margin-right: 10%;
 	width: 80%;
 }
 
-#prevForecastItemImg {
-	content: url(/assets/images/icons/arrow-left.png);
-	background-repeat: no-repeat;
-	width: 30px;
-	height: 30px;
-	
+#prevForecastItem {
+	float: left;
+	background: transparent;
+	border: none;
 }
 
+#nextForecastItem {
+	float: right;
+	background: transparent;
+	border: none;
+}
+
+#prevForecastItemImg, 
 #nextForecastItemImg {
-	content: url(/assets/images/icons/arrow-right.png);
-	background-repeat: no-repeat;
+	color: #0C6BA1;
+	font-size: 20px;
+	font-weight: bold;
 	width: 30px;
 	height: 30px;
+}
+
+#prevForecastItemImg {
+	content: url(/assets/images/icons/arrow-left-blue.png);
+}	
+
+#nextForecastItemImg {
+	content: url(/assets/images/icons/arrow-right-blue.png);
+}
+
+#forecastSlidePosition {
+	height: 30px;
+	padding-top: 5px;
+	display: inline-block;
 }

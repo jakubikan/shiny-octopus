@@ -3,12 +3,12 @@
 	<div class="container-fluid">
 		<div class="row well">
 			<div class="span2 no-left-margin" >
-				<div id="centerKoordsDisplay">
-					<span>Center:</span>
+				<div id="centerCoordsDisplay">
+					<div class="weather-title"><span>Center Coordinates</span></div>
 	            	<div id="centerKoordsDisplayLat">Latitude</div>
 	            	<div id="centerKoordsDisplayLng">Longitude</div>
+					<button id="weatherBtn">Get weather...</button>
 	        	</div>
-				<button id="weatherBtn">Weather</button>
 	        	<div id="crossKoordsDisplay">
 					<span>Crosshair:</span>
 					<div id="crossKoordsDisplayLat"></div>
@@ -18,20 +18,22 @@
 					<span>Crosshair distance:</span>
 					<div id="distanceDisplayValue"></div>
 				</div>
-				<div id="CurWeather" align="center">		
-					<div class="weather-title" align="left"><b>Current Weather:</b></div>
+				<div id="CurWeather">		
+					<div class="weather-title"><span>Current Weather</span></div>
 					<div id="CurWeatherDisplay"></div>
 				</div>
-				<div id="weatherForecast" align="center">
-					<div class="weather-title" align="left"><b>Weather Forecast</b></div>
+				<div id="weatherForecast">
+					<div class="weather-title"><span>Weather Forecast</span></div>
 					<div id="forecastSwipe" class="swipe">
 						<div class='swipe-wrap'>
 
 						</div>
+						<div>
+							<button id="prevForecastItem"><img id="prevForecastItemImg" alt="<"/></button>
+							<div id="forecastSlidePosition"></div>
+							<button id="nextForecastItem"><img id="nextForecastItemImg" alt=">"/></button>
+						</div>
 					</div>
-					<button id="prevForecastItem" align="left"><img id="prevForecastItemImg" /></button>
-					<button id="nextForecastItem" align="right"><img id="nextForecastItemImg"/></button>
-					<div id="forecastSlidePosition"></div>
 				</div>
 
 
