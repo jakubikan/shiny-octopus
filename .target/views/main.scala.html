@@ -15,9 +15,10 @@
         <script src="/assets/javascripts/jquery-1.9.0.min.js" type="text/javascript"></script>
         <script src="/assets/javascripts/jquery-ui.js" type="text/javascript"></script>
         <script src="/assets/javascripts/terrific-2.0.1.js" type="text/javascript"></script>
+        <script src="/assets/javascripts/swipe.js" type="text/javascript"></script>
         <script src="/assets/lib/bootstrap/js/bootstrap.js" type="text/javascript"></script>
         <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?
-			key=AIzaSyBAgciq8z1_C5aadB3D08yzrc-1YlTOEQ0&sensor=false">
+			key=AIzaSyBAgciq8z1_C5aadB3D08yzrc-1YlTOEQ0&sensor=false&libraries=geometry">
         </script>
         
         @helper.requireJs(core = routes.Assets.at("javascripts/require.js").url, module = routes.Assets.at("javascripts/main").url)
