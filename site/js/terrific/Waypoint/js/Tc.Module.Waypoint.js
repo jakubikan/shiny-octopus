@@ -69,10 +69,10 @@
 			var entry = $(this).find(':selected').text();
 
 			if (entry == '-New Entry-') { 
-				self.clearAll(); 
+				self.clearAll(self); 
 			}
 			else {
-				self.fetchWeatherData ({ID : self.map[entry]});	
+				self.fetchWeatherData (self, {ID : self.map[entry]});	
 			}
 		});	
 	
@@ -289,6 +289,7 @@
 				'action': action,
 				'data': data
 			},
+			dataType: "json",
 			success: function(data) {
 				success_function.call(this,data);
 			},
@@ -351,7 +352,7 @@
 					self.formData.wavedirection = data[18];
 					self.formData.dateandtime = data[19];
 
-					self.setFieldData(self.formData);
+					self.setFieldData(self, self.formData);
 					self.hideGif(self);
 					if (self.$entry.val() != '-New Entry-') {
 						self.showDel(self);
@@ -397,19 +398,17 @@
 				i=0;
 				self.$entry.empty();
 				self.$entry.append("<option>-New Entry-</option>");
-				if ($.type(data) === "Object") {
-					for (o in data) {
-						if (self.map[data[o]] == null) {
-							self.map[data[o]['DateTime']] = data[o]['ID'];
-						}
-						self.$entry.append("<option>"+data[o]['DateTime']+"</option>");
-						self.hideGif();
-						if (self.$entry.val() != '-New Entry-')  {
-							self.showDel(self);
-						}
+				for (o in data) {
+					if (self.map[data[o]] == null) {
+						self.map[data[o]['DateTime']] = data[o]['ID'];
 					}
-					self.updateCurrSelected(self);
+					self.$entry.append("<option>"+data[o]['DateTime']+"</option>");
+					self.hideGif();
+					if (self.$entry.val() != '-New Entry-')  {
+						self.showDel(self);
+					}
 				}
+				self.updateCurrSelected(self);
 			}
 		);
 	},
