@@ -283,6 +283,7 @@
 	makeAjaxProcessPost: function (self, action, data, before_ajax, success_function) {
 		before_ajax();
 		$.ajax({
+<<<<<<< HEAD
 			type: (data.formID != null ? "POST" : "GET"),
 			url:  "/api/waypoint/" + action + (data.formID != null ? "/" + data.formID : ""),
 			data:  data,
@@ -291,6 +292,18 @@
 			success: function(data) {
 				success_function.call(this,data);
 			},
+=======
+			type: "POST",
+			url:  "php/waypoint_process.php" ,
+			data: { 
+				'action': action,
+				'data': data
+			},
+			dataType: "json",
+			success: function(data) {
+				success_function.call(this,data);
+			},
+>>>>>>> b5c945cb7f005b98dde60bac13f32a1f695a46b5
 			error: function(a,b,c) {
 				console.log(a,b,c);
 				
@@ -301,7 +314,11 @@
 	
 	sendWeatherForm: function (self, data) {
 		self.makeAjaxProcessPost(self, 
+<<<<<<< HEAD
 			"create", data, 
+=======
+			"send", data, 
+>>>>>>> b5c945cb7f005b98dde60bac13f32a1f695a46b5
 			function(){
 				self.showGif(self);
 			},
@@ -387,7 +404,11 @@
 	},
 	
 	fillSelect: function (self) {
+<<<<<<< HEAD
 		self.makeAjaxProcessPost(self, "all", self.selectSelector,
+=======
+		self.makeAjaxProcessPost(self, "select", self.selectSelector,
+>>>>>>> b5c945cb7f005b98dde60bac13f32a1f695a46b5
 			function() {
 				self.hideDel(self); 
 				self.showGif(self);
@@ -398,9 +419,15 @@
 				self.$entry.append("<option>-New Entry-</option>");
 				for (o in data) {
 					if (self.map[data[o]] == null) {
+<<<<<<< HEAD
 						self.map[data[o]['dateTime']] = data[o]['ID'];
 					}
 					self.$entry.append("<option>"+data[o]['dateTime']+"</option>");
+=======
+						self.map[data[o]['DateTime']] = data[o]['ID'];
+					}
+					self.$entry.append("<option>"+data[o]['DateTime']+"</option>");
+>>>>>>> b5c945cb7f005b98dde60bac13f32a1f695a46b5
 					self.hideGif();
 					if (self.$entry.val() != '-New Entry-')  {
 						self.showDel(self);
