@@ -14,4 +14,4 @@ out
 RUNNING_PID
 .settings/*
 test-result
-.target/*
+.target
