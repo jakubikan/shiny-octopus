@@ -40,7 +40,7 @@
 		
 		
 		
-		$canvas.height(500);
+		$canvas.height(750);
 		//self.$ctx.height($canvas.width()/2);
 		
 		
@@ -97,6 +97,11 @@
 		}));
 
 		self.Server = new FancyWebSocket('ws://127.0.0.1:9300');
+		$("#weatherForecast",self.$ctx).hide();
+		$("#crossKoordsDisplay",self.$ctx).hide();
+		$("#distanceDisplay",self.$ctx).hide();
+		$("#CurWeather",self.$ctx).hide();
+
 		/*
 
 		*/
@@ -199,15 +204,33 @@
 					forecastContent = "";
 					for (var i = 0; i < data.list.length; i++) {
 						forecastContent = forecastContent +
-											"<div class=\"span2\">"+
+											"<div>"+
 											self.div(data.list[i].dt_txt)+
 											self.createWeatherString(self,data.list[i])+
-											"---</div>";
+											"</div>";
 					};
-					$("#weatherForecast",self.$ctx).html(
+					$("#forecastSwipe",self.$ctx).children().first().html(forecastContent);
+					$("#weatherForecast",self.$ctx).show();
+					window.mySwipe = new Swipe(document.getElementById('forecastSwipe'), {
+					  callback: function(){
+					  	$("#forecastSlidePosition").html(1+mySwipe.getPos()+"/"+mySwipe.getNumSlides());
+					  }
+					});
+					$("#forecastSlidePosition").html(1+mySwipe.getPos()+"/"+mySwipe.getNumSlides());
+					$("#prevForecastItem").on("click",function(){
+						mySwipe.prev();
+					});
+					$("#nextForecastItem").on("click",function(){
+						mySwipe.next();
+					});
+
+					/*
+					$("#forecastSwipe",self.$ctx).html(
 						"<h4 align=\"left\">Weather Forecast:</h4>"+
+						"<div id=\"forcastSwiper\">"+
 						forecastContent
 					);
+*/
 				}
 			});	
     },
@@ -225,10 +248,10 @@
 					<div id="CurWeatherHumidity">Humidity: 50%</div>
 					<div id="CurWeatherClouds">Clouds: 40 %</div>
 				*/
-		$("#CurWeather",self.$ctx).html(
-			"<div>Current Weather:</div>"+
+		$("#CurWeatherDisplay",self.$ctx).html(
 			self.createWeatherString(self,data)
 		);
+		$("#CurWeather",self.$ctx).show();
 		/*
     	$("#CurWeatherWSpeed",self.$ctx).html("Speed: "+data.wind.speed+" m/s");
     	$("#CurWeatherWDirection",self.$ctx).html("Direction: "+data.wind.deg+"°"); //Erweitern auf Windrichtungen
@@ -344,6 +367,7 @@
 				self.crosshairDragged(self);
 			});
 			self.crosshairDragged(self);
+			$("#crossKoordsDisplay",self.$ctx).show();
     	} else {
     		self.setMarkerDrawRoute.call(this,self,event);
     	}
@@ -352,7 +376,6 @@
     crosshairDragged : function(self){
     	degLatLngs = self.crosshair.getPosition();
     	latLngs = self.convertDMS(degLatLngs.lat(), degLatLngs.lng());
-    	$("#crossKoordsDisplayTitle",self.$ctx).html("Crosshair:");
     	$("#crossKoordsDisplayLat",self.$ctx).html("LAT: "+latLngs.latDMS);
     	$("#crossKoordsDisplayLng",self.$ctx).html("LNG: "+latLngs.lngDMS);
     },
@@ -361,9 +384,8 @@
     	self.drawNewMarkerAt.call(self,this.crosshair.getPosition());
     	this.crosshair.setMap(null);
     	this.crosshair = null;
-    	$("#crossKoordsDisplayTitle",self.$ctx).html("");
-    	$("#crossKoordsDisplayLat",self.$ctx).html("");
-    	$("#crossKoordsDisplayLng",self.$ctx).html("");
+    	$("#crossKoordsDisplay",self.$ctx).hide();
+
     },
 
     loadContextMenu : function(self, event) {
@@ -405,9 +427,9 @@
     onCalculateDistance : function(marker){
     	if(this.crosshair ==null)
     		return;
-    	distance = google.maps.geometry.spherical.computeDistanceBetween (this.crosshair.getPosition(), marker.getPosition());
-    	$("#distanceDisplayTitle",this.$ctx).html("Crosshair distance:");
+    	distance = google.maps.geometry.spherical.computeDistanceBetween (this.crosshair.getPosition(), marker.getPosition());    	
     	$("#distanceDisplayValue",this.$ctx).html(distance.toFixed(2)+ " meter");
+    	$("#distanceDisplay").show();
     },
     onMakeRoute : function(){
     	var self = this;
