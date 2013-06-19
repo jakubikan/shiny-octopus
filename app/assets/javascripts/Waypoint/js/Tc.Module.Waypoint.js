@@ -7,7 +7,7 @@
 	$entry: null,
 	formID : null,
 	formData : {
-		ID: null,													
+		id: null,													
 		windstrength: null,
 		winddirection: null,
 	  	airpressure: null,
@@ -16,15 +16,15 @@
 	  	rain: null,
 	  	waveheight: null,
 	  	wavedirection: null,
-	  	dateandtime: null,
+	  	datetime: null,
 
 	  	// waypoint data
 	  	name: null,		
-	  	latitude: null,
-	  	longitude: null, 
+	  	lat: null,
+	  	lng: null, 
 	  	cog: null,
 	  	sog: null,
-	  	destination: null,
+	  	dest: null,
 	  	maneuver: null,
 	  	headsail: null,
 	  	dtm: null,
@@ -60,7 +60,7 @@
 		$("[data-id='delEntryIcon']", self.$ctx).on('click', function() {
 			entry = self.$entry.find(':selected').text();
 			if (entry != null) {
-				self.deleteEntry(self, {ID: self.map[entry]});
+				self.deleteEntry(self, {id: self.map[entry]});
 			}
 			
 		});
@@ -72,7 +72,7 @@
 				self.clearAll(self); 
 			}
 			else {
-				self.fetchWeatherData (self, {ID : self.map[entry]});	
+				self.fetchWeatherData (self, {id : self.map[entry]});	
 			}
 		});	
 	
@@ -85,13 +85,13 @@
 				selects = self.$ctx.find('.form-select');
 
 				self.formData = {
-					ID: self.formID,													
+					id: self.formID,													
 
 					windstrength: self.getDOMElement(inputs, "windStrength").value || 0,
 					airpressure: self.getDOMElement(inputs, 'airPressure').value || 0,
 					temperature: self.getDOMElement(inputs, 'temp').value || 0,
 					waveheight: self.getDOMElement(inputs, 'waveHeight').value || 0,
-					dateandtime: self.getDOMElement(inputs, 'trackDateTime').value || "null",
+					datetime: self.getDOMElement(inputs, 'trackDateTime').value || "null",
 					
 					
 					clouds: self.getDOMElement(selects, 'clouds').value === self.DUMMY_SELECT ? 
@@ -109,15 +109,15 @@
 					
 					// waypoint data
 					name: self.getDOMElement(inputs, 'name').value || "null",		
-					latitude: self.getDOMElement(inputs, 'lat').value || "null",
-					longitude: self.getDOMElement(inputs, 'lng').value || "null", 
+					lat: self.getDOMElement(inputs, 'lat').value || "null",
+					lng: self.getDOMElement(inputs, 'lng').value || "null", 
 					cog: self.getDOMElement(inputs, 'cog').value || "null",
 					sog: self.getDOMElement(inputs, 'sog').value || "null",
 					dtm: self.getDOMElement(inputs, 'dtm').value || "null",
 					btm: self.getDOMElement(inputs, 'btm').value || "null",
 					
 					
-					destination: self.getDOMElement(selects, 'dest').value === self.DUMMY_SELECT ? 
+					dest: self.getDOMElement(selects, 'dest').value === self.DUMMY_SELECT ? 
 						"null" : self.getDOMElement(selects, 'dest').value,
 
 					maneuver: self.getDOMElement(selects, 'maneuver').value === self.DUMMY_SELECT ? 
@@ -210,13 +210,13 @@
 		inputs = self.$ctx.find('input');
 		selects = self.$ctx.find('select');
 		// Weather data
-		self.formID = formData.ID;
+		self.formID = formData.id;
 
 		self.getDOMElement(inputs, "windStrength").value = typeof formData.windstrength != 'undefined' && formData.windstrength != 0 ? formData.windstrength : "";
 		self.getDOMElement(inputs, "airPressure").value = typeof formData.airpressure != 'undefined' && formData.airpressure != 0 ? formData.airpressure : "";
 		self.getDOMElement(inputs, "temp").value = typeof formData.temperature != 'undefined' && formData.temperature != 0 ? formData.temperature : "";
 		self.getDOMElement(inputs, "waveHeight").value = typeof formData.waveheight != 'undefined' && formData.waveheight != 0 ? formData.waveheight : "";
-		self.getDOMElement(inputs, "trackDateTime").value = typeof formData.dateandtime != 'undefined' && formData.dateandtime != 0 ? formData.dateandtime : "";
+		self.getDOMElement(inputs, "trackDateTime").value = typeof formData.datetime != 'undefined' && formData.datetime != 0 ? formData.datetime : "";
 
 		self.getDOMElement(selects, "windDirection").value = typeof formData.winddirection != 'undefined' && formData.winddirection != 'null' ? formData.winddirection : self.DUMMY_SELECT;
 		self.getDOMElement(selects, "clouds").value = typeof formData.clouds != 'undefined' && formData.clouds != 'null' ? formData.clouds : self.DUMMY_SELECT;
@@ -225,8 +225,8 @@
 	
 		// Waypoint data
 		self.getDOMElement(inputs, "name").value = typeof formData.name != 'undefined' && formData.name != 'null' ? formData.name : "";
-		self.getDOMElement(inputs, "lat").value = typeof formData.latitude != 'undefined' && formData.latitude != 'null' ? formData.latitude : "";
-		self.getDOMElement(inputs, "lng").value = typeof formData.longitude != 'undefined' && formData.longitude != 'null' ? formData.longitude : "";
+		self.getDOMElement(inputs, "lat").value = typeof formData.lat != 'undefined' && formData.lat != 'null' ? formData.lat : "";
+		self.getDOMElement(inputs, "lng").value = typeof formData.lng != 'undefined' && formData.lng != 'null' ? formData.lng : "";
 		self.getDOMElement(inputs, "dtm").value = typeof formData.dtm != 'undefined' && formData.dtm != 'null' ? formData.dtm : "";
 		self.getDOMElement(inputs, "cog").value = typeof formData.cog != 'undefined' && formData.cog != 'null' ? formData.cog : "";
 		self.getDOMElement(inputs, "sog").value = typeof formData.sog != 'undefined' && formData.sog != 'null' ? formData.sog : "";
@@ -234,7 +234,7 @@
 		
 		
 		self.getDOMElement(selects, "headSail").value = typeof formData.headsail != 'undefined' && formData.headsail != 'null' ? formData.headsail : self.DUMMY_SELECT;
-		self.getDOMElement(selects, "dest").value = typeof formData.destination != 'undefined' && formData.destination != 'null' ? formData.destination : self.DUMMY_SELECT;
+		self.getDOMElement(selects, "dest").value = typeof formData.dest != 'undefined' && formData.dest != 'null' ? formData.dest : self.DUMMY_SELECT;
 		self.getDOMElement(selects, "maneuver").value = typeof formData.maneuver != 'undefined' && formData.maneuver != 'null' ? formData.maneuver : self.DUMMY_SELECT;
 			
 	},
@@ -276,16 +276,14 @@
 	},
 	
 	updateCurrSelected: function (self) {
-		self.$entry.val(self.formData != null && self.formData.dateandtime != null ? 
-										   self.formData.dateandtime : '-New Entry-');	
+		self.$entry.val(self.formData != null && self.formData.datetime != null ? 
+										   self.formData.datetime : '-New Entry-');	
 	},
 	
-	makeAjaxProcessPost: function (self, action, data, before_ajax, success_function, options) {
+	makeAjaxProcessPost: function (self, action, id, before_ajax, success_function, options) {
 		before_ajax();
 		settings = {
-			type: (data.ID != null ? "POST" : "GET"),
-			url:  "/api/waypoint/" + action + (data.ID != null ? "/" + data.ID : ""),
-			data:  data,
+			url:  "/api/waypoint/" + action  + (id ? "/" + id : ""),
 			contentType: "application/json",
 			dataType: "json",
 			success: function(data) {
@@ -304,7 +302,7 @@
 	
 	sendWeatherForm: function (self, data) {
 		self.makeAjaxProcessPost(self, 
-			"create", data, 
+			"create", data.id, 
 			function(){
 				self.showGif(self);
 			},
@@ -315,41 +313,41 @@
 				if (self.$entry.val() != '-New Entry-') {
 					self.showDel(self);										
 				}
-			}
+			}, {type: "POST", data: JSON.stringify(data)}
 		);
 	},
 	
 	
 	fetchWeatherData: function (self, index) {
 		self.makeAjaxProcessPost(self, 
-				"fetch", index, 
+				"fetch", index.id, 
 				function() {
 					self.showGif(); 
 				}, 
 				//Success function
 				function(data){
 					self.formData.name = data["name"];
-					self.formData.headsail = data["headSail"];
-					self.formData.latitude = data["lat"];
-					self.formData.longitude = data["lng"];
-					self.formData.destination = data["destination"];
+					self.formData.headsail = data["headsail"];
+					self.formData.lat = data["lat"];
+					self.formData.lng = data["lng"];
+					self.formData.dest = data["dest"];
 					self.formData.dtm = data["dtm"];
 					self.formData.cog = data["cog"];
 					self.formData.sog = data["sog"];
 					self.formData.maneuver = data["maneuver"];
 					self.formData.btm = data["btm"];										
-					self.formData.ID = data["id"];
-					self.formData.windstrength = data["windStrength"];
-					self.formData.winddirection = data["windDirection"];
-					self.formData.airpressure = data["airPressure"];
+					self.formData.id = data["id"];
+					self.formData.windstrength = data["windstrength"];
+					self.formData.winddirection = data["winddirection"];
+					self.formData.airpressure = data["airpressure"];
 					self.formData.temperature = data["temperature"];
 					self.formData.clouds = data["clouds"];
 					self.formData.rain = data["rain"];
-					self.formData.waveheight = data["waveHeight"];
-					self.formData.wavedirection = data["waveDirection"];
-					self.formData.dateandtime = data["dateTime"];
+					self.formData.waveheight = data["waveheight"];
+					self.formData.wavedirection = data["wavedirection"];
+					self.formData.datetime = data["datetime"];
 					
-					$.extend(true, self.formData, data);
+					//$.extend(true, self.formData, data);
 
 					self.setFieldData(self, self.formData);
 					self.hideGif(self);
@@ -360,7 +358,7 @@
 	},
 	
 	updateSentData: function (self, data) {
-		self.makeAjaxProcessPost(self, "update", data, 
+		self.makeAjaxProcessPost(self, "update", data.id, 
 			function() {
 				self.showGif();
 			},
@@ -369,7 +367,7 @@
 				if (self.$entry.val() != '-New Entry-') {
 					self.showDel();
 				}
-			}
+			}, {type: "POST", data: JSON.stringify(data)}
 		)
 	},
 	
@@ -387,7 +385,7 @@
 	},
 	
 	fillSelect: function (self) {
-		self.makeAjaxProcessPost(self, "all", self.selectSelector,
+		self.makeAjaxProcessPost(self, "all", 0,
 			function() {
 				self.hideDel(self); 
 				self.showGif(self);
@@ -398,16 +396,16 @@
 				self.$entry.append("<option>-New Entry-</option>");
 				for (o in data) {
 					if (self.map[data[o]] == null) {
-						self.map[data[o]['dateTime']] = data[o]['id'];
+						self.map[data[o]['datetime']] = data[o]['id'];
 					}
-					self.$entry.append("<option>"+data[o]['dateTime']+"</option>");
+					self.$entry.append("<option>"+data[o]['datetime']+"</option>");
 					self.hideGif();
 					if (self.$entry.val() != '-New Entry-')  {
 						self.showDel(self);
 					}
 				}
 				self.updateCurrSelected(self);
-			}
+			}, {type: "GET", data: self.selectSelector}
 		);
 	},
 	

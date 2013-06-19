@@ -20,7 +20,10 @@ import models.*;
 public class Waypoints extends Controller {
 	
 	public static Result create() {
+		
+
 		JsonNode  b = request().body().asJson();
+		System.out.println(b);
 		Waypoint json = Json.fromJson(b, Waypoint.class);
 
 		if (json == null) {
@@ -34,15 +37,14 @@ public class Waypoints extends Controller {
 	}
 
 	public static Result update(long id) {
-		Waypoint result = Waypoint.find.byId(id);
 		JsonNode  b = request().body().asJson();
 		Waypoint json = Json.fromJson(b, Waypoint.class);
-		if (json == null || result == null) {
+		if (json == null) {
 			return badRequest();
 			
 		}
-		result.update(json);
-		return ok(Json.toJson(result));
+		json.update();
+		return ok(Json.toJson(json));
 
 
 	}
