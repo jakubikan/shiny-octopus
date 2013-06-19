@@ -12,4 +12,11 @@ GET   	/:page                		controllers.Application.show(page)
 
 GET   	/app/:site                	controllers.Application.app(site)
 
-GET   	/api/weather               	controllers.Api.weather()
+POST   	/api/weather               	controllers.Api.weather()
+
+
+POST   	/api/waypoint/create 		controllers.Waypoints.create()
+POST   	/api/waypoint/update/:id   	controllers.Waypoints.update(id: Long)
+GET   	/api/waypoint/all   		controllers.Waypoints.all()
+GET   	/api/waypoint/delete/:id   	controllers.Waypoints.delete(id: Long)
+GET   	/api/waypoint/fetch/:id   	controllers.Waypoints.fetchWaypoint(id: Long)
