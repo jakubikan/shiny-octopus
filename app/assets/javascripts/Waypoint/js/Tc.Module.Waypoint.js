@@ -58,7 +58,7 @@
 		});
 		
 		$("[data-id='delEntryIcon']", self.$ctx).on('click', function() {
-			var entry = self.$entry;
+			entry = self.$entry.find(':selected').text();
 			if (entry != null) {
 				self.deleteEntry(self, {ID: self.map[entry]});
 			}
@@ -66,7 +66,7 @@
 		});
 		
 		$("[data-id='entry']", self.$ctx).on('change', function() {
-			var entry = $(this).find(':selected').text();
+			entry = self.$entry.find(':selected').text();
 
 			if (entry == '-New Entry-') { 
 				self.clearAll(self); 
@@ -280,11 +280,11 @@
 										   self.formData.dateandtime : '-New Entry-');	
 	},
 	
-	makeAjaxProcessPost: function (self, action, data, before_ajax, success_function) {
+	makeAjaxProcessPost: function (self, action, data, before_ajax, success_function, options) {
 		before_ajax();
-		$.ajax({
-			type: (data.formID != null ? "POST" : "GET"),
-			url:  "/api/waypoint/" + action + (data.formID != null ? "/" + data.formID : ""),
+		settings = {
+			type: (data.ID != null ? "POST" : "GET"),
+			url:  "/api/waypoint/" + action + (data.ID != null ? "/" + data.ID : ""),
 			data:  data,
 			contentType: "application/json",
 			dataType: "json",
@@ -295,8 +295,11 @@
 				console.log(a,b,c);
 				
 			}
+		};
+		
+		$.extend(true, settings, options);
 
-		});
+		$.ajax(settings);
 	},
 	
 	sendWeatherForm: function (self, data) {
@@ -319,44 +322,41 @@
 	
 	fetchWeatherData: function (self, index) {
 		self.makeAjaxProcessPost(self, 
-				// Action
-				"fetch", 
-				// Data
-				index, 
-				// Before Function
+				"fetch", index, 
 				function() {
 					self.showGif(); 
 				}, 
 				//Success function
 				function(data){
-					self.formData.name = data[0];
-					self.formData.headsail = data[1];
-					self.formData.latitude = data[2];
-					self.formData.longitude = data[3];
-					self.formData.destination = data[4];
-					self.formData.dtm = data[5];
-					self.formData.cog = data[6];
-					self.formData.sog = data[7];
-					self.formData.maneuver = data[8];
-					self.formData.btm = data[9];										
-					self.formData.ID = data[10];
-					self.formData.windstrength = data[11];
-					self.formData.winddirection = data[12];
-					self.formData.airpressure = data[13];
-					self.formData.temperature = data[14];
-					self.formData.clouds = data[15];
-					self.formData.rain = data[16];
-					self.formData.waveheight = data[17];
-					self.formData.wavedirection = data[18];
-					self.formData.dateandtime = data[19];
+					self.formData.name = data["name"];
+					self.formData.headsail = data["headSail"];
+					self.formData.latitude = data["lat"];
+					self.formData.longitude = data["lng"];
+					self.formData.destination = data["destination"];
+					self.formData.dtm = data["dtm"];
+					self.formData.cog = data["cog"];
+					self.formData.sog = data["sog"];
+					self.formData.maneuver = data["maneuver"];
+					self.formData.btm = data["btm"];										
+					self.formData.ID = data["id"];
+					self.formData.windstrength = data["windStrength"];
+					self.formData.winddirection = data["windDirection"];
+					self.formData.airpressure = data["airPressure"];
+					self.formData.temperature = data["temperature"];
+					self.formData.clouds = data["clouds"];
+					self.formData.rain = data["rain"];
+					self.formData.waveheight = data["waveHeight"];
+					self.formData.wavedirection = data["waveDirection"];
+					self.formData.dateandtime = data["dateTime"];
+					
+					$.extend(true, self.formData, data);
 
 					self.setFieldData(self, self.formData);
 					self.hideGif(self);
 					if (self.$entry.val() != '-New Entry-') {
 						self.showDel(self);
 					}
-			}
-		);		
+			}, {type: "GET", contentType:""});		
 	},
 	
 	updateSentData: function (self, data) {
@@ -382,7 +382,7 @@
 			function(data) {
 				self.hideGif(self);
 				self.fillSelect(self);
-			}
+			}, {type: "GET", contentType:""}
 		);
 	},
 	
@@ -398,7 +398,7 @@
 				self.$entry.append("<option>-New Entry-</option>");
 				for (o in data) {
 					if (self.map[data[o]] == null) {
-						self.map[data[o]['dateTime']] = data[o]['ID'];
+						self.map[data[o]['dateTime']] = data[o]['id'];
 					}
 					self.$entry.append("<option>"+data[o]['dateTime']+"</option>");
 					self.hideGif();
