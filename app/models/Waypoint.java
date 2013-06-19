@@ -12,46 +12,46 @@ public class Waypoint extends Model {
 
 	@Id
 	@Column(name = "ID")
-	private long ID;
+	private long id;
 
 	@Column(name = "Name")
-	private String Name;
+	private String name;
 	@Column(name = "HeadSail")
-	private String HeadSail;
+	private String headsail;
 	@Column(name = "Lat")
-	private String Lat;
+	private String lat;
 	@Column(name = "Lng")
-	private String Lng;
+	private String lng;
 	@Column(name = "Dest")
-	private String Dest;
+	private String dest;
 	@Column(name = "DTM")
-	private String DTM;
+	private String dtm;
 	@Column(name = "COG")
-	private String COG;
+	private String cog;
 	@Column(name = "SOG")
-	private String SOG;
+	private String sog;
 	@Column(name = "Maneuver")
-	private String Maneuver;
+	private String maneuver;
 	@Column(name = "BTM")
-	private String BTM;
+	private String btm;
 	@Column(name = "WindStrength")
-	private int WindStrength;
+	private int windstrength;
 	@Column(name = "WindDirection")
-	private String WindDirection;
+	private String winddirection;
 	@Column(name = "AirPressure")
-	private int AirPressure;
+	private int airpressure;
 	@Column(name = "Temperature")
-	private int Temperature;
+	private int temperature;
 	@Column(name = "Clouds")
-	private String Clouds;
+	private String clouds;
 	@Column(name = "Rain")
-	private String Rain;
+	private String rain;
 	@Column(name = "WaveHeight")
-	private int WaveHeight;
+	private int waveheight;
 	@Column(name = "WaveDirection")
-	private String WaveDirection;
+	private String wavedirection;
 	@Column(name = "DateTime")
-	private String DateTime;
+	private String datetime;
 
 
 	public static Finder<Long, Waypoint> find = new Finder<Long, Waypoint>(
@@ -59,18 +59,18 @@ public class Waypoint extends Model {
 
 
 	/**
-	 * @return the iD
+	 * @return the id
 	 */
-	public long getID() {
-		return ID;
+	public long getId() {
+		return id;
 	}
 
 
 	/**
-	 * @param iD the iD to set
+	 * @param id the id to set
 	 */
-	public void setID(long iD) {
-		ID = iD;
+	public void setId(long id) {
+		this.id = id;
 	}
 
 
@@ -78,7 +78,7 @@ public class Waypoint extends Model {
 	 * @return the name
 	 */
 	public String getName() {
-		return Name;
+		return name;
 	}
 
 
@@ -86,23 +86,23 @@ public class Waypoint extends Model {
 	 * @param name the name to set
 	 */
 	public void setName(String name) {
-		Name = name;
+		this.name = name;
 	}
 
 
 	/**
-	 * @return the headSail
+	 * @return the headsail
 	 */
-	public String getHeadSail() {
-		return HeadSail;
+	public String getHeadsail() {
+		return headsail;
 	}
 
 
 	/**
-	 * @param headSail the headSail to set
+	 * @param headsail the headsail to set
 	 */
-	public void setHeadSail(String headSail) {
-		HeadSail = headSail;
+	public void setHeadsail(String headsail) {
+		this.headsail = headsail;
 	}
 
 
@@ -110,7 +110,7 @@ public class Waypoint extends Model {
 	 * @return the lat
 	 */
 	public String getLat() {
-		return Lat;
+		return lat;
 	}
 
 
@@ -118,7 +118,7 @@ public class Waypoint extends Model {
 	 * @param lat the lat to set
 	 */
 	public void setLat(String lat) {
-		Lat = lat;
+		this.lat = lat;
 	}
 
 
@@ -126,7 +126,7 @@ public class Waypoint extends Model {
 	 * @return the lng
 	 */
 	public String getLng() {
-		return Lng;
+		return lng;
 	}
 
 
@@ -134,7 +134,7 @@ public class Waypoint extends Model {
 	 * @param lng the lng to set
 	 */
 	public void setLng(String lng) {
-		Lng = lng;
+		this.lng = lng;
 	}
 
 
@@ -142,7 +142,7 @@ public class Waypoint extends Model {
 	 * @return the dest
 	 */
 	public String getDest() {
-		return Dest;
+		return dest;
 	}
 
 
@@ -150,55 +150,55 @@ public class Waypoint extends Model {
 	 * @param dest the dest to set
 	 */
 	public void setDest(String dest) {
-		Dest = dest;
+		this.dest = dest;
 	}
 
 
 	/**
-	 * @return the dTM
+	 * @return the dtm
 	 */
-	public String getDTM() {
-		return DTM;
+	public String getDtm() {
+		return dtm;
 	}
 
 
 	/**
-	 * @param dTM the dTM to set
+	 * @param dtm the dtm to set
 	 */
-	public void setDTM(String dTM) {
-		DTM = dTM;
+	public void setDtm(String dtm) {
+		this.dtm = dtm;
 	}
 
 
 	/**
-	 * @return the cOG
+	 * @return the cog
 	 */
-	public String getCOG() {
-		return COG;
+	public String getCog() {
+		return cog;
 	}
 
 
 	/**
-	 * @param cOG the cOG to set
+	 * @param cog the cog to set
 	 */
-	public void setCOG(String cOG) {
-		COG = cOG;
+	public void setCog(String cog) {
+		this.cog = cog;
 	}
 
 
 	/**
-	 * @return the sOG
+	 * @return the sog
 	 */
-	public String getSOG() {
-		return SOG;
+	public String getSog() {
+		return sog;
 	}
 
 
 	/**
-	 * @param sOG the sOG to set
+	 * @param sog the sog to set
 	 */
-	public void setSOG(String sOG) {
-		SOG = sOG;
+	public void setSog(String sog) {
+		this.sog = sog;
 	}
 
 
@@ -206,7 +206,7 @@ public class Waypoint extends Model {
 	 * @return the maneuver
 	 */
 	public String getManeuver() {
-		return Maneuver;
+		return maneuver;
 	}
 
 
@@ -214,71 +214,71 @@ public class Waypoint extends Model {
 	 * @param maneuver the maneuver to set
 	 */
 	public void setManeuver(String maneuver) {
-		Maneuver = maneuver;
+		this.maneuver = maneuver;
 	}
 
 
 	/**
-	 * @return the bTM
+	 * @return the btm
 	 */
-	public String getBTM() {
-		return BTM;
+	public String getBtm() {
+		return btm;
 	}
 
 
 	/**
-	 * @param bTM the bTM to set
+	 * @param btm the btm to set
 	 */
-	public void setBTM(String bTM) {
-		BTM = bTM;
+	public void setBtm(String btm) {
+		this.btm = btm;
 	}
 
 
 	/**
-	 * @return the windStrength
+	 * @return the windstrength
 	 */
-	public int getWindStrength() {
-		return WindStrength;
+	public int getWindstrength() {
+		return windstrength;
 	}
 
 
 	/**
-	 * @param windStrength the windStrength to set
+	 * @param windstrength the windstrength to set
 	 */
-	public void setWindStrength(int windStrength) {
-		WindStrength = windStrength;
+	public void setWindstrength(int windstrength) {
+		this.windstrength = windstrength;
 	}
 
 
 	/**
-	 * @return the windDirection
+	 * @return the winddirection
 	 */
-	public String getWindDirection() {
-		return WindDirection;
+	public String getWinddirection() {
+		return winddirection;
 	}
 
 
 	/**
-	 * @param windDirection the windDirection to set
+	 * @param winddirection the winddirection to set
 	 */
-	public void setWindDirection(String windDirection) {
-		WindDirection = windDirection;
+	public void setWinddirection(String winddirection) {
+		this.winddirection = winddirection;
 	}
 
 
 	/**
-	 * @return the airPressure
+	 * @return the airpressure
 	 */
-	public int getAirPressure() {
-		return AirPressure;
+	public int getAirpressure() {
+		return airpressure;
 	}
 
 
 	/**
-	 * @param airPressure the airPressure to set
+	 * @param airpressure the airpressure to set
 	 */
-	public void setAirPressure(int airPressure) {
-		AirPressure = airPressure;
+	public void setAirpressure(int airpressure) {
+		this.airpressure = airpressure;
 	}
 
 
@@ -286,7 +286,7 @@ public class Waypoint extends Model {
 	 * @return the temperature
 	 */
 	public int getTemperature() {
-		return Temperature;
+		return temperature;
 	}
 
 
@@ -294,7 +294,7 @@ public class Waypoint extends Model {
 	 * @param temperature the temperature to set
 	 */
 	public void setTemperature(int temperature) {
-		Temperature = temperature;
+		this.temperature = temperature;
 	}
 
 
@@ -302,7 +302,7 @@ public class Waypoint extends Model {
 	 * @return the clouds
 	 */
 	public String getClouds() {
-		return Clouds;
+		return clouds;
 	}
 
 
@@ -310,7 +310,7 @@ public class Waypoint extends Model {
 	 * @param clouds the clouds to set
 	 */
 	public void setClouds(String clouds) {
-		Clouds = clouds;
+		this.clouds = clouds;
 	}
 
 
@@ -318,7 +318,7 @@ public class Waypoint extends Model {
 	 * @return the rain
 	 */
 	public String getRain() {
-		return Rain;
+		return rain;
 	}
 
 
@@ -326,55 +326,55 @@ public class Waypoint extends Model {
 	 * @param rain the rain to set
 	 */
 	public void setRain(String rain) {
-		Rain = rain;
+		this.rain = rain;
 	}
 
 
 	/**
-	 * @return the waveHeight
+	 * @return the waveheight
 	 */
-	public int getWaveHeight() {
-		return WaveHeight;
+	public int getWaveheight() {
+		return waveheight;
 	}
 
 
 	/**
-	 * @param waveHeight the waveHeight to set
+	 * @param waveheight the waveheight to set
 	 */
-	public void setWaveHeight(int waveHeight) {
-		WaveHeight = waveHeight;
+	public void setWaveheight(int waveheight) {
+		this.waveheight = waveheight;
 	}
 
 
 	/**
-	 * @return the waveDirection
+	 * @return the wavedirection
 	 */
-	public String getWaveDirection() {
-		return WaveDirection;
+	public String getWavedirection() {
+		return wavedirection;
 	}
 
 
 	/**
-	 * @param waveDirection the waveDirection to set
+	 * @param wavedirection the wavedirection to set
 	 */
-	public void setWaveDirection(String waveDirection) {
-		WaveDirection = waveDirection;
+	public void setWavedirection(String wavedirection) {
+		this.wavedirection = wavedirection;
 	}
 
 
 	/**
-	 * @return the dateTime
+	 * @return the datetime
 	 */
-	public String getDateTime() {
-		return DateTime;
+	public String getDatetime() {
+		return datetime;
 	}
 
 
 	/**
-	 * @param dateTime the dateTime to set
+	 * @param datetime the datetime to set
 	 */
-	public void setDateTime(String dateTime) {
-		DateTime = dateTime;
+	public void setDatetime(String datetime) {
+		this.datetime = datetime;
 	}
 
 
@@ -392,6 +392,7 @@ public class Waypoint extends Model {
 	public static void setFind(Finder<Long, Waypoint> find) {
 		Waypoint.find = find;
 	}
+
 
 
 
