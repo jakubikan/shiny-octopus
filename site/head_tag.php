@@ -44,7 +44,6 @@
 		
 		<!--  Helper -->
 		<script type="text/javascript" src="js/static/helper.js"></script>
-        <script type="text/javascript" src="js/static/helperMap.js"></script>
 		<script type="text/javascript" src="js/static/Websocket/fancywebsocket.js"></script>
 		<!-- Custom Modul Js -->
 		<script type="text/javascript" src="js/terrific/Header/js/Tc.Module.Header.js"></script>

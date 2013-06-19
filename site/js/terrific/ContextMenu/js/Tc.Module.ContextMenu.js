@@ -23,8 +23,8 @@
 			console.log("Context requested");
 			
 			self.fire("closeContextMenu", null, ["context"], function(){});
-			
 			self.currentWorkingObject = event.obj;
+
 			
 			map = event.obj.map;
 			canvas = map.getDiv();
