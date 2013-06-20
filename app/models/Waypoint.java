@@ -35,19 +35,19 @@ public class Waypoint extends Model {
 	@Column(name = "BTM")
 	private String btm;
 	@Column(name = "WindStrength")
-	private int windstrength;
+	private float windstrength;
 	@Column(name = "WindDirection")
 	private String winddirection;
 	@Column(name = "AirPressure")
-	private int airpressure;
+	private float airpressure;
 	@Column(name = "Temperature")
-	private int temperature;
+	private float temperature;
 	@Column(name = "Clouds")
 	private String clouds;
 	@Column(name = "Rain")
 	private String rain;
 	@Column(name = "WaveHeight")
-	private int waveheight;
+	private float waveheight;
 	@Column(name = "WaveDirection")
 	private String wavedirection;
 	@Column(name = "DateTime")
@@ -237,7 +237,7 @@ public class Waypoint extends Model {
 	/**
 	 * @return the windstrength
 	 */
-	public int getWindstrength() {
+	public float getWindstrength() {
 		return windstrength;
 	}
 
@@ -245,7 +245,7 @@ public class Waypoint extends Model {
 	/**
 	 * @param windstrength the windstrength to set
 	 */
-	public void setWindstrength(int windstrength) {
+	public void setWindstrength(float windstrength) {
 		this.windstrength = windstrength;
 	}
 
@@ -269,7 +269,7 @@ public class Waypoint extends Model {
 	/**
 	 * @return the airpressure
 	 */
-	public int getAirpressure() {
+	public float getAirpressure() {
 		return airpressure;
 	}
 
@@ -277,7 +277,7 @@ public class Waypoint extends Model {
 	/**
 	 * @param airpressure the airpressure to set
 	 */
-	public void setAirpressure(int airpressure) {
+	public void setAirpressure(float airpressure) {
 		this.airpressure = airpressure;
 	}
 
@@ -285,7 +285,7 @@ public class Waypoint extends Model {
 	/**
 	 * @return the temperature
 	 */
-	public int getTemperature() {
+	public float getTemperature() {
 		return temperature;
 	}
 
@@ -293,7 +293,7 @@ public class Waypoint extends Model {
 	/**
 	 * @param temperature the temperature to set
 	 */
-	public void setTemperature(int temperature) {
+	public void setTemperature(float temperature) {
 		this.temperature = temperature;
 	}
 
@@ -333,7 +333,7 @@ public class Waypoint extends Model {
 	/**
 	 * @return the waveheight
 	 */
-	public int getWaveheight() {
+	public float getWaveheight() {
 		return waveheight;
 	}
 
@@ -341,7 +341,7 @@ public class Waypoint extends Model {
 	/**
 	 * @param waveheight the waveheight to set
 	 */
-	public void setWaveheight(int waveheight) {
+	public void setWaveheight(float waveheight) {
 		this.waveheight = waveheight;
 	}
 

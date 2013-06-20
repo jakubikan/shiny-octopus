@@ -307,7 +307,7 @@
 				self.showGif(self);
 			},
 			function(data) {
-				self.formID = data;
+				self.formID = data.id;
 				self.hideGif(self);
 				self.fillSelect(self);
 				if (self.$entry.val() != '-New Entry-') {
@@ -326,28 +326,8 @@
 				}, 
 				//Success function
 				function(data){
-					self.formData.name = data["name"];
-					self.formData.headsail = data["headsail"];
-					self.formData.lat = data["lat"];
-					self.formData.lng = data["lng"];
-					self.formData.dest = data["dest"];
-					self.formData.dtm = data["dtm"];
-					self.formData.cog = data["cog"];
-					self.formData.sog = data["sog"];
-					self.formData.maneuver = data["maneuver"];
-					self.formData.btm = data["btm"];										
-					self.formData.id = data["id"];
-					self.formData.windstrength = data["windstrength"];
-					self.formData.winddirection = data["winddirection"];
-					self.formData.airpressure = data["airpressure"];
-					self.formData.temperature = data["temperature"];
-					self.formData.clouds = data["clouds"];
-					self.formData.rain = data["rain"];
-					self.formData.waveheight = data["waveheight"];
-					self.formData.wavedirection = data["wavedirection"];
-					self.formData.datetime = data["datetime"];
 					
-					//$.extend(true, self.formData, data);
+					$.extend(true, self.formData, data);
 
 					self.setFieldData(self, self.formData);
 					self.hideGif(self);
@@ -399,11 +379,11 @@
 						self.map[data[o]['datetime']] = data[o]['id'];
 					}
 					self.$entry.append("<option>"+data[o]['datetime']+"</option>");
-					self.hideGif();
 					if (self.$entry.val() != '-New Entry-')  {
 						self.showDel(self);
 					}
 				}
+				self.hideGif();
 				self.updateCurrSelected(self);
 			}, {type: "GET", data: self.selectSelector}
 		);
