@@ -360,6 +360,7 @@
 			function(data) {
 				self.hideGif(self);
 				self.fillSelect(self);
+				self.formID = null;
 			}, {type: "GET", contentType:"", dataType: ""}
 		);
 	},
