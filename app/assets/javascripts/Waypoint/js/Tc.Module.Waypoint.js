@@ -397,10 +397,10 @@
 			dataType: "jsonp",
 			success: function(data) {
 				if (data['cod'] == 200) {
-					self.formData.windstrength = data['list'][0]['wind']['speed'];
+					self.formData.windstrength = data['list'][0]['wind']['speed'].toFixed(2);
 					self.formData.winddirection = self.getDirectionFromDegrees(data['list'][0]['wind']['deg']);
-					self.formData.airpressure = data['list'][0]['main']['pressure'];
-					self.formData.temperature = data['list'][0]['main']['temp'] - 273.15;
+					self.formData.airpressure = data['list'][0]['main']['pressure'].toFixed(2);
+					self.formData.temperature = (data['list'][0]['main']['temp'] - 273.15).toFixed(2);
 					self.formData.clouds = self.getCloudiness(data['list'][0]['clouds']['all']);
 					self.formData.rain = self.getRainByCode(data['list'][0]['weather'][0]['id']);
 					self.setFieldData(self, self.formData);
