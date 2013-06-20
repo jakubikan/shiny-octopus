@@ -213,10 +213,10 @@
 					$("#weatherForecast",self.$ctx).show();
 					window.mySwipe = new Swipe(document.getElementById('forecastSwipe'), {
 					  callback: function(){
-					  	$("#forecastSlidePosition").html(1+mySwipe.getPos()+"/"+mySwipe.getNumSlides());
+					  	$("#forecastSlidePosition").html(mySwipe.getPos()+"/"+mySwipe.getNumSlides());
 					  }
 					});
-					$("#forecastSlidePosition").html(1+mySwipe.getPos()+"/"+mySwipe.getNumSlides());
+					$("#forecastSlidePosition").html(mySwipe.getPos()+"/"+mySwipe.getNumSlides());
 					$("#prevForecastItem").on("click",function(){
 						mySwipe.prev();
 					});

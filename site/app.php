@@ -3,7 +3,7 @@
 include("php/dbconnect.php");
 $con = ConnectAndSelectDB();
 global $site;
-$site = $_GET["site"] || "weather"
+$site = $_GET["site"] || "waypoint"
 ?>
 <html lang="de">
 <?php include("head_tag.php")?>
