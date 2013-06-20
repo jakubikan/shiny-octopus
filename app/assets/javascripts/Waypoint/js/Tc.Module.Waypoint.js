@@ -360,7 +360,7 @@
 			function(data) {
 				self.hideGif(self);
 				self.fillSelect(self);
-			}, {type: "GET", contentType:""}
+			}, {type: "GET", contentType:"", dataType: ""}
 		);
 	},
 	

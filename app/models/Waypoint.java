@@ -1,9 +1,12 @@
 package models;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.Version;
 
 import play.db.ebean.*;
 
@@ -13,6 +16,9 @@ public class Waypoint extends Model {
 	@Id
 	@Column(name = "ID")
 	private long id;
+
+	@Version
+	private Date timestamp;
 
 	@Column(name = "Name")
 	private String name;

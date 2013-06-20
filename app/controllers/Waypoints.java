@@ -2,6 +2,7 @@ package controllers;
 
 import java.util.List;
 
+import javax.persistence.OptimisticLockException;
 import javax.sql.DataSource;
 
 import org.codehaus.jackson.JsonNode;
@@ -9,6 +10,7 @@ import org.codehaus.jackson.node.ObjectNode;
 
 
 
+import play.db.ebean.Transactional;
 import play.libs.Json;
 import play.mvc.BodyParser;
 import play.mvc.Controller;
@@ -19,6 +21,7 @@ import models.*;
 
 public class Waypoints extends Controller {
 	
+	@Transactional
 	public static Result create() {
 		
 
@@ -36,6 +39,9 @@ public class Waypoints extends Controller {
 
 	}
 
+	
+	
+	@Transactional
 	public static Result update(long id) {
 		JsonNode  b = request().body().asJson();
 		Waypoint json = Json.fromJson(b, Waypoint.class);
@@ -48,13 +54,27 @@ public class Waypoints extends Controller {
 
 
 	}
+
+	@Transactional
 	public static Result delete(long id) {
-		Waypoint result = Waypoint.find.byId(id);
-		if (result == null) {
-			return badRequest();
+		int count = 0;
+		try {
+			for (int i = 0; i < 10; i++) {
+				Waypoint result = Waypoint.find.ref(id);
+				result.delete();
+			}
+		} catch (OptimisticLockException e){
+			count++;
+
+			
 		}
-		result.delete();
-		return ok(Json.toJson(result));
+		if (count < 10) {
+			return ok();
+			
+		} else {
+			return badRequest();
+			
+		}
 
 	}
 	
