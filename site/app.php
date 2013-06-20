@@ -20,9 +20,6 @@ $site = $_GET["site"] || "weather"
 		<?php include ("js/terrific/Appmenu/appmenu.php"); ?>
 		<?php 
 		switch ($site) {
-			case "weather":
-				include ("js/terrific/Weather/weather.php");
-				break;
 			case "waypoint":
 				include ("js/terrific/Waypoint/waypoint.php");
 				break;

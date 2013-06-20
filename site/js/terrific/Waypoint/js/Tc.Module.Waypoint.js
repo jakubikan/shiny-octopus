@@ -58,7 +58,7 @@
 		});
 		
 		$("[data-id='delEntryIcon']", self.$ctx).on('click', function() {
-			var entry = self.$entry;
+			var entry = self.$entry.val();
 			if (entry != null) {
 				self.deleteEntry(self, {ID: self.map[entry]});
 			}
@@ -268,7 +268,7 @@
 	
 	clearAll: function (self){
 		var self = this;
-		self.clearFields();
+		self.clearFields(self);
 		self.formID = null;
 		self.$entry.value = '-New Entry-';
 		self.firstWeatherFetch = true;

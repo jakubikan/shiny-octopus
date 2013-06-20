@@ -7,7 +7,7 @@
 		return $con;
 	}
 	function SelectDB($connection){
-		if(!mysql_select_db("seapal",$connection)){
+		if(!mysql_select_db("seapal_php",$connection)){
 			die("Could not select DB: ".mysql_error());
 		}
 	}

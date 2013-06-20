@@ -1,3 +1,70 @@
+@iconSize: 30px;
+@maxTextWidth: (2*@iconSize);
+
 .mod-map #map-canvas img {
   max-width: none;
+}
+
+.weather-title {
+	padding-top: 15px;
+	padding-bottom: 15px;
+	text-decoration: underline;
+	font-weight: bold;
+	float: center;
+}
+
+#centerCoordsDisplay,
+#weatherForecast,
+#CurWeather {
+	background-color: #e6e6e6;
+	border-radius: 4px;
+	margin: 5px;
+	padding-bottom: 15px;
+	text-align: center;
+}
+
+.no-left-margin {
+	margin-left: 0px;
+}
+
+#weatherBtn {
+	margin-top: 15px;
+	margin-left: 10%;
+	margin-right: 10%;
+	width: 80%;
+}
+
+#prevForecastItem {
+	float: left;
+	background: transparent;
+	border: none;
+}
+
+#nextForecastItem {
+	float: right;
+	background: transparent;
+	border: none;
+}
+
+#prevForecastItemImg, 
+#nextForecastItemImg {
+	color: #0C6BA1;
+	font-size: 20px;
+	font-weight: bold;
+	width: 30px;
+	height: 30px;
+}
+
+#prevForecastItemImg {
+	content: url(../../../../../img/icons/arrow-left-blue.png);
+}	
+
+#nextForecastItemImg {
+	content: url(../../../../../img/icons/arrow-right-blue.png);
+}
+
+#forecastSlidePosition {
+	height: 30px;
+	padding-top: 5px;
+	display: inline-block;
 }
