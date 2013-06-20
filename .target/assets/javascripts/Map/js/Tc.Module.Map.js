@@ -98,7 +98,7 @@
 
 		//self.Server = new FancyWebSocket('ws://127.0.0.1:9300');
 		$("#weatherForecast",self.$ctx).hide();
-		$("#crossKoordsDisplay",self.$ctx).hide();
+		$("#crossCoordsDisplay",self.$ctx).hide();
 		$("#distanceDisplay",self.$ctx).hide();
 		$("#CurWeather",self.$ctx).hide();
 
