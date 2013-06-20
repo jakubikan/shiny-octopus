@@ -250,6 +250,7 @@
 	clearFields: function (self) {
 		inputs = self.$ctx.find('input');
 		selects = self.$ctx.find('select');
+
 		inputs.each(function(index, element) {
 			$(this).val("");
 		});
@@ -267,12 +268,11 @@
 	},
 	
 	clearAll: function (self){
-		var self = this;
-		self.clearFields();
+		self.clearFields(self);
 		self.formID = null;
 		self.$entry.value = '-New Entry-';
 		self.firstWeatherFetch = true;
-		self.hideDel();
+		self.hideDel(self);
 	},
 	
 	updateCurrSelected: function (self) {
@@ -372,7 +372,7 @@
 	},
 	
 	deleteEntry: function (self, index) {
-		self.makeAjaxProcessPost(self, "delete", index,
+		self.makeAjaxProcessPost(self, "delete", index.id,
 			function() {
 				self.hideDel(self); 
 				self.showGif(self);
